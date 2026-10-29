@@ -35,9 +35,9 @@ for(const path of ['a1-course-data.js','a1-essentials-data.js','a1-grammar-bridg
 const vocab=fake.window.DEUTSCH_A1_ESSENTIALS;
 const grammar=fake.window.DEUTSCH_A1_GRAMMAR_BRIDGE;
 const units=new Set(fake.window.DEUTSCH_A1.units.map(u=>u.id));
-assert.equal(fake.window.DEUTSCH_A1_BRIDGE.wordGroups,16);
+assert.equal(fake.window.DEUTSCH_A1_BRIDGE.wordGroups,21);
 assert.equal(fake.window.DEUTSCH_A1_BRIDGE.grammarTopics,12);
-assert.equal(vocab.length,16);
+assert.equal(vocab.length,21);
 assert.equal(grammar.length,12);
 const ids=new Set(),wordCount=[];
 for(const group of vocab){
@@ -50,8 +50,8 @@ for(const group of vocab){
   wordCount.push(w[0]);
  }
 }
-assert.equal(wordCount.length,128);
-assert.equal(new Set(wordCount.map(v=>v.toLowerCase())).size,128,'No duplicate essential words');
+assert.equal(wordCount.length,168);
+assert.equal(new Set(wordCount.map(v=>v.toLowerCase())).size,168,'No duplicate essential words');
 const grammarIds=new Set();
 for(const topic of grammar){
  assert(topic.title&&topic.en.length>=40&&topic.ne.length>=25&&topic.tip);
@@ -75,10 +75,10 @@ const grammarTabs=rules.querySelector('.a1-bridge-tabs');
 const grammarPracticeInitial=rules.querySelector('.a1-bridge-practice');
 assert(grammarPracticeInitial);
 assert(wordTabs&&grammarTabs);
-assert.equal(wordTabs.children.length,16);
+assert.equal(wordTabs.children.length,21);
 assert.equal(grammarTabs.children.length,12);
 let wordQuestions=0,ruleQuestions=0;
-for(let t=0;t<16;t++){
+for(let t=0;t<21;t++){
  wordTabs.children[t].click();
  const group=vocab[t];
  const cards=words.querySelector('.a1-bridge-cards');
@@ -129,6 +129,6 @@ for(let t=0;t<12;t++){
  }
  assert(grammarPractice.textContent.includes('0 of 3'),'First-try feedback must be honest');
 }
-assert.equal(wordQuestions,80);
+assert.equal(wordQuestions,105);
 assert.equal(ruleQuestions,36);
-console.log('A1 grammar/essentials checks passed: 128 bilingual cards, 12 grammar workshops, 80 word + 36 rule interactions, German audio and responsive practice controls.');
+console.log('A1 grammar/essentials checks passed: 168 bilingual cards, 12 grammar workshops, 105 word + 36 rule interactions, German audio and responsive practice controls.');

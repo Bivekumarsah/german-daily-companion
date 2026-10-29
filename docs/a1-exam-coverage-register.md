@@ -30,6 +30,22 @@ Goethe-Institut's public descriptions:
 - Listening scripts are hidden during the objective rehearsal and visible after section submission; **device TTS is not professional audio** and the tests are not officially standardized.
 - Writing and speaking **are not automatically marked**; user compares model and checklist, then should obtain assessment from a teacher or speaking partner.
 
+## Focused Goethe word-list and grammar follow-up (October 29, 2026)
+
+The official adult *Start Deutsch 1* booklet (Goethe-Institut, **29-page word-list PDF**) describes **approximately 650 listed entries** and roughly half that amount as an active A1 target. It also groups the expected everyday contexts into personal, work, education and public situations. This is a reference framework, not an automatically calculable website-completeness percentage.
+
+**New original study material in this release:**
+- **80 English/Nepali/German expression cards** over 10 practical themes. Each has an independently written German example, an English meaning and tap-to-play German device speech.
+- **12 bilingual grammar workshops** with **36 mini-questions**, linked to existing course units: present tense, sein/haben, accusative articles, object pronouns, possessive endings, useful dative patterns, modals, separable verbs, time markers, introductory Perfekt, questions and polite requests.
+- Previous count: 244 distinct case-folded German strings in the 36 main units, plus the 100 noun pack entries (60 distinct additions) = **304 distinct strings**. The 80 essential expressions add **77 previously absent strings** and repeat 3 previously seen ones. Combined: **381 case-folded German entry strings**. These include phrase-level and form-level entries and **must not** be equated to 381 official Goethe word-list headwords.
+
+**Small source-confirmed spot check, not full concordance:** A manually selected set of 22 forms was inspected against the Goethe source's alphabetical portion. After the release, 19 have exact matches in the site's three learning banks: *abfahren, abgeben, abholen, anbieten, anfangen, ankommen, ankreuzen, anrufen, antworten, arbeiten, ausfüllen, aussteigen, beginnen, besuchen, bestellen, bezahlen, bleiben, warten, wollen*. A twentieth is present pedagogically as *sich anmelden*, whereas the booklet uses *(sich) anmelden*. Two forms in that **specific spot-check set** remain absent from the three vocabulary banks: *ausmachen* and *zwischen*. Some may appear in example sentences; this comparison only checks canonical bank strings. This hand-picked check is **not a representative sample** and cannot be turned into a percentage of the official syllabus.
+
+**Next genuine needs:** source-by-source full Goethe lexical concordance with sense/part-of-speech and inflection analysis; human proofreading of German and Nepali; qualified evaluation of writing/speaking; authentic listening recordings and actual-device usability/a11y review. The user-provided A1 PDFs are reference resources, not mass-imported licensed lesson content.
+
+### Word-list citation
+- [Goethe-Institut: Start Deutsch 1 Wortliste (PDF)](https://www.goethe.de/pro/relaunch/prf/en/A1_SD1_Wortliste_02.pdf), especially the preface (printed page 3), themes (page 4), and alphabetic lexicon (printed pages 9–27).
+
 ## Editorial findings and unfinished release gates
 1. **Official word-list gap audit is outstanding.** The original 244 and the supplementary 100 entries were not mechanically/linguistically matched to every official Goethe A1 word-list headword; spellings, word senses, plural forms, article distribution and coverage should be verified by a German-speaking editor.
 2. **Pronunciation audit is outstanding** for all 36 lessons, 100 supplementary words and 12 curated pronunciation tutorials. English-sound/Devanagari hints remain approximate, especially ich /ç/, ö and ü.

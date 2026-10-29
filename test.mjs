@@ -57,8 +57,8 @@ const referenced=new Set([...read('app.js').matchAll(/\$\('([^']+)'\)/g),...read
 for(const id of referenced)assert(html.includes('id="'+id+'"'),`Missing DOM element ${id}`);
 const allIds=[...html.matchAll(/id="([^"]+)"/g)].map(m=>m[1]);
 assert.equal(allIds.length,new Set(allIds).size,'Duplicate DOM IDs');
-for(const filename of ['a1-themes-data.js','a1-themes.js','a1-themes.css','a1-mock-data.js','a1-mock.js','a1-mock.css','app.js','lessons.js','phrases.js','a1-course.js','a1-course-data.js','visual-stories.js','listening-lab.js','visual-lab.js','visual-lab.css','sentence-builder.js','sentence-builder.css','pronunciation-data.js','pronunciation-lab.js','pronunciation-lab.css','a1-mock-data.js','a1-mock.js','a1-mock.css','academy.js','sw.js','styles.css','manifest.webmanifest','icon.svg'])assert(fs.existsSync(new URL(filename,root)),`${filename} missing`);
-const sw=read('sw.js');for(const file of ['a1-themes-data.js','a1-themes.js','a1-themes.css','a1-mock-data.js','a1-mock.js','a1-mock.css','a1-course.js','a1-course-data.js','visual-stories.js','listening-lab.js','visual-lab.js','visual-lab.css','sentence-builder.js','sentence-builder.css','pronunciation-data.js','pronunciation-lab.js','pronunciation-lab.css','a1-mock-data.js','a1-mock.js','a1-mock.css','academy.js'])assert(sw.includes(file),`Offline cache missing ${file}`);
+for(const filename of ['a1-essentials-data.js','a1-grammar-bridge-data.js','a1-bridge.js','a1-bridge.css','a1-themes-data.js','a1-themes.js','a1-themes.css','a1-mock-data.js','a1-mock.js','a1-mock.css','app.js','lessons.js','phrases.js','a1-course.js','a1-course-data.js','visual-stories.js','listening-lab.js','visual-lab.js','visual-lab.css','sentence-builder.js','sentence-builder.css','pronunciation-data.js','pronunciation-lab.js','pronunciation-lab.css','a1-mock-data.js','a1-mock.js','a1-mock.css','academy.js','sw.js','styles.css','manifest.webmanifest','icon.svg'])assert(fs.existsSync(new URL(filename,root)),`${filename} missing`);
+const sw=read('sw.js');for(const file of ['a1-essentials-data.js','a1-grammar-bridge-data.js','a1-bridge.js','a1-bridge.css','a1-themes-data.js','a1-themes.js','a1-themes.css','a1-mock-data.js','a1-mock.js','a1-mock.css','a1-course.js','a1-course-data.js','visual-stories.js','listening-lab.js','visual-lab.js','visual-lab.css','sentence-builder.js','sentence-builder.css','pronunciation-data.js','pronunciation-lab.js','pronunciation-lab.css','a1-mock-data.js','a1-mock.js','a1-mock.css','academy.js'])assert(sw.includes(file),`Offline cache missing ${file}`);
 assert(html.includes('https://www.goethe.de/en/spr/prf/ueb/pa1.html'));
 assert(html.includes('src="visual-lab.js"')&&html.includes('href="visual-lab.css"'));
 assert(html.indexOf('src="visual-stories.js"')<html.indexOf('src="visual-lab.js"'),'Conversation dataset must load before lesson UI');
@@ -76,6 +76,11 @@ for(const name of ['a1-mock-data.js','a1-mock.js','a1-themes-data.js','a1-themes
 for(const id of ['a1MockRoot','a1ThemesRoot'])assert(html.includes('id="'+id+'"'));
 assert(html.indexOf('src="a1-mock-data.js"')<html.indexOf('src="a1-mock.js"'));
 assert(html.indexOf('src="a1-themes-data.js"')<html.indexOf('src="a1-themes.js"'));
+for(const name of ['a1-essentials-data.js','a1-grammar-bridge-data.js','a1-bridge.js'])assert(html.includes('src="'+name+'"'));
+for(const id of ['a1EssentialsRoot','a1GrammarBridgeRoot'])assert(html.includes('id="'+id+'"'));
+assert(html.includes('href="a1-bridge.css"'));
+assert(html.indexOf('src="a1-essentials-data.js"')<html.indexOf('src="a1-bridge.js"'));
+assert(html.indexOf('src="a1-grammar-bridge-data.js"')<html.indexOf('src="a1-bridge.js"'));
 assert(html.includes('id="a1MockRoot"')&&html.includes('id="a1MocksHeading"'));
 assert(html.includes('src="a1-mock-data.js"')&&html.includes('src="a1-mock.js"')&&html.includes('href="a1-mock.css"'));
 assert(html.indexOf('src="a1-mock-data.js"')<html.indexOf('src="a1-mock.js"'));

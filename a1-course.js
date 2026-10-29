@@ -93,6 +93,7 @@ function renderVocabulary(out){
 function renderGrammar(out){
  heading(out,unit.grammar.title,'Grammar explained in English and Nepali, with an original example.');
  out.append(el('p','a1-grammar-copy',unit.grammar.en),el('p','a1-grammar-ne',unit.grammar.ne));
+ if(window.DEUTSCH_SENTENCE_BUILDER?.render)window.DEUTSCH_SENTENCE_BUILDER.render(out,unit,speaking);
  const ex=el('div','a1-example');const de=el('strong','',unit.grammar.example);de.lang='de';ex.append(de,el('span','',unit.grammar.exampleEn),el('span','a1-word-ne',unit.grammar.exampleNe));
  if(unit.grammar.pronEnglish&&unit.grammar.pronNepali){ex.append(el('small','a1-phon',`Approx. sounds: ${unit.grammar.pronEnglish} · ${unit.grammar.pronNepali}`));}
  ex.append(button('🔊 Listen',()=>speaking(unit.grammar.example),'a1-audio-small'),button('◷ Slow',()=>speaking(unit.grammar.example,true),'a1-audio-small'));

@@ -1,0 +1,48 @@
+/* DeutschDaily A1 word-order challenge: small, accessible, mobile-first. */
+.sentence-builder{margin:24px 0;border:1px solid #516c85;background:linear-gradient(145deg,#193749,#1c2b43);border-radius:18px;padding:20px;color:#eaf4ff}
+.sb-header{margin:0 0 16px}
+.sb-kicker{display:block;color:#c6ed9b;font-size:11px;letter-spacing:1.35px;font-weight:850}
+.sb-title{font-size:clamp(19px,2.7vw,23px);line-height:1.3;margin:9px 0}
+.sb-help{font-size:13px;line-height:1.7;color:#d3e2f2;margin:8px 0}
+.sb-translation{border:1px solid #61798e;border-radius:14px;background:#223d54;padding:16px}
+.sb-translate-label,.sb-label{display:block;font-size:11px;font-weight:850;letter-spacing:1px;color:#c8e5ec}
+.sb-translation p{font-size:15px;line-height:1.6;margin:9px 0}
+.sb-translation .sb-nepali{font-family:system-ui,"Noto Sans Devanagari",sans-serif;font-size:15px}
+.sb-actions{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}
+.sb-action,.sb-check{min-height:45px;border-radius:10px;padding:10px 14px;border:1px solid #85a4b8;background:#294c62;color:#f7fbff;font:inherit;font-size:13px;font-weight:750}
+.sb-action:hover:not(:disabled),.sb-check:hover:not(:disabled){border-color:#c7f783;background:#315d70}
+.sb-check{background:#c7f783;color:#153021;border-color:#c7f783}
+.sb-check:hover:not(:disabled){background:#e0ffb2;color:#153021}
+.sb-check:disabled,.sb-action:disabled{opacity:.55;cursor:not-allowed}
+.sb-label{margin:19px 0 9px}
+.sb-built,.sb-bank{display:flex;flex-wrap:wrap;align-items:center;gap:9px;border-radius:14px;padding:13px;min-height:70px}
+.sb-built{border:2px dashed #87a5b6;background:#112638}
+.sb-bank{background:#203e53;border:1px solid #628299}
+.sb-placeholder{color:#c6d8e6;font-size:13px;line-height:1.5}
+.sb-word,.sb-selected{min-height:47px;padding:10px 13px;border-radius:10px;background:#f4f9ff;color:#19324a;border:1px solid #bfdbf0;font:inherit;font-size:15px;font-weight:700;line-height:1.35;word-break:break-word}
+.sb-selected{background:#cfefb2;border-color:#c7f783;color:#152d1e}
+.sb-word:hover:not(:disabled),.sb-selected:hover:not(:disabled){border-color:#b9f37b;box-shadow:0 0 0 2px #a6dd7044}
+.sb-word:disabled{opacity:.34;cursor:default}
+.sb-selected:disabled{opacity:1;cursor:default}
+.sb-word:focus-visible,.sb-selected:focus-visible,.sb-check:focus-visible,.sb-action:focus-visible{outline:3px solid #a4d7ff;outline-offset:3px}
+.sb-controls{margin:16px 0 8px}
+.sb-feedback{font-size:14px;line-height:1.65;font-weight:650;min-height:22px;margin:8px 0;color:#d4f0e3}
+.sb-answer{border-left:4px solid #c7f783;border-radius:10px;padding:13px;background:#153e3a;margin-top:10px}
+.sb-answer strong{font-size:12px}
+.sb-correct-sentence{font-size:18px;line-height:1.5;font-weight:750;margin:6px 0}
+html[data-theme="light"] .sentence-builder{background:#f1f8fc;border-color:#bad0dd;color:#183047}
+html[data-theme="light"] .sb-kicker,html[data-theme="light"] .sb-label,html[data-theme="light"] .sb-translate-label{color:#265e44}
+html[data-theme="light"] .sb-help{color:#526377}
+html[data-theme="light"] .sb-translation{background:#fff;border-color:#c1d2df}
+html[data-theme="light"] .sb-built{background:#fff;border-color:#91abbc}
+html[data-theme="light"] .sb-bank{background:#e8f2f7;border-color:#b0c8d8}
+html[data-theme="light"] .sb-action{background:#fff;border-color:#8caabf;color:#1e4054}
+html[data-theme="light"] .sb-check{background:#286b22;border-color:#286b22;color:#fff}
+html[data-theme="light"] .sb-placeholder{color:#54677c}
+html[data-theme="light"] .sb-feedback{color:#275a42}
+html[data-theme="light"] .sb-answer{background:#e2f5e5;color:#163825}
+html[data-theme="light"] .sb-word{background:#fff;border-color:#9fbacb;color:#1b3b50}
+html[data-theme="light"] .sb-selected{background:#d7efc2;border-color:#73a766;color:#1c3a2a}
+@media(max-width:640px){.sentence-builder{padding:13px;margin:20px 0}.sb-translation{padding:12px}.sb-built,.sb-bank{gap:7px;padding:10px}.sb-word,.sb-selected{font-size:14px;padding:9px 11px}.sb-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.sb-controls button{min-width:0;white-space:normal}}
+@media(max-width:390px){.sb-controls{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.sentence-builder *{transition:none!important;animation:none!important}}

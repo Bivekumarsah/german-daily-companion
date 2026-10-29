@@ -123,6 +123,7 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
   }
   answered=false;
   const [de,en,ne,answer]=task.turns[round];
+  const cue=window.DEUTSCH_SPEAKING_CUES?.[setId]?.[taskIndex]?.[round];
   panel.append(make('p','productive-count','Turn '+(round+1)+' of '+task.turns.length));
   const actions=make('div','productive-actions');
   actions.append(button('🔊 Hear your partner',()=>speak(de)),button('◷ Hear slowly',()=>speak(de,true)));
@@ -136,6 +137,14 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
   const response=make('p','productive-help','Think of your own response, then say it aloud clearly.');
   panel.append(response);
   recording=window.DEUTSCH_SPEAKING_RECORDER?.mount?.(panel)||null;
+  const reflection=make('div','productive-reflection');
+  const reflectionLabel=make('label','productive-reflection-label','Optional: type what you said · आफूले भनेको वाक्य लेख्नुहोस्');
+  const reflectionText=make('textarea','productive-reflection-input');
+  reflectionText.rows=2;reflectionText.maxLength=320;reflectionText.lang='de';
+  reflectionText.placeholder='Ich heiße ... / Ich komme aus ...';
+  reflectionLabel.append(reflectionText);
+  const reflectionStatus=make('p','productive-help','Type your own words manually if useful. This does NOT transcribe the recording. Nothing here is saved or uploaded.');
+  reflection.append(reflectionLabel,reflectionStatus);panel.append(reflection);
   const confirm=button('✓ I answered aloud',()=>{
    if(answered)return;
    answered=true;
@@ -158,6 +167,34 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
     line.append(mark,make('span','',text));selfCheck.append(line);
    }
    example.append(selfCheck);
+   if(cue){
+    const goal=make('section','productive-speaking-goal');
+    goal.append(make('strong','','Situation-specific goal · बोल्ने उद्देश्य'));
+    goal.append(make('p','',cue[0]),make('p','productive-hint-ne',cue[1]));
+    const phrase=make('p','productive-german',cue[2]);phrase.lang='de';
+    goal.append(make('p','productive-help','Optional example wording; another correct response may be different.'),phrase);
+    example.append(goal);
+   }
+   const typed=reflectionText.value.trim();
+   const review=make('section','productive-spoken-review');
+   review.append(make('strong','','Your optional typed reflection · आफ्नो समीक्षा'));
+   if(typed){
+    const yourText=make('p','productive-german',typed);
+    yourText.lang='de';
+    review.append(yourText);
+    const checks=window.DEUTSCH_WRITING_HINTS?.analyze?.(typed)||[];
+    if(checks.length){
+     const list=make('ul','productive-hint-list');
+     for(const hint of checks){
+      const item=make('li','productive-hint-item');
+      item.append(make('strong','',hint.en),make('p','productive-hint-ne',hint.ne));
+      const pattern=make('p','productive-hint-example',hint.example);
+      pattern.lang='de';item.append(pattern);list.append(item);
+     }
+     review.append(list);
+    }else review.append(make('p','productive-help','No supported pattern detected. This does NOT mean your answer or pronunciation was correct.'));
+   }else review.append(make('p','productive-help','No written reflection entered. Compare your spoken answer with the goal above; pronunciation and grammar still need a teacher or partner.'));
+   example.append(review);
    panel.append(example,button(round===task.turns.length-1?'Finish dialogue →':'Next partner turn →',()=>{round++;render();},'productive-primary'));
   },'productive-primary');
   panel.append(confirm);

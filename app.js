@@ -5,15 +5,43 @@ const PHRASES = window.DAILY_PHRASES || [];
 const ALPHABET = window.GERMAN_ALPHABET || [];
 const KEY_FAV = 'deutschdaily-favorites-v1';
 const KEY_CACHE = 'deutschdaily-translations-v1';
+const CACHE_LIMIT = 250;
+const IDENTICAL_GERMAN_WORDS = new Set(['hotel','computer','internet','taxi','radio','pizza','bus','baby','film','museum','restaurant','problem','auto','kilo']);
 const normalize = s => String(s).toLowerCase().trim().replace(/[.!?।,;:]+$/g,'').replace(/\s+/g,' ');
 const lookup = new Map(PHRASES.map(p => [normalize(p.english),p]));
 const example = PHRASES.find(p => normalize(p.english) === 'how are you');
+const alphabetLookup = new Map(ALPHABET.filter(([letter]) => /^[A-Z]$/.test(letter)).map(([letter,pronEnglish,pronNepali]) => [letter.toLowerCase(), {english:letter,german:letter,nepali:'जर्मन वर्णमालाको अक्षर '+letter,pronEnglish,pronNepali,source:'German alphabet'}]));
 let current = null, requestId = 0, delay = 0, toastTimer = 0;
 let favorites = readStorage(KEY_FAV, []);
 let translationCache = readStorage(KEY_CACHE, {});
+if (!translationCache || typeof translationCache !== 'object' || Array.isArray(translationCache)) translationCache = {};
 let currentFlash = 0;
 function readStorage(key, fallback){try {const x=JSON.parse(localStorage.getItem(key));return x??fallback;}catch {return fallback;}}
-function writeStorage(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch{/* Private mode or full storage */}}
+function writeStorage(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{return false;}}
+function localPhrase(english){return lookup.get(normalize(english)) || alphabetLookup.get(normalize(english));}
+function germanLooksValid(english,german){
+ if(typeof german !== 'string' || !german.trim() || /MYMEMORY WARNING|QUERY LENGTH LIMIT|YOU HAVE REACHED|NO QUERY SPECIFIED/i.test(german))return false;
+ const src=normalize(english), translated=normalize(german);
+ if(src===translated && !IDENTICAL_GERMAN_WORDS.has(src))return false;
+ return true;
+}
+function cachedTranslation(english){
+ const result=translationCache[normalize(english)];
+ if(!result || !germanLooksValid(english,result.german))return null;
+ return {...result,english,source:'Saved offline'};
+}
+function storeTranslation(result){
+ const key=normalize(result.english);
+ delete translationCache[key];
+ translationCache[key]={...result,source:'Online translation'};
+ while(Object.keys(translationCache).length>CACHE_LIMIT)delete translationCache[Object.keys(translationCache)[0]];
+ writeStorage(KEY_CACHE,translationCache);renderRecent();
+}
+function friendlyError(error){
+ const msg=String(error?.message||'');
+ if(/limit|429|quota|too many/i.test(msg))return 'The free translation service has reached its limit. Try again later, or use words saved on this device.';
+ return 'Online translation is unavailable right now. Check your internet connection and try again. Your saved and built-in phrases still work offline.';
+}
 function notify(text){const box=$('toast');box.textContent=text;box.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>box.classList.remove('show'),3000);}
 function setStatus(text,kind=''){const status=$('resultStatus');status.textContent=text;status.className='result-state'+(kind?' '+kind:'');}
 function connection(){const online=navigator.onLine;const node=$('connection');node.className='offline-indicator'+(online?' online':'');node.innerHTML='<i aria-hidden="true"></i>'+(online?'Online':'Offline mode');}
@@ -57,9 +85,12 @@ function renderResult(data){
  $('pronNepali').textContent=data.pronNepali || nepaliSounds(romanizeGerman(data.german));
  $('nepaliOutput').textContent=data.nepali || 'नेपाली अर्थ अहिले उपलब्ध छैन।';
  const fromOnline=data.source==='Online translation';
+ const savedOffline=data.source==='Saved offline';
  $('translationSource').textContent = fromOnline
- ? 'Online translation (MyMemory). Pronunciation spellings are automatically approximated; listen to the audio for a better guide.'
- : 'Curated offline translation. Pronunciation spellings are approximate; listen to the audio for a better guide.';
+ ? 'Online translation (MyMemory), automatically saved on this device for offline reuse. Pronunciation is approximate.'
+ : savedOffline ? 'Previously translated and saved on this device. Available offline. Pronunciation is approximate.'
+ : data.source==='German alphabet' ? 'German alphabet letter. Tap Listen to hear its name.'
+ : 'Curated built-in phrase, available offline. Pronunciation is approximate.';
  const strip=$('wordStrip');strip.replaceChildren();
  for(const word of data.german.split(/\s+/).filter(Boolean)){
    const b=document.createElement('button');b.type='button';b.className='word-button';b.textContent='🔊 '+word;
@@ -67,7 +98,7 @@ function renderResult(data){
  }
  const saved=favorites.some(x=>normalize(x.english)===normalize(data.english));
  $('savePhrase').classList.toggle('active',saved);$('savePhrase').setAttribute('aria-pressed',String(saved));
- $('savePhrase').textContent=saved?'♥':'♡';setStatus(fromOnline?'ONLINE':'OFFLINE READY');
+ $('savePhrase').textContent=saved?'♥':'♡';$('retryTranslation').hidden=true;setStatus(fromOnline?'SAVED FOR OFFLINE':savedOffline?'SAVED OFFLINE':'OFFLINE READY');
 }
 async function apiTranslate(q,language){
  const url=new URL('https://api.mymemory.translated.net/get');
@@ -81,34 +112,63 @@ async function apiTranslate(q,language){
    const decoded=document.createElement('textarea');decoded.innerHTML=json.responseData.translatedText;
    const result=decoded.value.trim();
    if(/MYMEMORY WARNING|QUERY LENGTH LIMIT|YOU HAVE REACHED|NO QUERY SPECIFIED/i.test(result))throw new Error('Free translation limit reached');
+   if(language==='de' && !germanLooksValid(q,result))throw new Error('Untranslated English response');
+   if(language==='ne' && !/[\u0900-\u097f]/.test(result))throw new Error('Nepali translation missing');
    return result;
  } finally {clearTimeout(timeout);}
 }
 async function translateEnglish(raw){
  const english=raw.trim();const id=++requestId;
- if(!english){current=null;$('resultContent').hidden=true;$('emptyResult').hidden=false;setStatus('READY');return;}
- const local=lookup.get(normalize(english));if(local){renderResult(local);return;}
- const cached=translationCache[normalize(english)];if(cached){renderResult(cached);return;}
- if(!navigator.onLine){showUnavailable('Not in offline phrasebook. Connect to the internet for a new translation.');return;}
+ if(!english){current=null;$('resultContent').hidden=true;$('emptyResult').hidden=false;$('retryTranslation').hidden=true;setStatus('READY');return;}
+ const local=localPhrase(english);if(local){renderResult(local);return;}
+ const cached=cachedTranslation(english);if(cached){renderResult(cached);return;}
+ if(!navigator.onLine){showUnavailable('This is not in your offline vocabulary yet. Connect to the internet to translate it once; it will then be available offline.');return;}
  if(new TextEncoder().encode(english).length>500){showUnavailable('Text is too long for the free translation service. Try a shorter sentence.');return;}
- setStatus('TRANSLATING…','loading');
+ setStatus('TRANSLATING…','loading');$('retryTranslation').hidden=true;
  $('emptyResult').hidden=false;$('resultContent').hidden=true;
  $('emptyResult').querySelector('h3').textContent='Looking up your phrase…';
  $('emptyResult').querySelector('p').textContent='Checking German and Nepali translations.';
- const [de,ne]=await Promise.allSettled([apiTranslate(english,'de'),apiTranslate(english,'ne')]);
+ // Start both requests together; show the German result without waiting for Nepali.
+ const nepaliTask=apiTranslate(english,'ne').then(value=>({ok:true,value}),error=>({ok:false,error}));
+ let german;
+ try {german=await apiTranslate(english,'de');}
+ catch(error){if(id===requestId)showUnavailable(friendlyError(error));return;}
  if(id!==requestId)return;
- if(de.status!=='fulfilled'){
-   showUnavailable('Could not translate right now. Check your connection, or try a common practice phrase.');return;
- }
- const result={english,german:de.value,nepali:ne.status==='fulfilled'?ne.value:'',pronEnglish:'',pronNepali:'',source:'Online translation'};
- translationCache[normalize(english)]=result;
- const keys=Object.keys(translationCache);if(keys.length>100){for(const key of keys.slice(0,keys.length-100))delete translationCache[key];}
- writeStorage(KEY_CACHE,translationCache);
- renderResult(result);
+ const result={english,german,nepali:'',pronEnglish:'',pronNepali:'',source:'Online translation'};
+ storeTranslation(result);renderResult(result);
+ const nepali=await nepaliTask;
+ if(id!==requestId || !nepali.ok)return;
+ result.nepali=nepali.value;
+ storeTranslation(result);renderResult(result);
+ const idx=favorites.findIndex(item=>normalize(item.english)===normalize(english));
+ if(idx>=0){favorites[idx]={...favorites[idx],nepali:nepali.value};writeStorage(KEY_FAV,favorites);renderFavorites();}
 }
-function showUnavailable(msg){current=null;$('resultContent').hidden=true;$('emptyResult').hidden=false;$('emptyResult').querySelector('h3').textContent='Translation unavailable';$('emptyResult').querySelector('p').textContent=msg;setStatus('UNAVAILABLE','error');}
-function scheduleTranslation(){const txt=$('englishInput').value;const id=++requestId;clearTimeout(delay);if(!txt.trim()){translateEnglish('');return;}const match=lookup.get(normalize(txt));if(match){renderResult(match);return;}const cached=translationCache[normalize(txt)];if(cached){renderResult(cached);return;}
- setStatus('TYPING…','loading');delay=setTimeout(()=>{if(id===requestId)translateEnglish(txt);},850);
+function showUnavailable(msg){current=null;$('resultContent').hidden=true;$('emptyResult').hidden=false;$('emptyResult').querySelector('h3').textContent='Translation unavailable';$('emptyResult').querySelector('p').textContent=msg;$('retryTranslation').hidden=false;setStatus('UNAVAILABLE','error');}
+function scheduleTranslation(){
+ const txt=$('englishInput').value;const id=++requestId;clearTimeout(delay);
+ if(!txt.trim()){translateEnglish('');return;}
+ const match=localPhrase(txt);if(match){renderResult(match);return;}
+ const cached=cachedTranslation(txt);if(cached){renderResult(cached);return;}
+ current=null;$('resultContent').hidden=true;$('emptyResult').hidden=false;$('retryTranslation').hidden=true;
+ $('emptyResult').querySelector('h3').textContent='Ready to translate…';
+ $('emptyResult').querySelector('p').textContent='Checking your English sentence.';
+ setStatus('TYPING…','loading');
+ delay=setTimeout(()=>{if(id===requestId)translateEnglish(txt);},850);
+}
+function renderRecent(){
+ const node=$('recentList');if(!node)return;
+ const all=Object.values(translationCache).filter(x=>x && germanLooksValid(x.english,x.german)).reverse();
+ $('recentCount').textContent=String(all.length);node.replaceChildren();
+ if(!all.length){const p=document.createElement('p');p.className='saved-empty';p.textContent='Your online translations will be automatically stored here for offline practice.';node.append(p);return;}
+ for(const item of all.slice(0,8)){
+  const row=document.createElement('div');row.className='saved-row';
+  const btn=document.createElement('button');btn.type='button';
+  const name=document.createElement('strong');name.textContent=item.german;
+  const meaning=document.createElement('span');meaning.textContent=item.english;
+  btn.append(name,meaning);btn.addEventListener('click',()=>choosePhrase(item.english));
+  const speak=document.createElement('button');speak.className='icon-btn';speak.type='button';speak.textContent='🔊';speak.setAttribute('aria-label','Speak '+item.german);speak.addEventListener('click',()=>speaking(item.german));
+  row.append(btn,speak);node.append(row);
+ }
 }
 function choosePhrase(phrase){$('englishInput').value=phrase;scheduleTranslation();$('englishInput').focus({preventScroll:true});if(location.hash!=='#translator')$('translator').scrollIntoView({behavior:'smooth',block:'start'});}
 function saveCurrent(){if(!current)return;const key=normalize(current.english);const index=favorites.findIndex(p=>normalize(p.english)===key);if(index>=0){favorites.splice(index,1);notify('Removed from saved phrases');}else{favorites.unshift(current);favorites=favorites.slice(0,100);notify('Saved for practice ♡');}writeStorage(KEY_FAV,favorites);renderFavorites();renderResult(current);}
@@ -121,6 +181,7 @@ function renderAlphabet(){const grid=$('alphabetGrid');for(const [letter,english
 function init(){connection();window.addEventListener('online',connection);window.addEventListener('offline',connection);
  $('englishInput').addEventListener('input',scheduleTranslation);
  $('clearInput').addEventListener('click',()=>{$('englishInput').value='';scheduleTranslation();$('englishInput').focus();});
+ $('retryTranslation').addEventListener('click',()=>translateEnglish($('englishInput').value));
  $('suggestions').addEventListener('click',e=>{const b=e.target.closest('[data-phrase]');if(b)choosePhrase(b.dataset.phrase);});
  $('speakGerman').addEventListener('click',()=>current&&speaking(current.german));
  $('slowGerman').addEventListener('click',()=>current&&speaking(current.german,true));
@@ -129,7 +190,7 @@ function init(){connection();window.addEventListener('online',connection);window
  $('revealFlash').addEventListener('click',()=>{const hidden=$('flashReveal').hidden;$('flashReveal').hidden=!hidden;$('revealFlash').textContent=hidden?'Hide answer':'Show answer';});
  $('nextFlash').addEventListener('click',()=>{currentFlash=(currentFlash+1)%PHRASES.length;renderFlash();});
  $('speakFlash').addEventListener('click',()=>speaking(PHRASES[currentFlash%PHRASES.length].german));
- renderFavorites();renderFlash();renderAlphabet();
+ renderFavorites();renderRecent();renderFlash();renderAlphabet();
  $('englishInput').value=example?.english||'How are you?';scheduleTranslation();
  if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost' || location.hostname==='127.0.0.1'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }

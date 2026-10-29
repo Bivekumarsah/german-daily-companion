@@ -17,9 +17,9 @@ assert.equal(lessons.length,6);
 const a1=mock.window.DEUTSCH_A1;
 const visual=mock.window.DEUTSCH_VISUAL_LAB;
 const visualStories=mock.window.DEUTSCH_VISUAL_STORIES;
-assert(visualStories&&Object.keys(visualStories).length===8);
+assert(visualStories&&Object.keys(visualStories).length===12);
 assert(visual&&typeof visual.render==='function','Visual learning feature is loaded');
-assert(Object.keys(visual.scenes).length>=8,'Expected eight themed visual learning scenes');
+assert(Object.keys(visual.scenes).length>=12,'Expected eight themed visual learning scenes');
 for(const [unitId,scene] of Object.entries(visual.scenes)){
  assert(a1.units.some(u=>u.id===unitId),`Unknown unit for visual scene ${unitId}`);
  assert(scene.title&&scene.items.length===3);

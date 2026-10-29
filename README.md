@@ -67,3 +67,16 @@ This starter app may be modified for your personal learning or deployed to your 
 - When the translator fails, the app displays a clear error and a **Try again** button.
 - English and Nepali pronunciation guides for newly translated text are approximate; device speech synthesis is best for listening.
 - No backend, login or account is required; translations and favorites are stored in the local browser only. Clearing browser data may remove them. Inputs sent for online translation are handled by a third-party service.
+
+## Improvements (v3)
+
+- **Six offline A1 starter units**, each with five multiple-choice questions, German audio on reveal, Nepali meaning, and local progress tracking. These are *starter units*, **not a complete CEFR A1/B1 course**.
+- **Translation** still uses offline phrases and the free MyMemory service for new phrases. API limits and accuracy limitations remain.
+- **Honest pronunciation**: curated phrases retain simplified English and Nepali phonetic guides. For arbitrary online translations the app deliberately no longer invents pronunciation spellings using inaccurate character substitutions; users must listen with an installed German text-to-speech voice.
+- **German voice picker** enumerates compatible German voices from the user's operating system; audio does not fall back to an incorrectly accented non-German voice.
+- **Light/dark mode**, increased mobile word-button tap targets, safer offline cache versioning and network-first navigation.
+- **JSON export and restore** of saved favorites, recent translations and lesson progress. No remote account or sync.
+
+Note: Multiple-choice lessons are comprehension practice; the app does not yet evaluate spoken pronunciation. The voice picker requires German speech voices installed on the user's device. The website itself can work offline once cached, but unknown translations require internet.
+
+Backup restore validates essential fields and replaces existing local progress. Keep exported JSON files private.

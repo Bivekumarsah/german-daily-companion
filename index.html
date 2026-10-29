@@ -10,14 +10,15 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <script src="phrases.js" defer></script>
+  <script src="lessons.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
   <div class="page-shell">
     <header class="site-header">
       <a class="brand" href="#home" aria-label="DeutschDaily home"><span class="brand-mark">D<span>.</span></span><span class="brand-name">DeutschDaily<small>Speak a little, every day.</small></span></a>
-      <nav aria-label="Main navigation" class="main-nav"><a href="#translator">Translator</a><a href="#practice">Practice</a><a href="#alphabet">Alphabet</a></nav>
-      <span class="offline-indicator" id="connection"><i aria-hidden="true"></i> Checking…</span>
+      <nav aria-label="Main navigation" class="main-nav"><a href="#translator">Translator</a><a href="#lessons">A1 Lessons</a><a href="#practice">Practice</a><a href="#alphabet">Alphabet</a></nav>
+      <button class="tiny-button theme-toggle" type="button" id="themeToggle" aria-label="Switch color mode">☀ Light</button><span class="offline-indicator" id="connection"><i aria-hidden="true"></i> Checking…</span>
     </header>
 
     <main id="home">
@@ -31,7 +32,7 @@
           <div class="panel-top"><div class="section-heading"><span class="step-num">01</span><div><h2>Start with English</h2><p>Letters, words or complete sentences</p></div></div><span class="mini-tag">EN → DE + NE</span></div>
           <label for="englishInput" class="field-label">YOUR ENGLISH</label>
           <textarea id="englishInput" rows="5" maxlength="450" spellcheck="true" placeholder="e.g. What is your name?" aria-describedby="inputHelp"></textarea>
-          <div class="input-tools"><span id="inputHelp">Translation starts when you finish typing.</span><button class="tiny-button" id="clearInput" type="button">Clear ×</button></div>
+          <div class="input-tools"><span id="inputHelp">Translation starts after a short pause. New text uses an online service.</span><button class="tiny-button" id="clearInput" type="button">Clear ×</button></div>
           <div class="divider"></div>
           <div class="field-label">TRY A PHRASE</div>
           <div class="chip-list" id="suggestions"><button class="chip" data-phrase="How are you?">How are you?</button><button class="chip" data-phrase="What is your name?">What is your name?</button><button class="chip" data-phrase="Good morning">Good morning</button><button class="chip" data-phrase="I am learning German">I am learning German</button><button class="chip" data-phrase="Where is the train station?">Where is the train station?</button></div>
@@ -44,18 +45,31 @@
             <div class="translation-label"><span class="flag">🇩🇪</span> GERMAN <button type="button" class="icon-btn" id="copyGerman" aria-label="Copy German translation" title="Copy German">⧉ Copy</button></div>
             <div class="german-output" id="germanOutput" lang="de"></div>
             <div class="word-strip" id="wordStrip" aria-label="Tap individual German words to hear them"></div>
-            <div class="audio-actions"><button class="primary-btn" id="speakGerman" type="button">🔊 &nbsp; Listen in German</button><button class="secondary-btn" id="slowGerman" type="button">◷ &nbsp; Slow</button><button class="secondary-btn square" id="savePhrase" type="button" aria-label="Save to favorites" aria-pressed="false">♡</button></div>
+            <div class="audio-actions"><button class="primary-btn" id="speakGerman" type="button">🔊 &nbsp; Listen in German</button><button class="secondary-btn" id="slowGerman" type="button">◷ &nbsp; Slow</button><button class="secondary-btn square" id="savePhrase" type="button" aria-label="Save to favorites" aria-pressed="false">♡</button></div><div class="voice-row"><label for="germanVoice">German voice</label><select id="germanVoice" aria-label="Select German speech voice"><option value="">Detecting German voices…</option></select><span id="voiceStatus" role="status"></span></div>
             <div class="result-divider"></div>
-            <div class="translation-label">🔤 EASY PRONUNCIATION <span class="small-note">Approximate guide</span></div>
+            <div class="translation-label">🔤 ENGLISH-SOUND GUIDE <span class="small-note">Curated phrases only</span></div>
             <div class="pronunciation" id="pronEnglish"></div>
-            <div class="translation-label second-label">🇳🇵 नेपाली उच्चारण <span class="small-note">अनुमानित</span></div>
+            <div class="translation-label second-label">🇳🇵 नेपाली उच्चारण <span class="small-note">सिकाइका लागि मात्र</span></div>
             <div class="pronunciation nepali" id="pronNepali" lang="ne"></div>
             <div class="result-divider"></div>
             <div class="translation-label">🇳🇵 NEPALI MEANING</div>
             <div class="nepali-meaning" id="nepaliOutput" lang="ne"></div>
-            <div class="translation-foot" id="translationSource"></div>
+            <div class="translation-foot" id="translationSource"></div><button class="secondary-btn jump-btn" id="backToInput" type="button">← Type another sentence</button>
           </div>
           <div id="emptyResult" class="empty-result"><div class="empty-illustration">Aa <span>→</span> Ää</div><h3>Every word is progress.</h3><p>Type a sentence on the left, or select a sample phrase to begin.</p><button class="secondary-btn retry-btn" id="retryTranslation" type="button" hidden>↻ Try again</button></div>
+        </div>
+      </section>
+
+      <section id="lessons" class="lower-section lessons-section" aria-labelledby="lesson-title">
+        <div class="lower-heading"><div><span class="eyebrow">STEP-BY-STEP GERMAN · OFFLINE</span><h2 id="lesson-title">Your A1 beginner lessons.</h2></div><p>Short lessons in English, German and नेपाली. Progress stays in your browser.</p></div>
+        <div class="lesson-head"><div><strong id="lessonProgress">0 / 6 lessons completed</strong><small id="lessonStreak">Start your first lesson today</small></div><div class="progress-track" role="progressbar" aria-label="A1 lesson progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="lessonProgressBar"><span id="lessonProgressFill"></span></div></div>
+        <div class="lesson-grid" id="lessonGrid"></div>
+        <div class="mini-panel lesson-player" id="lessonPlayer" hidden>
+          <div class="lesson-player-top"><div><span class="eyebrow" id="lessonStep">LESSON</span><h3 id="lessonQuestion">Learn German step by step</h3><p class="subtle" id="lessonTip"></p></div><button type="button" class="tiny-button" id="closeLesson" aria-label="Close lesson">Close ×</button></div>
+          <div class="lesson-prompt" id="lessonPrompt"></div>
+          <div class="quiz-options" id="lessonOptions" role="group" aria-label="Choose the German translation"></div>
+          <p class="quiz-feedback" id="lessonFeedback" role="status" aria-live="polite"></p>
+          <div class="lesson-controls"><button class="secondary-btn" type="button" id="lessonListen" hidden>🔊 Listen in German</button><button class="primary-btn" type="button" id="lessonNext" hidden>Continue →</button></div>
         </div>
       </section>
 
@@ -67,9 +81,10 @@
         </div>
       </section>
 
+      <section class="backup-section" aria-labelledby="backup-title"><div class="mini-panel backup-panel"><div><h2 id="backup-title">Keep your learning history</h2><p class="subtle">Back up your favorites, recent translations and lesson progress, or restore a previous backup. Your data stays on this device unless you export it.</p></div><div class="backup-actions"><button class="secondary-btn" id="exportLearning" type="button">↓ Export progress</button><button class="secondary-btn" id="importLearning" type="button">↑ Restore backup</button><input type="file" id="backupFile" accept="application/json,.json" hidden aria-label="Choose a saved DeutschDaily JSON backup"></div></div></section>
       <section id="alphabet" class="alphabet-section" aria-labelledby="alphabet-title"><div class="lower-heading"><div><span class="eyebrow">FIRST STEPS</span><h2 id="alphabet-title">German alphabet, one tap at a time.</h2></div><p>Tap a letter to hear its German name. Includes Ä, Ö, Ü and ß.</p></div><div id="alphabetGrid" class="alphabet-grid"></div></section>
     </main>
-    <footer><div><strong>DeutschDaily</strong> <span>· English → German → नेपाली</span></div><span>Free personal learning tool · Translation services may have usage limits. Pronunciation spellings are approximate.</span></footer>
+    <footer><div><strong>DeutschDaily</strong> <span>· English → German → नेपाली</span></div><span>Free personal learning tool · Translation services may have usage limits. Pronunciation spellings are available for curated phrases only.</span></footer>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>

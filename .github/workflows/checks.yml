@@ -1,0 +1,17 @@
+name: DeutschDaily checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check app.js && node --check lessons.js && node --check phrases.js && node --check sw.js
+      - run: node test.mjs

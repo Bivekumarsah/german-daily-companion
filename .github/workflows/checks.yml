@@ -13,5 +13,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --check app.js && node --check lessons.js && node --check phrases.js && node --check a1-course-data.js && node --check visual-stories.js && node --check listening-lab.js && node --check visual-lab.js && node --check sentence-builder.js && node --check pronunciation-data.js && node --check pronunciation-lab.js && node --check a1-course.js && node --check sw.js
-      - run: node test.mjs && node visual-dom.test.mjs && node listening-lab.test.mjs && node sentence-builder.test.mjs && node pronunciation-lab.test.mjs && node pronunciation-mic.test.mjs
+      - run: node --check app.js && node --check lessons.js && node --check phrases.js && node --check a1-course-data.js && node --check visual-stories.js && node --check listening-lab.js && node --check visual-lab.js && node --check sentence-builder.js && node --check pronunciation-data.js && node --check pronunciation-lab.js && node --check a1-mock-data.js && node --check a1-mock.js && node --check a1-course.js && node --check sw.js
+      - run: node test.mjs && node visual-dom.test.mjs && node listening-lab.test.mjs && node sentence-builder.test.mjs && node pronunciation-lab.test.mjs && node pronunciation-mic.test.mjs && node a1-mock.test.mjs

@@ -88,6 +88,10 @@ assert(sw.includes('a1-exam-german-data.js')&&sw.includes('a1-exam-german.css'))
 assert(html.includes('src="a1-mock-data.js"')&&html.includes('src="a1-mock.js"')&&html.includes('href="a1-mock.css"'));
 for(const f of ['productive-guides.js','productive-coach.js','productive-coach.css'])assert(html.includes(f)&&sw.includes(f),'Missing offline productive skill asset '+f);
 assert(html.indexOf('src="productive-coach.js"')<html.indexOf('src="a1-course.js"'));
+assert(html.includes('src="writing-hints.js"')&&sw.includes('writing-hints.js'));
+assert(html.indexOf('src="writing-hints.js"')<html.indexOf('src="productive-coach.js"'));
+assert(html.includes('Open official Goethe A1 model exams and listening audio'));
+assert(html.includes('href="https://www.goethe.de/en/spr/prf/ueb/pa1.html"'));
 assert(html.indexOf('src="a1-mock-data.js"')<html.indexOf('src="a1-mock.js"'));
 for (const view of ['dashboard','course','vocabulary','exam','translator','practice','resources']) assert(html.includes('data-academy-view=\"'+view+'\"') || html.includes('data-academy-view=\''+view+'\''),'Missing routed view '+view);
 for(const id of ['examTimer','examTimerStart','examTimerPause','examTimerReset','academyDashPercent'])assert(html.includes('id=\"'+id+'\"'),'Missing academy widget '+id);

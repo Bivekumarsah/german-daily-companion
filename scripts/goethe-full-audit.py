@@ -150,6 +150,14 @@ def main() -> int:
     official_dedup={}
     for row in official:
         official_dedup.setdefault(row["term"],row)
+    required_source_anchors={"ab","die abfahrt","der schuh","zwischen","das leben"}
+    absent_anchors=required_source_anchors-set(official_dedup)
+    if absent_anchors:
+        raise RuntimeError("Official PDF column parsing missed core source anchors: "+repr(absent_anchors))
+    if "allallein" in official_dedup or "anderanfangen" in official_dedup:
+        raise RuntimeError("PDF prefix was incorrectly fused with an adjacent headword")
+    if not 620 <= len(official_dedup) <= 760:
+        raise RuntimeError("Unexpected distinct candidate count: "+str(len(official_dedup)))
     unique_exact={r["term"] for r in exact}
     unique_variant={r["term"] for r in variant}
     unique_missing={r["term"] for r in missing}

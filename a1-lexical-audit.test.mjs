@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {report} from './audit-a1.mjs';
+assert.equal(report.banks.unitEntries,260);
+assert.equal(report.banks.uniqueUnitStrings,244);
+assert.equal(report.banks.nounEntries,100);
+assert.equal(report.banks.essentialEntries,128);
+assert.equal(report.banks.uniqueGermanStrings,429);
+assert.equal(report.checkpoints.sample,176);
+assert.equal(report.checkpoints.exact,139);
+assert.equal(report.checkpoints.variantReview,0);
+assert.equal(report.checkpoints.missing,37);
+assert(report.missingCheckpoints.some(x=>x.term==='der Schuh'),'Singular Schuh remains unlisted; plural Schuhe is not an exact headword match');
+assert(report.missingCheckpoints.some(x=>x.term==='zwischen'),'Known unlisted A1 connector must be visible');
+assert(report.limitations.some(t=>t.includes('not prove full coverage')),'Do not conflate source sample with official complete word list');
+console.log('Source-grounded lexical audit assertions passed: 488 study entries, 429 distinct local strings, 176 selected official checkpoints.');

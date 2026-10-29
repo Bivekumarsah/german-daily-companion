@@ -1,48 +1,50 @@
-# DeutschDaily A1 vocabulary accuracy and official-source checkpoint audit
+# DeutschDaily A1 — official vocabulary checkpoint audit
 
-**Audit date:** 29 October 2026. **Status: first source-grounded lexical pass, not a full Goethe A1 certification.**
+**Updated 29 October 2026.** This report tracks a **selected 176-entry reference sample** from the official Goethe-Institut *Start Deutsch 1* word list, not the whole ~650-entry syllabus. This distinction matters: **zero gaps in this sample does not mean the site covers all A1 vocabulary**.
 
-## Basis and attribution
+## Primary source and reproducibility
 
-- **Primary exam reference:** [Goethe-Institut, Goethe-Zertifikat A1: Start Deutsch 1 – Wortliste](https://www.goethe.de/pro/relaunch/prf/en/A1_SD1_Wortliste_02.pdf), preface (printed p. 3), group lists (pp. 5–8), alphabetic headwords (pp. 9–27).
-- Goethe says the word list has **approximately 650 entries**. Learners should understand them passively, with about half available for active use. The book also notes that derived subentries and female counterparts are not necessarily separately listed.
-- **Local material:** Original DeutschDaily 36-unit vocabulary; independent noun packs; independently written essential expressions. The site has not copied Goethe's illustrative sample sentences. Seven contributed PDF sheets are reference documents and **are not** the official examiner's normative list.
-- **Repeatable test:** `node audit-a1.mjs` (zero external dependencies) checks every local entry's German/English/Nepali presence, audits the selected source-page checkpoints and reports verbatim form matches and gaps. `node audit-a1.mjs --json` also prints machine-readable output. `--strict` deliberately fails when sample gaps remain.
+- [Goethe-Institut, Goethe-Zertifikat A1: Start Deutsch 1 — official Wortliste (PDF)](https://www.goethe.de/pro/relaunch/prf/en/A1_SD1_Wortliste_02.pdf), alphabetic section (printed pp. 9–27).
+- The Goethe introduction states approximately **650** principal listed words, with receptive recognition expected for all and active use of about half. Inflected, derived and feminine forms are not always separate official entries.
+- The local checker `node audit-a1.mjs` reads the three existing DeutschDaily vocabulary files, checks that local entries have German, English and Nepali content, reports local duplicates and compares **176 specifically selected source headword strings**. `node audit-a1.mjs --json` emits structured results.
+- The original Goethe example sentences have **not** been copied into the course. All added study examples and Nepali/English explanations were drafted for DeutschDaily.
 
-## Actual corpus counts
+## Current course inventory
 
-| Local source | Entries |
+| Bank | Number of study entries |
 |---|---:|
-| Original 36 A1 lessons | 260 entries, 244 distinct strings |
-| 10 thematic noun packs | 100 entries, of which 60 added previously absent strings |
-| Previous essential verb/phrase packs | 80 entries, of which 77 added previously absent strings |
-| This review's *Goethe-reference-checked* expansion | **48 new entries** over 6 topics |
-| **Combined current site** | **488 study entries; 429 distinct case-folded German entry strings** |
+| Existing 36-unit course vocabulary | 260 (244 distinct strings) |
+| Independent noun themes | 100 |
+| Earlier essential expression cards | 80 |
+| First Goethe-based gap expansion | 48 |
+| This release: closes 37 remaining checkpoints, adds 3 verified everyday nouns | 40 |
+| **Total study entries** | **528** |
+| **Distinct case-insensitive German entry strings** | **469** |
 
-Counting is on the **German entry string**, not on roots, meanings, inflections or exact Goethe headwords. Some local phrases and derived forms do not correspond to a single listed Goethe dictionary headword.
+The combined bank is **not** 469 distinct Goethe principal lemmas. Phrases, inflected forms and gender variants are mixed with headwords. Learner progress keys and original course entries remain unchanged.
 
-## Verified sample comparison, not a percentage of full syllabus
+## Checkpoint results — fixed 176-item reference sample
 
-The code contains **176 hand-selected checkpoints** from the official alphabetic list (printed pages 9–26), with an accompanying printed page number. The corpus search returns **139 exact case-insensitive string matches**, and **37 checkpoints not represented as an exact entry in any of the three banks**. Results come from checking local bank entries only; some forms appear elsewhere inside sentences or mock dialogue.
+| State | Before this release | After |
+|---|---:|---:|
+| Exact case-insensitive entries matched | 139 | **176** |
+| Absent exact-entry checkpoints | 37 | **0** |
+| Variant-equivalence cases in this sample | 0 | 0 |
 
-This is an **intentionally selected sample** to make future audits measurable, *not a random sample*. Accordingly, **139/176 is NOT a Goethe pass score or a claim about the 650-entry list's coverage**.
+The 37 prior exact-label gaps now have individually drafted cards: *ab, allein, anmachen, ausmachen, danken, dann, dich, dir, das Dorf, draußen, das Foto, die Frau, hier, in, leben, das Licht, man, mehr, möchten, mögen, rauchen, das Restaurant, richtig, der Schuh, der Sohn, tun, über, verkaufen, verheiratet, vor, weiblich, werden, willkommen, wir, wissen, die Zeit, zwischen*. Three more source-confirmed, standalone A1 nouns were added: *der Ausweis, das Auto, der Urlaub*.
 
-Examples of outstanding checklist gaps include: *ab, ausmachen, danken, dich, dir, das Dorf, das Foto, hier, in, möchten, mögen, der Schuh, wissen* and *zwischen*. We intentionally retain the gap report rather than mark these words as learned merely because they occur inside example sentences.
+The official dictionary headword **der Schuh** and previously taught plural **die Schuhe** are now both available without replacing the original item. Reflexive verb canonical forms like *sich anmelden* may still need editorial equivalence checks.
 
-### Editorial issues and distinctions
+## Critical boundaries: what this audit cannot establish
 
-1. **Inflection and article normalization:** The core lessons have *die Schuhe* (plural), while the official headword is *der Schuh* (singular). Both are valid German, but the plural form must not be counted as an exact dictionary-entry match. The audit therefore reports the missing singular headword. Future data updates should add the singular **without deleting existing learner progress for the plural**.
-2. **Reflexive variants:** *sich anmelden* and the official *(sich) anmelden* need human sense-level equivalence review; exact string matching is deliberately conservative.
-3. **Meaning and plural accuracy:** Each new word has been provided with a German example plus English and Nepali meanings, and selected forms checked against source pages. **The entire 488-entry site has not been independently reviewed by a German-speaking teacher**, so we must not call its translations or morphology certified.
-4. **Pronunciation:** German TTS voices differ by device. English/Nepali approximations, especially for /ç/, ö and ü, remain didactic hints rather than native-speaker transcriptions.
-5. **Source scope:** The official list is intended as a level reference, not necessarily a lesson sequence. Its 650 entries cannot be compared naïvely with a website's 429 strings.
+1. **This is a selected, nonrandom comparison, not a full 650-headword concordance.** A 176/176 sample result is not a valid whole-list percentage, Goethe grade, or completion certificate.
+2. **Complete semantic matching has not been performed.** Exact labels do not prove correct sense, noun gender, plural, verb valency, or ability to use a word productively.
+3. **No qualified bilingual human proofreading has been certified.** The new sentences were reviewed for obvious word order, spelling and A1 suitability, but the 528 total entries and all their translations have not been independently proofread by native-fluent German and Nepali language specialists.
+4. **German audio uses browser/device text-to-speech**; it does not assess learner pronunciation, speaking or listening under official test conditions.
+5. **Official full-list PDF parsing is still a research/development task.** The published PDF was available to read, but direct programmatic download to the development environment was blocked. We deliberately did not invent or bulk-reproduce the full official list.
 
-## Reproducible next editorial steps
+## Follow-up work required before calling DeutschDaily fully A1-complete
 
-1. Run the complete official Goethe headword list through a human-reviewed concordance, including noun gender, plural patterns, reflexive forms, idiomatic expressions, secondary meanings and capitalization. This audit was **not** performed exhaustively because the official PDF was readable online but not available as a local file to process here.
-2. Resolve the 37 documented sample gaps with graded lessons; do not optimize a selected coverage score by inventing new high-frequency counts.
-3. Have a qualified German editor proofread the bilingual meaning and sentence examples, then a Nepali-fluent reviewer check script and register.
-4. Validate 36-unit navigation, microphone permissions, German speech synthesis and accessibility on Android and iPhone; automated DOM tests are not substitutes for actual devices.
-5. Test writing/speaking with a tutor, and use the official Goethe A1 model exam's **authentic audio** before claiming complete exam readiness.
+A verified, **complete** official-word-list concordance; qualified review of German meanings, noun genders/plurals and Nepali translations; coverage-appropriate practice in context; writing/speaking review; and physical-device/browser testing. Reference authentic Goethe model exam materials at [Goethe official A1 training](https://www.goethe.de/en/spr/prf/ueb/pa1.html).
 
-**Conclusion:** More A1-relevant content and a traceable local consistency/official-sample check are implemented. **DeutschDaily is still not independently validated as 100% complete for the Goethe A1 examination.**
+**Conclusion:** The website now resolves **all 37 previously identified exact-entry gaps in the fixed 176-checkpoint sample**, but **100% Goethe A1 coverage is not yet verified**.

@@ -27,7 +27,7 @@ class FakeNode {
 }
 const mock={window:{},document:{createElement:tag=>new FakeNode(tag)}};
 vm.createContext(mock);
-for(const filename of ['visual-stories.js','visual-lab.js'])
+for(const filename of ['a1-course-data.js','visual-stories.js','visual-lab.js'])
   vm.runInContext(read(filename),mock,{filename});
 const scenes=mock.window.DEUTSCH_VISUAL_LAB.scenes;
 const stories=mock.window.DEUTSCH_VISUAL_STORIES;
@@ -84,6 +84,39 @@ for(const [id,scene] of Object.entries(scenes)){
   assert(title.textContent.includes('1 of 3'),'Repeat should reset the challenge');
 }
 assert(texts.size>=30);
+const entireCourse=mock.window.DEUTSCH_A1.units;
+assert.equal(entireCourse.length,36);
+for(const unit of entireCourse){
+  const scene=mock.window.DEUTSCH_VISUAL_LAB.sceneFor(unit);
+  assert(scene && scene.items.length===3,unit.id+' must have accessible picture vocabulary');
+  const parent=new FakeNode(),recorded=[];
+  assert.equal(mock.window.DEUTSCH_VISUAL_LAB.render(parent,unit,(de,slow)=>recorded.push({de,slow})),true);
+  const lab=parent.querySelector('.visual-lab');
+  assert(lab,'Each unit must render an exercise');
+  assert.equal(lab.querySelector('.visual-lab-cards').children.length,3);
+  assert(lab.querySelector('.visual-lab-ears'),'Each unit needs a listening-only exercise');
+  const ear=lab.querySelector('.visual-lab-ears');
+  const earControls=ear.querySelector('.visual-lab-turn-actions').children;
+  earControls[0].click();
+  earControls[1].click();
+  assert.equal(recorded.at(-2).de,scene.items[1][1]);
+  assert.equal(recorded.at(-2).slow,false);
+  assert.equal(recorded.at(-1).slow,true);
+  const answer=ear.querySelector('.visual-lab-options').children.find(c=>c.textContent===scene.items[1][2]);
+  assert(answer,unit.id+' listening answer missing');
+  answer.click();
+  assert(ear.querySelector('.visual-lab-feedback').textContent.includes('Correct!'));
+  if(!stories[unit.id]){
+    const grammar=lab.querySelector('.visual-lab-example');
+    assert(grammar,unit.id+' needs an existing grammar sentence as its context');
+    const grammarControls=grammar.querySelector('.visual-lab-turn-actions').children;
+    grammarControls[1].click();
+    assert.equal(recorded.at(-1).slow,true);
+    grammarControls[2].click();
+    assert(grammar.querySelector('.visual-lab-meaning').hidden,'Grammar translation must be hideable');
+  }
+}
+
 const nonexistent=new FakeNode();
 assert.equal(mock.window.DEUTSCH_VISUAL_LAB.render(nonexistent,{id:'a1-99'},()=>{}),false);
-console.log('Visual dialogue checks passed: 12 scenes, 36 conversation turns, audio/slow actions, translation toggles, wrong-answer feedback, challenge completion and replay.');
+console.log('Visual dialogue checks passed: 36 units, 12 curated scenes, 36 conversation turns, audio/slow actions, translation toggles, wrong-answer feedback, challenge completion and replay.');

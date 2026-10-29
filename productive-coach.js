@@ -146,6 +146,18 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
    const repeat=make('div','productive-actions');
    repeat.append(button('🔊 Hear example',()=>speak(answer)),button('◷ Slow example',()=>speak(answer,true)));
    example.append(repeat,make('p','productive-help','Compare what you said with the example. Is your meaning clear? Do not treat this as a grade.'));
+   const selfCheck=make('fieldset','productive-speaking-checklist');
+   selfCheck.append(make('legend','','Review your own answer · आफ्नो उत्तर जाँच्नुहोस्'));
+   for(const text of [
+    'I answered what my partner asked · मैले प्रश्नको जवाफ दिएँ',
+    'I spoke clearly and at a comfortable pace · मैले स्पष्ट र बिस्तारै बोलेँ',
+    'I can try again without reading · म नहेरी फेरि प्रयास गर्न सक्छु'
+   ]){
+    const line=make('label','productive-check');
+    const mark=make('input');mark.type='checkbox';
+    line.append(mark,make('span','',text));selfCheck.append(line);
+   }
+   example.append(selfCheck);
    panel.append(example,button(round===task.turns.length-1?'Finish dialogue →':'Next partner turn →',()=>{round++;render();},'productive-primary'));
   },'productive-primary');
   panel.append(confirm);

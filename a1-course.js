@@ -128,6 +128,7 @@ function renderProductive(out,skill){
  let textarea=null;
  if(writing){textarea=el('textarea','a1-writing');textarea.rows=5;textarea.lang='de';textarea.maxLength=1400;textarea.placeholder='Schreiben Sie hier auf Deutsch …';
   const meter=el('p','a1-help','0 words written');textarea.addEventListener('input',()=>{meter.textContent=`${wordCount(textarea.value)} words written`;});out.append(textarea,meter);
+  if(window.DEUTSCH_PRODUCTIVE_COACH?.addWriting)window.DEUTSCH_PRODUCTIVE_COACH.addWriting(out,textarea,{key:unit.id,goals:window.DEUTSCH_PRODUCTIVE_GUIDES?.writingGoals?.[unit.id]});
  }else{
   out.append(button('🔊 Hear a sample response',()=>speaking(task.model),'secondary-btn'));
   const recordBox=el('div','a1-record-controls');const start=button('🎙 Record yourself',async()=>{

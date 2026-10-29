@@ -16,6 +16,10 @@ The latest [official Goethe whole-alphabet audit](goethe-full-concordance.md) pr
 
 The vocabulary data now includes **528 study entries / 469 distinct case-insensitive German entry strings**, including **168 essential-word cards**. All **37 previously missing exact-entry terms** from the fixed, hand-selected **176-checkpoint Goethe word-list sample** have now been added. That sample now has **176 exact string matches**, but **is NOT a full ~650-word-list concordance or percentage of A1 completion**. See [the latest A1 vocabulary accuracy audit](a1-vocabulary-accuracy-audit.md). Earlier counts below are historical milestones, not the current inventory.
 
+## Writing and speaking coaching phase (29 October 2026)
+
+All 36 core writing tasks now offer task-specific self-review checklists and an optional locally stored draft (not included in standard progress backup). The two original mock exams provide guided 18-turn speaking dialogues with English/Nepali clues, transcript reveal, model replies, and speech playback; mock writing tasks gain checklists and forms gain completeness feedback. **None of these features recognizes speech or verifies German grammar.** Full 9/10 writing/speaking ratings are contingent on independent teacher-level evaluation and real-device QA.
+
 ## Current internal unit mapping (preserved IDs, no migrations)
 
 | A1 competency | Current DeutschDaily units | Status |

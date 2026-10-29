@@ -17,6 +17,8 @@ A free static progressive-web-app for personal German study, with English explan
 - **German Essentials:** 216 bilingual verbs, connectors, prepositions and useful expression cards in 27 everyday groups, each with an original context sentence and tap-to-listen audio. These add 213 distinct entries beyond the prior 304, yielding **517 unique case-folded German entry strings across three banks**. This is not a Goethe headword count or confirmed 100% coverage.
 - Original listening comprehension questions with German device text-to-speech; replay slowly, reveal transcript after answering
 - Original reading comprehension with short everyday messages and multiple choice
+- **Writing Coach across all 36 A1 units**: unique task-goal checklists, word-length guidance, optional explicitly saved local draft, easy copy/export to ask for teacher feedback; **does not grade grammar**. Mock writing messages also include goal review; mock forms show filled-field counts.
+- **Six guided speaking roleplays** in the two A1 mocks: 18 listen-and-answer turns with German slow/normal speech, English/Nepali cues, transcripts revealed on request and examples revealed after self-practice. **No automatic speaking score.**
 - Guided writing prompts and examples; writing is **self-reviewed**, not auto-graded
 - Speaking prompts; optional local microphone recording with playback when supported; **no speech recognition or automatic marking**
 - Per-unit six-skill practice tracking, topic/search filters and course completion summary (tracking activity, **not mastery**)

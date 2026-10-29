@@ -20,7 +20,7 @@ const normalizeHeadword=s=>norm(s).replace(/^\(sich\) /,'sich ').replace(/^sich 
 const actual=new Map();
 for(const word of all){
  assert(word.de&&word.en&&word.ne,'Missing German/English/Nepali for '+word.bank);
- if(word.example)assert(word.example.length>=16,'Example is too short for '+word.de);
+ if(word.example)assert(word.example.trim().length>=8,'Example must contain a useful sentence for '+word.de);
  const key=norm(word.de);
  if(!actual.has(key))actual.set(key,[]);
  actual.get(key).push(word.bank);

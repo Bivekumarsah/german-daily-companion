@@ -8,7 +8,7 @@ if(!root || sets.length===0)return;
 const titles={listening:'Hören · Listening',reading:'Lesen · Reading',writing:'Schreiben · Writing',speaking:'Sprechen · Speaking'};
 const minutes={listening:20,reading:25,writing:20,speaking:15};
 const skills=Object.keys(titles);
-let selected=0,skill='listening',index=0,completed=false;
+let selected=0,skill='listening',index=0,completed=false,examLanguage='guided';
 let answers=[],startSeconds=0,remaining=minutes[skill]*60,timerId=null;
 const writingAnswers={};
 const el=(tag,klass,txt)=>{
@@ -25,10 +25,11 @@ const header=el('div','a1-mock-head');
 const lead=el('p','a1-mock-lead','Independent original practice · device-generated listening audio · no official exam score');
 const setsRow=el('div','a1-mock-sets');
 const skillRow=el('div','a1-mock-skills');
+const languageRow=el('div','a1-mock-language');
 const clock=el('div','a1-mock-clock');
 const notice=el('p','a1-mock-notice','');
 notice.setAttribute('role','status');
-header.append(lead,setsRow,skillRow,clock,notice);
+header.append(lead,setsRow,skillRow,languageRow,clock,notice);
 root.append(header,content);
 const pad=n=>String(n).padStart(2,'0');
 const format=s=>pad(Math.floor(s/60))+':'+pad(s%60);
@@ -108,6 +109,28 @@ function render(){
   if(skill===name)b.classList.add('is-active');
   skillRow.append(b);
  }
+ languageRow.replaceChildren();
+ if(skill==='listening'||skill==='reading'){
+  const label=el('p','a1-mock-language-label','Choose practice language · Sprache wählen');
+  const modes=el('div','a1-mock-language-options');
+  modes.setAttribute('role','group');
+  modes.setAttribute('aria-label','Question and answer language');
+  for(const [value,title] of [['guided','Guided · English'],['german','German exam-style · Deutsch']]){
+   const b=btn(title,()=>{
+    if(examLanguage===value)return;
+    examLanguage=value;
+    stopTimer();index=0;answers=[];completed=false;remaining=minutes[skill]*60;
+    notice.textContent='Practice language changed. Previous answers and timer were reset; this is an independent, unofficial exercise.';
+    render();
+   },'a1-mock-language-choice');
+   b.setAttribute('aria-pressed',String(examLanguage===value));
+   if(examLanguage===value)b.classList.add('is-active');
+   modes.append(b);
+  }
+  languageRow.append(label,modes,el('p','a1-mock-help',examLanguage==='german'?
+   'Original German-language questions and answers. English explanations appear only after submitting. Audio uses your device voice, not authentic examination recordings.':
+   'Begin with English questions and answer choices. Switch to German-only rehearsal when ready. Switching restarts this section.'));
+ }
  renderTimer();
  showTask();
 }
@@ -116,6 +139,8 @@ function showTask(){
  content.replaceChildren();
  const set=sets[selected];
  const items=set[skill];
+ const source=window.DEUTSCH_A1_EXAM_DE?.[set.id]?.[skill];
+ const germanMode=examLanguage==='german' && (skill==='listening'||skill==='reading') && Array.isArray(source) && source.length===items.length;
  const heading=el('h4','a1-mock-title',titles[skill]+' · '+set.title);
  content.append(heading);
  if(skill==='listening'||skill==='reading'){
@@ -129,16 +154,30 @@ function showTask(){
    review.append(el('summary','', 'Review the original questions and answer explanations'));
    for(const [i,q] of items.entries()){
     const response=el('div','a1-mock-review-item');
-    response.append(el('strong','',(i+1)+'. '+q[1]),el('p','',q[0]),
-      el('p','', 'Correct answer: '+q[2][q[3]]),
-      el('p','', 'Your answer: '+(answers[i]===undefined?'Not answered':q[2][answers[i]])));
+    const g=source?.[i];
+    const question=el('strong','',(i+1)+'. '+(germanMode&&g?g[0]:q[1]));
+    if(germanMode)question.lang='de';
+    response.append(question);
+    if(germanMode)response.append(el('p','a1-mock-help','English: '+q[1]));
+    const passage=el('p','',q[0]);passage.lang='de';response.append(passage);
+    if(germanMode&&g){
+     const correct=el('p','','Richtig: '+g[1][q[3]]);correct.lang='de';
+     const chosen=el('p','','Ihre Antwort: '+(answers[i]===undefined?'Nicht beantwortet':g[1][answers[i]]));chosen.lang='de';
+     response.append(correct,chosen,el('p','a1-mock-help','English answer: '+q[2][q[3]]));
+    }else{
+     response.append(el('p','','Correct answer: '+q[2][q[3]]),
+       el('p','','Your answer: '+(answers[i]===undefined?'Not answered':q[2][answers[i]])));
+    }
     review.append(response);
    }
    result.append(review,btn('Try this section again ↻',()=>setSection(skill),'a1-mock-primary'));
    content.append(result);return;
   }
-  content.append(el('p','a1-mock-count','Question '+(index+1)+' of '+items.length+' · '+(skill==='listening'?'Hear the audio; the German transcript stays hidden until the section is submitted.':'Read the short original notice, sign, advertisement or message.')));
+  content.append(el('p','a1-mock-count',germanMode?
+    'Aufgabe '+(index+1)+' von '+items.length+' · '+(skill==='listening'?'Hören Sie den Text und wählen Sie eine Antwort.':'Lesen Sie den Text und wählen Sie eine Antwort.'):
+    'Question '+(index+1)+' of '+items.length+' · '+(skill==='listening'?'Hear the audio; the German transcript stays hidden until the section is submitted.':'Read the short original notice, sign, advertisement or message.')));
   const q=items[index];
+  const germanTask=germanMode?source[index]:null;
   if(skill==='listening'){
    const audios=el('div','a1-mock-audio');
    audios.append(btn('🔊 Play German audio',()=>speak(q[0],false),'a1-mock-primary'),
@@ -147,27 +186,36 @@ function showTask(){
   }else{
     const passage=el('blockquote','a1-mock-passage',q[0]);passage.lang='de';content.append(passage);
   }
-  content.append(el('h5','a1-mock-question',q[1]));
+  const question=el('h5','a1-mock-question',germanTask?germanTask[0]:q[1]);
+  if(germanTask)question.lang='de';
+  question.setAttribute('tabindex','-1');
+  content.append(question);
   const choices=el('div','a1-mock-options');
-  q[2].forEach((option,i)=>{
+  choices.setAttribute('role','group');
+  choices.setAttribute('aria-label',germanTask?'Antwortmöglichkeiten':'Answer choices');
+  (germanTask?germanTask[1]:q[2]).forEach((option,i)=>{
     const b=btn(option,()=>{
       answers[index]=i;showTask();
+      content.querySelector('.a1-mock-options')?.children?.[i]?.focus?.();
     },'a1-mock-choice');
+    if(germanTask)b.lang='de';
     b.setAttribute('aria-pressed',String(answers[index]===i));
     if(answers[index]===i)b.classList.add('is-selected');
     choices.append(b);
   });
   content.append(choices);
   const navigation=el('div','a1-mock-navigation');
-  const previous=btn('← Previous',()=>{index--;showTask();});previous.disabled=index===0;
+  const previous=btn(germanMode?'← Zurück':'← Previous',()=>{index--;showTask();content.querySelector('.a1-mock-question')?.focus?.();});previous.disabled=index===0;
   navigation.append(previous);
   if(index===items.length-1){
-   navigation.append(btn('Submit section for feedback',finishMCQ,'a1-mock-primary'));
+   navigation.append(btn(germanMode?'Antworten prüfen':'Submit section for feedback',finishMCQ,'a1-mock-primary'));
   }else{
-   navigation.append(btn('Next question →',()=>{index++;showTask();},'a1-mock-primary'));
+   navigation.append(btn(germanMode?'Weiter →':'Next question →',()=>{index++;showTask();content.querySelector('.a1-mock-question')?.focus?.();},'a1-mock-primary'));
   }
   content.append(navigation);
-  content.append(el('p','a1-mock-help',answers.filter(a=>a!==undefined).length+' / '+items.length+' answered. You may leave an answer blank. The score appears only when you submit this section.'));
+  content.append(el('p','a1-mock-help',germanMode?
+    answers.filter(a=>a!==undefined).length+' von '+items.length+' beantwortet. Nicht beantwortete Fragen zählen nicht als richtig.':
+    answers.filter(a=>a!==undefined).length+' / '+items.length+' answered. You may leave an answer blank. The score appears only when you submit this section.'));
   return;
  }
  // Written and spoken responses are *deliberately* not given automated point scores.

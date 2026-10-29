@@ -47,6 +47,21 @@ try{
   const severeExam=examAccessibility.violations.filter(v=>['critical','serious'].includes(v.impact));
   assert.deepEqual(severeExam.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')),[],
    'No serious or critical WCAG violations in active exam mock');
+  await page.locator('#a1MockRoot .a1-mock-skills button').nth(3).click();
+  const speaking=page.locator('#a1MockRoot .productive-speaking');
+  await speaking.waitFor({timeout:10000});
+  const recorder=speaking.locator('.productive-recorder');
+  await recorder.waitFor({timeout:10000});
+  assert.match(await recorder.innerText(),/Nothing is uploaded or saved/,'Privacy promise is visible');
+  const start=recorder.locator('button').first();
+  const micSize=await start.evaluate(el=>el.getBoundingClientRect().height);
+  assert(micSize>=44,'Recording start button has usable touch geometry');
+  const speakingAccessibility=await page.evaluate(async()=>window.axe.run(document.querySelector('#a1MockRoot .productive-speaking'),{
+   runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}
+  }));
+  const severeSpeaking=speakingAccessibility.violations.filter(v=>['critical','serious'].includes(v.impact));
+  assert.deepEqual(severeSpeaking.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')),[],
+   'No serious or critical WCAG violations in local speaking controls');
   await page.goto(host+'#/vocabulary',{waitUntil:'domcontentloaded'});
   await page.locator('#a1EssentialsStudio > summary').click();
   await page.locator('#a1EssentialsRoot .a1-bridge-card').first().waitFor({timeout:10000});

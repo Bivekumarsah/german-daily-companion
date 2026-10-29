@@ -56,5 +56,5 @@ await secondRecord.events.click();
 assert.equal(tracks[2].stopped,false);
 hash='#/dashboard';winEvents.hashchange();
 assert.equal(tracks[2].stopped,true,'Leaving Practice route must stop microphone capture');
-assert.equal(created.length,2,'Only local blob playback data should be created');
+assert.equal(created.length,1,'Only an explicitly stopped recording creates local playback data');
 console.log('Pronunciation microphone checks passed: start, stop, local playback, URL revocation, lesson navigation and route-change cleanup.');

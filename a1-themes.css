@@ -33,3 +33,13 @@ html[data-theme="light"] .a1-theme-option.is-correct{background:#d5efda;color:#2
 html[data-theme="light"] .a1-theme-option.is-wrong{background:#fbdde3;color:#5b2534}
 @media(max-width:760px){.a1-theme-cards{grid-template-columns:1fr}.a1-theme-options{grid-template-columns:1fr}.a1-theme-studio{padding:13px}.a1-theme-tab{flex:1 1 140px}}
 @media(prefers-reduced-motion:reduce){.a1-theme-studio *{animation:none!important;transition:none!important}}
+
+
+/* Concise, dictionary-backed beginner grammar notes. */
+.a1-theme-usage{margin:11px 0;padding:10px 11px;border-left:3px solid #a6dda1;background:#1b3b49;border-radius:7px}
+.a1-theme-card .a1-theme-usage p{font-size:12px;line-height:1.6;margin:7px 0;overflow-wrap:anywhere}
+.a1-theme-nepali{font-family:system-ui,"Noto Sans Devanagari",sans-serif}
+.a1-theme-source{display:inline-block;padding:7px 0;min-height:32px;line-height:1.5;font-size:12px;color:#ddf3b6;text-decoration:underline}
+.a1-theme-source:focus-visible{outline:3px solid #b8e5ff;outline-offset:3px}
+html[data-theme="light"] .a1-theme-usage{background:#edf6ed;border-color:#4c9a58}
+html[data-theme="light"] .a1-theme-source{color:#145c32}

@@ -189,7 +189,10 @@ function showTask(){
     });
     label.append(input);form.append(label);
    }
-   response.append(form);
+   const formStatus=el('p','a1-mock-help','');formStatus.setAttribute('role','status');
+   const updateForm=()=>{const total=task.fields.length;const done=form.children.filter(label=>label.children[0]?.value?.trim()).length;formStatus.textContent=done+' / '+total+' fields filled · Use fictional information and double-check spelling. This is not automatically evaluated.';};
+   for(const field of form.children)field.children[0].addEventListener('input',updateForm);
+   updateForm();response.append(form,formStatus);
   }else{
     const area=el('textarea','a1-mock-textarea');
     area.rows=7;area.lang='de';area.maxLength=1800;
@@ -197,9 +200,11 @@ function showTask(){
     area.placeholder='Write your German answer before revealing the example…';
     area.addEventListener('input',()=>{writingAnswers[key]=area.value;});
     response.append(area);
+    if(window.DEUTSCH_PRODUCTIVE_COACH?.addWriting)window.DEUTSCH_PRODUCTIVE_COACH.addWriting(response,area,{goals:task.tips});
   }
  }else{
   response.append(el('p','a1-mock-help','Speak your answer aloud first. If possible, practise the question/request with a speaking partner; the Goethe speaking test is interactive.'));
+  if(window.DEUTSCH_PRODUCTIVE_COACH?.addSpeaking)window.DEUTSCH_PRODUCTIVE_COACH.addSpeaking(response,{setId:set.id,taskIndex:index,speak});
  }
  content.append(response);
  const model=el('div','a1-mock-model');

@@ -40,6 +40,7 @@ try{
   assert.equal(overflow,false,'Page should not scroll horizontally at '+viewport.width);
   assert.deepEqual(errors,[],'No JS exceptions after route, keyboard switching and mock answers');
   await page.goto(host+'#/vocabulary',{waitUntil:'domcontentloaded'});
+  await page.locator('#a1EssentialsStudio > summary').click();
   await page.locator('#a1EssentialsRoot .a1-bridge-card').first().waitFor({timeout:10000});
   assert.deepEqual(errors,[],'Vocabulary view must remain functional');
   console.log('Viewport '+viewport.width+'×'+viewport.height+': exam language, keyboard, touch geometry and vocabulary route passed.');

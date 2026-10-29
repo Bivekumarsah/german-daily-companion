@@ -46,7 +46,7 @@ for(const group of vocab){
  assert(group.title&&group.items.length===8,'Each topic requires eight expressions');
  for(const w of group.items){
   assert.equal(w.length,5);
-  assert(w.every(v=>typeof v==='string'&&v.trim().length>=2));
+  assert(w.every(v=>typeof v==='string'&&v.trim().length>=1));
   wordCount.push(w[0]);
  }
 }

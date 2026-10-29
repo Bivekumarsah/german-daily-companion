@@ -21,6 +21,12 @@ try{
   assert.match(await rec.innerText(),/Nothing is uploaded or saved/);
   const size=await rec.locator('button').first().evaluate(el=>el.getBoundingClientRect().height);
   assert(size>=44,'Safari-engine speaking control <44px');
+  await page.goto(host+'#/dashboard',{waitUntil:'domcontentloaded'});
+  const daily=page.locator('#dailyJourneyRoot');
+  await daily.locator('.dj-primary').first().click();
+  assert.match(await daily.innerText(),/Discover useful words/);
+  assert.equal(await daily.locator('.dj-word').count(),4);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2),false,'Guided lessons must not overflow WebKit');
   await page.goto(host+'#/vocabulary',{waitUntil:'domcontentloaded'});
   const cards=page.locator('#a1ThemesRoot .a1-theme-card');
   await cards.first().waitFor({timeout:10000});

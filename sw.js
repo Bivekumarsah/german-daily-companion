@@ -1,6 +1,6 @@
 /* Versioned offline shell. New external translations cannot be retrieved offline. */
-const CACHE='deutschdaily-static-v10-listening-lab';
-const FILES=['./','./index.html','./styles.css','./app.js','./phrases.js','./lessons.js','./a1-course-data.js','./visual-stories.js','./listening-lab.js','./visual-lab.js','./visual-lab.css','./sentence-builder.js','./sentence-builder.css','./a1-course.js','./academy.js','./manifest.webmanifest','./icon.svg'];
+const CACHE='deutschdaily-static-v11-pronunciation';
+const FILES=['./','./index.html','./styles.css','./app.js','./phrases.js','./lessons.js','./a1-course-data.js','./visual-stories.js','./listening-lab.js','./visual-lab.js','./visual-lab.css','./sentence-builder.js','./sentence-builder.css','./pronunciation-data.js','./pronunciation-lab.js','./pronunciation-lab.css','./a1-course.js','./academy.js','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('deutschdaily-static-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

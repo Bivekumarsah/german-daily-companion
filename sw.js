@@ -1,4 +1,4 @@
-const CACHE = 'deutschdaily-static-v1';
+const CACHE = 'deutschdaily-static-v2';
 const FILES = ['./','./index.html','./styles.css','./app.js','./phrases.js','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));

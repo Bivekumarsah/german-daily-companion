@@ -70,6 +70,7 @@ function showTab(next){if(!unit)return;tab=next;renderSkillProgress();const out=
 }
 function heading(parent,title,desc){parent.append(el('h4','a1-task-title',title));if(desc)parent.append(el('p','a1-help',desc));}
 function renderVocabulary(out){
+ if(window.DEUTSCH_VISUAL_LAB?.render)window.DEUTSCH_VISUAL_LAB.render(out,unit,speaking);
  heading(out,'Words you should know','Tap 🔊 for authentic German device speech. English and Nepali meanings are written for this lesson.');
  const grid=el('div','a1-vocab-grid');
  for(const w of unit.vocab){const row=el('div','a1-word-card');const de=el('strong','a1-word-de',w.de);de.lang='de';row.append(de,el('span','a1-word-en',w.en),el('span','a1-word-ne',w.ne));const play=button('🔊 Listen',()=>speaking(w.de),'a1-audio-small');play.setAttribute('aria-label',`Speak ${w.de}`);row.append(play);grid.append(row);}

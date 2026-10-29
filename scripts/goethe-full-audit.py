@@ -185,6 +185,7 @@ def main() -> int:
     print(f"Local study items: {len(labels)}; distinct strings: {len(all_local)}")
     print(f"Exact labels: {len(unique_exact)}; variants to review: {len(unique_variant)}; unmatched: {len(unique_missing)}")
     print("Sample unmatched terms:",", ".join(summary["sample_unmatched_for_editor"][:22]))
+    print("Manual variants:",json.dumps(summary["sample_variants_for_editor"],ensure_ascii=False)[:1400])
     if args.debug:
         print("Page 9 extraction preview:",json.dumps(debug,ensure_ascii=False))
     return 0

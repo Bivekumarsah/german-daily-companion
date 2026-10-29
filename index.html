@@ -13,6 +13,8 @@
 <link href="visual-lab.css" rel="stylesheet"/>
 <link href="sentence-builder.css" rel="stylesheet"/>
 <link href="pronunciation-lab.css" rel="stylesheet"/>
+<link href="a1-mock.css" rel="stylesheet"/>
+<link href="a1-themes.css" rel="stylesheet"/>
 <script defer="" src="phrases.js"></script>
 <script defer="" src="lessons.js"></script>
 <script defer="" src="a1-course-data.js"></script>
@@ -22,6 +24,10 @@
 <script defer="" src="sentence-builder.js"></script>
 <script defer="" src="pronunciation-data.js"></script>
 <script defer="" src="pronunciation-lab.js"></script>
+<script defer="" src="a1-mock-data.js"></script>
+<script defer="" src="a1-mock.js"></script>
+<script defer="" src="a1-themes-data.js"></script>
+<script defer="" src="a1-themes.js"></script>
 <script defer="" src="a1-course.js"></script>
 <script defer="" src="app.js"></script>
 <script defer="" src="academy.js"></script></head>
@@ -104,6 +110,7 @@ DeutschDaily is a self-study aid. Practice completion and automatic multiple-cho
 </section>
 <section aria-labelledby="a1ReviewHeading" class="lower-section a1-review-section academy-view" data-academy-view="vocabulary" id="a1review">
 <div class="lower-heading"><div><span class="eyebrow">ACTIVE RECALL · OFFLINE VOCABULARY</span><h2 id="a1ReviewHeading">Remember the words, not just the lesson.</h2></div><p>Practice vocabulary with simple spaced repetition. Again, Good and Easy schedule words for later review on this device.</p></div>
+<div class="a1-theme-studio" aria-labelledby="a1ThemesHeading"><h3 id="a1ThemesHeading">Explore ten everyday vocabulary themes</h3><p class="subtle">100 original bilingual entries with German noun articles, plural forms, tap-to-hear practice, and short quizzes. These supplement the existing 36 lessons; official Goethe word-list coverage is still being audited.</p><div id="a1ThemesRoot"></div></div>
 <div class="mini-panel a1-review-panel"><p class="subtle" id="a1ReviewStatus" role="status">Preparing your vocabulary cards…</p>
 <div id="a1ReviewCard"><span class="eyebrow">SAY THE GERMAN WORD</span><div class="a1-review-word" id="a1ReviewWord" lang="de"></div>
 <div class="a1-review-answer" hidden="" id="a1ReviewAnswer"><strong id="a1ReviewEnglish"></strong><p id="a1ReviewNepali" lang="ne"></p></div>
@@ -121,6 +128,7 @@ DeutschDaily is a self-study aid. Practice completion and automatic multiple-cho
 <button class="secondary-btn" id="examTimerReset" type="button">↻ Reset</button>
 </div>
 </div>
+<section class="a1-mock-studio" aria-labelledby="a1MocksHeading"><h3 id="a1MocksHeading">Two complete-length original listening &amp; reading practice sets</h3><p class="subtle">Each set includes 15 listening questions and 15 reading questions, plus guided writing and speaking tasks. They are <strong>not</strong> official Goethe model tests. Device-generated audio and independent feedback cannot replace authentic recordings, a conversation partner, or teacher assessment.</p><div id="a1MockRoot"></div></section>
 <div class="mini-panel a1-exam-body"><h3 id="a1ExamTitle">Listening</h3><p class="subtle" id="a1ExamInfo"></p><div id="a1ExamContent"></div><p class="a1-exam-warning">Listening uses your device's text-to-speech, not Goethe audio. Writing and speaking require human feedback for meaningful assessment. Do not treat this exercise score as an official Goethe result.</p></div>
 </section>
 <section aria-labelledby="referenceHeading" class="lower-section a1-reference-section academy-view" data-academy-view="resources" id="references">

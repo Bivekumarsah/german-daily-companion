@@ -11,6 +11,8 @@ A free static progressive-web-app for personal German study, with English explan
 - Grammar notes with English and Nepali explanations and spoken examples
 - Interactive, mobile-friendly sentence-building and visual vocabulary exercises across all 36 original units, including listen-first micro-practice
 - **Pronunciation Lab in Daily Practice:** 12 original A1 sound lessons (including ich/ach ch, sch, ei/ie, eu/äu, ö, ü, w, z, initial sp/st and ß/ss); 24 example words with English and Nepali approximate sound cues; two-round listening identification; slow speech; short listen-and-repeat speaking drills and optional on-device microphone replay. Practice markers are self-reported and backed up as JSON. This is **not** automated pronunciation scoring.
+- **Two additional full question-count independent A1 exam practice sets**: each has 15 listening questions and 15 reading questions (30 objective questions per set), 2 writing form/message tasks and 3 speaking preparation tasks. Timed practice, objective-score feedback and answer review; not official Goethe material or authentic recorded audio.
+- **Ten independent bilingual thematic vocabulary packs**: 100 noun entries with German article, English/Nepali meaning, plural notes, optional device audio and five-question practice. Of these 100 entries, 60 are new compared with the existing 244 unique course strings, 40 are purposeful reinforcement; the two banks together have 304 distinct case-folded German entries.
 - Original listening comprehension questions with German device text-to-speech; replay slowly, reveal transcript after answering
 - Original reading comprehension with short everyday messages and multiple choice
 - Guided writing prompts and examples; writing is **self-reviewed**, not auto-graded
@@ -25,6 +27,8 @@ A free static progressive-web-app for personal German study, with English explan
 - Original A1 exam-style everyday form, invitation email and course-absence writing prompts with clear self-check rubrics; original role-play speaking prompts
 - Mobile-friendly with a five-section bottom dock plus More menu for practice/resources, dark/light mode, versioned service worker, import/export including the new course progress
 - No backend, account, advertisement, tracking pixel, subscription, npm dependency or payment required
+
+**Coverage and gaps:** See [Goethe-aligned content register](docs/a1-exam-coverage-register.md) for what is implemented and what still requires vocabulary, language, phone-browser and exam-method validation.
 
 ## Exam structure & external sources
 

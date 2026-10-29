@@ -1,0 +1,52 @@
+/* English + Nepali A1 essentials and grammar bridges, 44px+ mobile controls. */
+.a1-bridge-studio{margin:20px 0 24px;border:1px solid #54758d;border-radius:17px;background:#1a3448;padding:18px}
+.a1-bridge-studio summary{cursor:pointer;font-size:16px;font-weight:850;line-height:1.5;padding:5px 0}
+.a1-bridge-studio summary:focus-visible{outline:3px solid #a6e0ff;outline-offset:5px;border-radius:5px}
+.a1-bridge-intro,.a1-bridge-help{font-size:13px;line-height:1.7;color:#d5e6f4}
+.a1-bridge-intro{margin:10px 0 15px}
+.a1-bridge-tabs{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0}
+.a1-bridge-tab,.a1-bridge-btn,.a1-bridge-choice,.a1-bridge-primary{min-height:45px;border-radius:10px;border:1px solid #7ba0b4;background:#25485f;color:#f0f8ff;padding:10px 12px;font:inherit;font-size:13px;font-weight:750;line-height:1.45}
+.a1-bridge-tab.is-active{background:#2b6146;border-color:#c7f59b}
+.a1-bridge-btn:hover,.a1-bridge-choice:hover,.a1-bridge-tab:hover{border-color:#c4eea3}
+.a1-bridge-tab:focus-visible,.a1-bridge-btn:focus-visible,.a1-bridge-choice:focus-visible,.a1-bridge-primary:focus-visible{outline:3px solid #b1e0ff;outline-offset:3px}
+.a1-bridge-title{font-size:19px;line-height:1.4;margin:14px 0}
+.a1-bridge-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.a1-bridge-card{border:1px solid #5c7892;background:#11293f;border-radius:13px;padding:14px;min-width:0}
+.a1-bridge-card p{font-size:13px;line-height:1.7;margin:9px 0}
+.a1-bridge-de{font-size:21px;color:#f7ffed;line-height:1.35}
+.a1-bridge-sentence{font-size:16px;line-height:1.6;font-weight:800;color:#e4ffbb;margin:14px 0}
+.a1-bridge-example-en{color:#d4e8f2}
+.a1-bridge-voice-status{font-size:11px;line-height:1.6;color:#c9dfe8}
+.a1-bridge-actions{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0}
+.a1-bridge-practice{margin:18px 0 0;padding:17px;border:1px solid #668f82;background:#193e3e;border-radius:14px}
+.a1-bridge-count{font-size:12px;font-weight:800;color:#c2efb0}
+.a1-bridge-question,.a1-bridge-prompt{font-size:16px;font-weight:750;line-height:1.6}
+.a1-bridge-prompt{font-size:22px;color:#f3ffec}
+.a1-bridge-translation,.a1-bridge-feedback,.a1-bridge-result{font-size:13px;line-height:1.75}
+.a1-bridge-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:13px 0}
+.a1-bridge-choice{background:#f4f9fc;color:#20384a;border-color:#c0d5e5;word-break:break-word}
+.a1-bridge-choice.is-correct{background:#caecc3;color:#183c28;border-color:#79bf78}
+.a1-bridge-choice.is-wrong{background:#f6d6dc;color:#672d3b;border-color:#df99ac}
+.a1-bridge-choice:disabled{opacity:.9;cursor:default}
+.a1-bridge-primary{background:#c9ef9e;color:#173821;border-color:#c9ef9e;margin:6px 0}
+.a1-bridge-rule-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.a1-bridge-unit-link{font-size:12px;color:#c9eeaf;font-weight:750;text-decoration:underline}
+.a1-bridge-explain{padding:14px;border-radius:12px;background:#122c42;border:1px solid #506e81}
+.a1-bridge-explain p{font-size:14px;line-height:1.8;margin:8px 0}
+.a1-bridge-ne{font-family:system-ui,"Noto Sans Devanagari",sans-serif}
+.a1-bridge-tip{font-weight:750;color:#dcf5c4}
+html[data-theme="light"] .a1-bridge-studio{background:#edf7f9;color:#1c3548;border-color:#b3c8da}
+html[data-theme="light"] .a1-bridge-intro,html[data-theme="light"] .a1-bridge-help{color:#4b6377}
+html[data-theme="light"] .a1-bridge-tab,html[data-theme="light"] .a1-bridge-btn{background:#fff;color:#20384b;border-color:#92b2c6}
+html[data-theme="light"] .a1-bridge-tab.is-active{background:#daf0dc;color:#173e26;border-color:#6eac79}
+html[data-theme="light"] .a1-bridge-card,html[data-theme="light"] .a1-bridge-explain{background:#fff;border-color:#c5d5df}
+html[data-theme="light"] .a1-bridge-de,html[data-theme="light"] .a1-bridge-sentence,html[data-theme="light"] .a1-bridge-prompt,html[data-theme="light"] .a1-bridge-tip{color:#224b32}
+html[data-theme="light"] .a1-bridge-voice-status,html[data-theme="light"] .a1-bridge-example-en{color:#566a7c}
+html[data-theme="light"] .a1-bridge-practice{background:#e2f4e8;border-color:#aad0b5}
+html[data-theme="light"] .a1-bridge-count,html[data-theme="light"] .a1-bridge-unit-link{color:#276d3d}
+html[data-theme="light"] .a1-bridge-primary{background:#286b22;border-color:#286b22;color:#fff}
+html[data-theme="light"] .a1-bridge-choice{background:#fff;border-color:#b0c7d7;color:#1b354b}
+html[data-theme="light"] .a1-bridge-choice.is-correct{background:#cdeed3;color:#194328}
+html[data-theme="light"] .a1-bridge-choice.is-wrong{background:#f9dce3;color:#6a2b3d}
+@media(max-width:750px){.a1-bridge-cards{grid-template-columns:1fr}.a1-bridge-choices{grid-template-columns:1fr}.a1-bridge-studio{padding:13px}.a1-bridge-practice{padding:13px}.a1-bridge-tab{flex:1 1 140px}}
+@media(prefers-reduced-motion:reduce){.a1-bridge-studio *{transition:none!important;animation:none!important}}

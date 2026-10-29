@@ -16,5 +16,5 @@ for(const pack of context.window.DEUTSCH_A1_THEME_PACKS)
 for(const pack of context.window.DEUTSCH_A1_ESSENTIALS)
   for(const entry of pack.items)
     all.push({de:entry[0],en:entry[1],ne:entry[2],example:entry[3],bank:'essential:'+pack.id});
-if(all.length!==568)throw Error('Unexpected local vocabulary size '+all.length);
+if(all.length!==576)throw Error('Unexpected local vocabulary size '+all.length);
 console.log(JSON.stringify(all));

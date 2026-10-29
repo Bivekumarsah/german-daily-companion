@@ -4,7 +4,7 @@
 
 A free static progressive-web-app for personal German study, with English explanations and Nepali meanings. The **36-unit A1 syllabus** is independently written to cover the everyday CEFR A1 objectives described publicly by the Goethe-Institut and the Council of Europe. **Not an official Goethe-Institut product, partnership, licensed textbook or certificate.** Completing the site is not proof of A1 proficiency and cannot guarantee exam success.
 
-## Features in v4
+## Features in v5
 
 - 36 structured A1 units across foundations, people & home, grammar, everyday life, practical situations and exam preparation
 - 260 curated unit vocabulary entries (some repeated across units for revision) with English and Nepali meanings, German speech buttons, and selected hand-written approximate English-sound/Nepali pronunciation guides for example sentences
@@ -15,9 +15,13 @@ A free static progressive-web-app for personal German study, with English explan
 - Speaking prompts; optional local microphone recording with playback when supported; **no speech recognition or automatic marking**
 - Per-unit six-skill practice tracking, topic/search filters and course completion summary (tracking activity, **not mastery**)
 - Offline vocabulary word bank with a simple spaced-review schedule (Again / Good / Easy), exported/restored with progress
-- A separately labeled original **exam-style practice sampler**: 10 listening + 10 reading MCQs, three writing and three speaking prompts; shorter than real exam; not an official exam or pass score
+- A separately labeled original **exam-style practice sampler**: 12 listening + 12 reading MCQs, three writing and three speaking prompts; shorter than real exam; not an official exam or pass score
 - Preserved English → German → Nepali translator, common 78 phrase entries, offline glossary, pronunciation audio, favorites, recent translations, starter flashcard drills and German alphabet
-- Mobile-friendly, dark/light mode, versioned service worker, import/export including the new course progress
+- Independent routed academy views (`#/dashboard`, `#/course`, `#/vocabulary`, `#/exam`, `#/translator`, `#/practice`, `#/resources`) with top navigation and a compact mobile dock; direct links work on GitHub Pages
+- A dashboard with course progress (practice tracking, not proficiency), themed unit navigation and deep links to units, e.g. `#/course/a1-01`
+- Optional per-section A1 practice countdown timers (20/25/20/15 minutes); shorter drills than the actual exams
+- Original A1 exam-style everyday form, invitation email and course-absence writing prompts with clear self-check rubrics; original role-play speaking prompts
+- Mobile-friendly with a five-section bottom dock plus More menu for practice/resources, dark/light mode, versioned service worker, import/export including the new course progress
 - No backend, account, advertisement, tracking pixel, subscription, npm dependency or payment required
 
 ## Exam structure & external sources

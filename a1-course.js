@@ -7,6 +7,8 @@ const $=id=>document.getElementById(id);
 const PROGRESS_KEY='deutschdaily-a1-pathway-v1';
 const TEST_KEY='deutschdaily-a1-mock-v1';
 const skills=['vocabulary','grammar','listening','reading','writing','speaking'];
+const examDurations={listening:20,reading:25,writing:20,speaking:15};
+let examSeconds=examDurations.listening*60,examTicker=null;
 const labels={vocabulary:'Vocabulary',grammar:'Grammar',listening:'Listening',reading:'Reading',writing:'Writing',speaking:'Speaking'};
 const storage=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback;}catch{return fallback;}};
 const save=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));}catch{setNote('Storage is full or disabled. Your progress may not persist.');}};
@@ -30,7 +32,7 @@ function speaking(text,slow=false){
  utter.onerror=()=>note('Audio could not play. Try another German device voice.');synth.speak(utter);
 }
 function pstate(id){if(!progress[id]||typeof progress[id]!=='object')progress[id]={};return progress[id];}
-function complete(id,skill){pstate(id)[skill]=true;pstate(id).updated=new Date().toISOString().slice(0,10);save(PROGRESS_KEY,progress);renderDashboard();renderSkillProgress();}
+function complete(id,skill){pstate(id)[skill]=true;pstate(id).updated=new Date().toISOString().slice(0,10);save(PROGRESS_KEY,progress);renderDashboard();renderSkillProgress();document.dispatchEvent(new Event('deutschdaily:progress-update'));}
 function achieved(u){const p=pstate(u.id);return skills.every(s=>p[s]);}
 function renderDashboard(){
  const done=data.units.filter(achieved).length;const total=data.units.length;
@@ -56,6 +58,7 @@ function renderSkillProgress(){
 function openUnit(id){
  const found=data.units.find(u=>u.id===id);if(!found)return;
  if(recorder?.state==='recording')recorder.stop();unit=found;
+ if(location.hash!==`#/course/${id}`)history.replaceState(null,'',`#/course/${id}`);
  $('a1Workspace').hidden=false;$('a1UnitTitle').textContent=`Unit ${unit.number}: ${unit.title}`;
  $('a1UnitSubtitle').textContent=`${unit.group} · Original A1 lesson · available offline`;
  showTab('vocabulary');$('a1Workspace').scrollIntoView({behavior:'smooth',block:'start'});
@@ -135,9 +138,16 @@ function renderProductive(out,skill){
   complete(unit.id,skill);note('Practice recorded. This is a self-check, not an automatic assessment.');
  },'primary-btn');out.append(mark);
 }
+function timeLabel(seconds){const m=Math.floor(seconds/60),s=seconds%60;return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
+function showExamTime(){const t=$('examTimer');if(t)t.textContent=timeLabel(examSeconds);}
+function pauseExamTimer(){if(examTicker!==null){clearInterval(examTicker);examTicker=null;}const start=$('examTimerStart'),pause=$('examTimerPause');if(start)start.disabled=examSeconds===0;if(pause)pause.disabled=true;}
+function resetExamTimer(){pauseExamTimer();examSeconds=examDurations[examSkill]*60;showExamTime();}
+function startExamTimer(){if(examTicker!==null||examSeconds<=0)return;const start=$('examTimerStart'),pause=$('examTimerPause');if(start)start.disabled=true;if(pause)pause.disabled=false;
+ examTicker=setInterval(()=>{examSeconds=Math.max(0,examSeconds-1);showExamTime();if(!examSeconds){pauseExamTimer();const body=$('a1ExamContent');if(body){const alert=el('p','a1-exam-warning','Time is up for this practice timer. You may finish the exercise at your own pace; this is not an exam grade.');body.prepend(alert);}}},1000);
+}
 function renderExam(){
  $('a1ExamTitle').textContent=({listening:'Hören · Listening',reading:'Lesen · Reading',writing:'Schreiben · Writing',speaking:'Sprechen · Speaking'})[examSkill];
- $('a1ExamInfo').textContent=({listening:'20 minutes in the official exam · 10 original self-check questions here',reading:'25 minutes in the official exam · 10 original self-check questions here',writing:'20 minutes in the official exam · 3 original prompts (self-checked)',speaking:'15 minutes in the official group exam · 3 speaking prompts (self-checked)'})[examSkill];
+ $('a1ExamInfo').textContent=({listening:'20 minutes in the official exam · 12 original self-check questions here',reading:'25 minutes in the official exam · 12 original self-check questions here',writing:'20 minutes in the official exam · 3 original prompts (self-checked)',speaking:'15 minutes in the official group exam · 3 speaking prompts (self-checked)'})[examSkill];
  for(const b of $('a1ExamTabs').querySelectorAll('button')){b.classList.toggle('active',b.dataset.skill===examSkill);b.setAttribute('aria-pressed',String(b.dataset.skill===examSkill));}
  const out=clear($('a1ExamContent'));const items=data.exam[examSkill];
  if(examIndex>=items.length){out.append(el('h4','', 'Practice finished'));
@@ -153,11 +163,26 @@ function renderExam(){
   mcq(out,items[examIndex],after,{audio:examSkill==='listening'});
  }else{
   const task=items[examIndex];out.append(el('p','a1-passage',task.prompt));
-  if(examSkill==='writing'){const t=el('textarea','a1-writing');t.rows=5;t.placeholder='Write a short message in German…';out.append(t);}
-  else out.append(button('🔊 Hear model',()=>speaking(task.model,true),'secondary-btn'));
-  const model=el('p','a1-passage',task.model);model.lang='de';model.hidden=true;
-  out.append(button('Reveal sample answer',event=>{model.hidden=false;event.target.hidden=true},'secondary-btn'),model,
-   button('Next practice prompt →',()=>{examIndex++;renderExam()},'primary-btn'));
+  let wrote=null;
+  if(examSkill==='writing'){
+    wrote=el('textarea','a1-writing');wrote.rows=6;wrote.maxLength=1400;wrote.lang='de';wrote.placeholder='Write your own German answer here before reading the example…';
+    const count=el('p','a1-help','0 words written');wrote.addEventListener('input',()=>count.textContent=`${wordCount(wrote.value)} words written`);out.append(wrote,count);
+  } else out.append(el('p','a1-help','Speak your complete answer aloud before revealing the example. Practice with a partner or teacher for feedback.'));
+  const model=el('div','a1-model');model.hidden=true;model.append(el('p','a1-help','One possible answer; other correct answers exist.'));
+  const example=el('p','a1-passage',task.model);example.lang='de';example.style.whiteSpace='pre-line';model.append(example,button('🔊 Listen to sample',()=>speaking(task.model,true),'secondary-btn'));
+  const reveal=button('Reveal example to compare',()=>{model.hidden=false;reveal.hidden=true},'secondary-btn');
+  const checklist=el('div','exam-self-check');checklist.append(el('h4','',examSkill==='writing'?'Check your writing':'Check your speaking'));
+  const checks=examSkill==='writing' ? ['I answered every part of the task.','My text is clear and uses relevant German words.','I checked basic grammar, spelling and polite forms.'] : ['I attempted the German answer aloud.','My answer fits the question or role-play task.','I listened to the model and considered my pronunciation.'];
+  const boxes=checks.map(label=>{const wrap=el('label');const check=document.createElement('input');check.type='checkbox';wrap.append(check,document.createTextNode(label));checklist.append(wrap);return check});
+  checklist.append(el('p','', 'Self-check only. No automated writing or pronunciation scoring is performed.'));
+  const feedback=el('p','a1-feedback');feedback.setAttribute('role','status');
+  const next=button('Next practice prompt →',()=>{
+    if(examSkill==='writing' && wordCount(wrote?.value||'')<5){feedback.textContent='Write at least five German words first.';return;}
+    if(model.hidden){feedback.textContent='Compare your answer with the example first.';return;}
+    if(!boxes.every(b=>b.checked)){feedback.textContent='Complete the self-check before continuing, or honestly mark what you attempted.';return;}
+    examIndex++;renderExam();
+  },'primary-btn');
+  out.append(reveal,model,checklist,feedback,next);
  }
 }
 const REVIEW_KEY='deutschdaily-a1-vocabulary-review-v1';
@@ -200,7 +225,8 @@ function init(){
  menu.addEventListener('change',()=>{filter=menu.value;renderDashboard()});
  $('a1Search').addEventListener('input',()=>{keyword=$('a1Search').value.toLowerCase().trim();renderDashboard()});
  $('a1SkillProgress').addEventListener('keydown',e=>{if(e.key==='Escape')$('a1Workspace').hidden=true;});
- $('a1Close').addEventListener('click',()=>{$('a1Workspace').hidden=true;unit=null;if(recorder?.state==='recording')recorder.stop();});
+ $('a1Close').addEventListener('click',()=>{$('a1Workspace').hidden=true;unit=null;if(recorder?.state==='recording')recorder.stop();history.replaceState(null,'','#/course');});
+ document.addEventListener('deutschdaily:open-unit',event=>{if(event.detail?.id)openUnit(event.detail.id)});
  $('a1Prev').addEventListener('click',()=>{if(unit&&unit.number>1)openUnit(data.units[unit.number-2].id)});
  $('a1Next').addEventListener('click',()=>{if(unit&&unit.number<data.units.length)openUnit(data.units[unit.number].id)});
  $('a1ReviewListen').addEventListener('click',()=>reviewCurrent&&speaking(reviewCurrent.de));
@@ -208,7 +234,8 @@ function init(){
  $('a1ReviewAgain').addEventListener('click',()=>gradeReview('again'));
  $('a1ReviewGood').addEventListener('click',()=>gradeReview('good'));
  $('a1ReviewEasy').addEventListener('click',()=>gradeReview('easy'));
- $('a1ExamTabs').addEventListener('click',e=>{const b=e.target.closest('button[data-skill]');if(!b)return;examSkill=b.dataset.skill;examIndex=0;examCorrect=0;examAnswered=false;renderExam()});
+ $('a1ExamTabs').addEventListener('click',e=>{const b=e.target.closest('button[data-skill]');if(!b)return;examSkill=b.dataset.skill;examIndex=0;examCorrect=0;examAnswered=false;resetExamTimer();renderExam()});
+ $('examTimerStart').addEventListener('click',startExamTimer);$('examTimerPause').addEventListener('click',pauseExamTimer);$('examTimerReset').addEventListener('click',resetExamTimer);
  const totalWords=new Set(data.units.flatMap(u=>u.vocab.map(w=>w.de.toLowerCase()))).size;
  $('a1VocabularyCount').textContent=String(totalWords);
  document.addEventListener('deutschdaily:restore-a1',()=>{
@@ -217,7 +244,7 @@ function init(){
    if(restored&&typeof restored==='object'&&!Array.isArray(restored))Object.assign(progress,restored);
    renderDashboard();renderSkillProgress();syncReview();
  });
- renderDashboard();renderExam();renderReview();
+ renderDashboard();renderExam();renderReview();showExamTime();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();

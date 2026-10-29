@@ -1,134 +1,153 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101729">
-  <meta name="description" content="A friendly English to German and Nepali speaking companion: translate, listen, save and practice every day.">
-  <title>DeutschDaily — English · Deutsch · नेपाली</title>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <script src="phrases.js" defer></script>
-  <script src="lessons.js" defer></script>
-  <script src="a1-course-data.js" defer></script>
-  <script src="a1-course.js" defer></script>
-  <script src="app.js" defer></script>
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#101729" name="theme-color"/>
+<meta content="Independent German A1 learning academy with 36 units, English and Nepali help, vocabulary revision, four-skill practice, and official Goethe exam references." name="description"/>
+<title>DeutschDaily Academy | German A1 Learning &amp; Exam Preparation</title>
+<link href="manifest.webmanifest" rel="manifest"/>
+<link href="icon.svg" rel="icon" type="image/svg+xml"/>
+<link href="styles.css" rel="stylesheet"/>
+<script defer="" src="phrases.js"></script>
+<script defer="" src="lessons.js"></script>
+<script defer="" src="a1-course-data.js"></script>
+<script defer="" src="a1-course.js"></script>
+<script defer="" src="app.js"></script>
+<script defer="" src="academy.js"></script></head>
 <body>
-  <div class="page-shell">
-    <header class="site-header">
-      <a class="brand" href="#home" aria-label="DeutschDaily home"><span class="brand-mark">D<span>.</span></span><span class="brand-name">DeutschDaily<small>Speak a little, every day.</small></span></a>
-      <nav aria-label="Main navigation" class="main-nav"><a href="#translator">Translator</a><a href="#a1course">Full A1 Course</a><a href="#a1review">Vocabulary Review</a><a href="#a1exam">Exam Practice</a><a href="#practice">Practice</a><a href="#alphabet">Alphabet</a></nav>
-      <button class="tiny-button theme-toggle" type="button" id="themeToggle" aria-label="Switch color mode">☀ Light</button><span class="offline-indicator" id="connection"><i aria-hidden="true"></i> Checking…</span>
-    </header>
-
-    <main id="home">
-      <section class="intro" aria-labelledby="intro-title">
-        <div><div class="eyebrow"><span class="star">✦</span> YOUR EVERYDAY LANGUAGE COMPANION</div><h1 id="intro-title">Learn German <em>A1</em> step by step.<br>With Nepali by your side.</h1><p>Study an independent 36-unit Goethe A1–aligned pathway, practice listening, reading, writing and speaking, and use the English → German → नेपाली translator.</p><p><a class="hero-course-link" href="#a1course">Start the A1 course →</a></p></div>
-        <div class="hero-stats" aria-label="Learning features"><div><strong>3</strong><small>Languages</small></div><div><strong>2</strong><small>Speaking speeds</small></div><div><strong>∞</strong><small>Daily practice</small></div></div>
-      </section>
-
-      <section id="translator" class="translator-grid" aria-label="English German Nepali translator">
-        <div class="panel input-panel">
-          <div class="panel-top"><div class="section-heading"><span class="step-num">01</span><div><h2>Start with English</h2><p>Letters, words or complete sentences</p></div></div><span class="mini-tag">EN → DE + NE</span></div>
-          <label for="englishInput" class="field-label">YOUR ENGLISH</label>
-          <textarea id="englishInput" rows="5" maxlength="450" spellcheck="true" placeholder="e.g. What is your name?" aria-describedby="inputHelp"></textarea>
-          <div class="input-tools"><span id="inputHelp">Translation starts after a short pause. New text uses an online service.</span><button class="tiny-button" id="clearInput" type="button">Clear ×</button></div>
-          <div class="divider"></div>
-          <div class="field-label">TRY A PHRASE</div>
-          <div class="chip-list" id="suggestions"><button class="chip" data-phrase="How are you?">How are you?</button><button class="chip" data-phrase="What is your name?">What is your name?</button><button class="chip" data-phrase="Good morning">Good morning</button><button class="chip" data-phrase="I am learning German">I am learning German</button><button class="chip" data-phrase="Where is the train station?">Where is the train station?</button></div>
-          <div class="notice"><span aria-hidden="true">✳</span><span>Built-in phrases and previously translated words work offline. New text is sent to a free third-party translator when online; translations are saved on this device.</span></div>
-        </div>
-
-        <div class="panel result-panel" aria-live="polite" aria-atomic="false">
-          <div class="panel-top"><div class="section-heading"><span class="step-num green">02</span><div><h2>Your translation</h2><p>See it. Hear it. Remember it.</p></div></div><span class="result-state" id="resultStatus">READY</span></div>
-          <div id="resultContent" hidden>
-            <div class="translation-label"><span class="flag">🇩🇪</span> GERMAN <button type="button" class="icon-btn" id="copyGerman" aria-label="Copy German translation" title="Copy German">⧉ Copy</button></div>
-            <div class="german-output" id="germanOutput" lang="de"></div>
-            <div class="word-strip" id="wordStrip" aria-label="Tap individual German words to hear them"></div>
-            <div class="audio-actions"><button class="primary-btn" id="speakGerman" type="button">🔊 &nbsp; Listen in German</button><button class="secondary-btn" id="slowGerman" type="button">◷ &nbsp; Slow</button><button class="secondary-btn square" id="savePhrase" type="button" aria-label="Save to favorites" aria-pressed="false">♡</button></div><div class="voice-row"><label for="germanVoice">German voice</label><select id="germanVoice" aria-label="Select German speech voice"><option value="">Detecting German voices…</option></select><span id="voiceStatus" role="status"></span></div>
-            <div class="result-divider"></div>
-            <div class="translation-label">🔤 ENGLISH-SOUND GUIDE <span class="small-note">Curated phrases only</span></div>
-            <div class="pronunciation" id="pronEnglish"></div>
-            <div class="translation-label second-label">🇳🇵 नेपाली उच्चारण <span class="small-note">सिकाइका लागि मात्र</span></div>
-            <div class="pronunciation nepali" id="pronNepali" lang="ne"></div>
-            <div class="result-divider"></div>
-            <div class="translation-label">🇳🇵 NEPALI MEANING</div>
-            <div class="nepali-meaning" id="nepaliOutput" lang="ne"></div>
-            <div class="translation-foot" id="translationSource"></div><button class="secondary-btn jump-btn" id="backToInput" type="button">← Type another sentence</button>
-          </div>
-          <div id="emptyResult" class="empty-result"><div class="empty-illustration">Aa <span>→</span> Ää</div><h3>Every word is progress.</h3><p>Type a sentence on the left, or select a sample phrase to begin.</p><button class="secondary-btn retry-btn" id="retryTranslation" type="button" hidden>↻ Try again</button></div>
-        </div>
-      </section>
-
-
-      <section id="a1course" class="lower-section a1-full-course" aria-labelledby="a1Heading">
-        <div class="lower-heading"><div><span class="eyebrow">INDEPENDENT CEFR A1 PATHWAY · ENGLISH + नेपाली</span><h2 id="a1Heading">Your complete A1 study pathway.</h2></div><p>Original, structured lessons across essential A1 topics. Aligned with publicly described Goethe-Zertifikat A1 objectives; not an official Goethe course or certification.</p></div>
-        <div class="a1-stats" aria-label="Course progress"><div><strong id="a1Total">36</strong><span>Study units</span></div><div><strong id="a1VocabularyCount">0</strong><span>Unique words & phrases</span></div><div><strong id="a1Done">0</strong><span>Units practiced</span></div><div><strong id="a1Percent">0%</strong><span>Practice completion</span></div></div>
-        <div class="progress-track a1-track" id="a1ProgressTrack" role="progressbar" aria-label="A1 skill practice completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="a1ProgressFill"></span></div>
-        <p class="subtle">Completion means you practiced all six activities. It does not certify A1 ability or predict a Goethe exam grade.</p>
-        <div class="a1-toolbar"><label for="a1Filter">Topics <select id="a1Filter" class="a1-control"></select></label><label for="a1Search">Find a unit <input class="a1-control" type="search" id="a1Search" placeholder="e.g. family, verbs, booking"></label></div>
-        <div class="a1-unit-grid" id="a1UnitGrid"></div><p class="subtle" id="a1EmptySearch" hidden>No units match. Try another search.</p>
-        <div class="mini-panel a1-workspace" id="a1Workspace" hidden>
-          <div class="a1-work-top"><div><span class="eyebrow">STUDY · PRACTICE · SELF-CHECK</span><h3 id="a1UnitTitle"></h3><p id="a1UnitSubtitle" class="subtle"></p></div><button id="a1Close" class="secondary-btn" type="button">Close ×</button></div>
-          <div class="a1-skill-tabs" id="a1SkillProgress" role="group" aria-label="Six lesson activities"></div>
-          <p class="a1-unit-status" id="a1UnitProgress"></p><p class="a1-note" id="courseNote" role="status" hidden></p>
-          <div class="a1-tab-content" id="a1TabContent"></div>
-          <div class="a1-navigation"><button id="a1Prev" type="button" class="secondary-btn">← Previous unit</button><button id="a1Next" type="button" class="secondary-btn">Next unit →</button></div>
-        </div>
-      </section>
-
-      <section id="a1review" class="lower-section a1-review-section" aria-labelledby="a1ReviewHeading">
-        <div class="lower-heading"><div><span class="eyebrow">ACTIVE RECALL · OFFLINE VOCABULARY</span><h2 id="a1ReviewHeading">Remember the words, not just the lesson.</h2></div><p>Practice vocabulary with simple spaced repetition. Again, Good and Easy schedule words for later review on this device.</p></div>
-        <div class="mini-panel a1-review-panel"><p class="subtle" id="a1ReviewStatus" role="status">Preparing your vocabulary cards…</p>
-        <div id="a1ReviewCard"><span class="eyebrow">SAY THE GERMAN WORD</span><div id="a1ReviewWord" class="a1-review-word" lang="de"></div>
-          <div id="a1ReviewAnswer" class="a1-review-answer" hidden><strong id="a1ReviewEnglish"></strong><p id="a1ReviewNepali" lang="ne"></p></div>
-          <div class="a1-review-buttons"><button class="secondary-btn" id="a1ReviewListen" type="button">🔊 Listen</button><button class="primary-btn" id="a1ReviewReveal" type="button">Show meaning</button></div>
-          <div class="a1-review-buttons" id="a1ReviewGrades" hidden><button class="secondary-btn" id="a1ReviewAgain" type="button">Again · today</button><button class="secondary-btn" id="a1ReviewGood" type="button">Good · later</button><button class="secondary-btn" id="a1ReviewEasy" type="button">Easy · later</button></div>
-        </div></div>
-      </section>
-
-      <section id="a1exam" class="lower-section a1-exam-section" aria-labelledby="a1ExamHeading">
-        <div class="lower-heading"><div><span class="eyebrow">ORIGINAL SELF-CHECK · NOT AN OFFICIAL EXAM</span><h2 id="a1ExamHeading">Goethe A1–style practice by skill.</h2></div><p>Four areas similar to the official format: Hören ~20 min, Lesen 25 min, Schreiben 20 min, Sprechen 15 min. These practice sets are shorter and cannot predict your exam result.</p></div>
-        <div class="a1-exam-tabs" id="a1ExamTabs" role="group" aria-label="Choose exam skill"><button type="button" data-skill="listening">🔊 Listening</button><button type="button" data-skill="reading">📖 Reading</button><button type="button" data-skill="writing">✍ Writing</button><button type="button" data-skill="speaking">🗣 Speaking</button></div>
-        <div class="mini-panel a1-exam-body"><h3 id="a1ExamTitle">Listening</h3><p class="subtle" id="a1ExamInfo"></p><div id="a1ExamContent"></div><p class="a1-exam-warning">Listening uses your device's text-to-speech, not Goethe audio. Writing and speaking require human feedback for meaningful assessment. Do not treat this exercise score as an official Goethe result.</p></div>
-      </section>
-      <section class="lower-section a1-reference-section" id="references" aria-labelledby="referenceHeading">
-        <div class="mini-panel a1-sources"><h2 id="referenceHeading">Sources, credit & exam resources</h2><p>This independent course was designed around publicly described A1 skills and exam categories. All lesson questions and dialogues here are original DeutschDaily material. Goethe-Institut and CEFR are referenced for study alignment only; there is no endorsement, collaboration, licensing claim or certificate.</p>
-          <ul><li><a href="https://www.goethe.de/ins/de/en/prf/gzsd1.cfm" target="_blank" rel="noopener noreferrer">Goethe-Institut — Goethe-Zertifikat A1: Start Deutsch 1 (official exam description)</a></li>
-          <li><a href="https://www.goethe.de/en/spr/prf/ueb/pa1.html" target="_blank" rel="noopener noreferrer">Goethe-Institut — free official A1 practice tests, audio & vocabulary list</a></li>
-          <li><a href="https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-descriptors-search" target="_blank" rel="noopener noreferrer">Council of Europe — CEFR A1 language ability descriptors</a></li></ul>
-          <p class="subtle">For authentic listening tests and a real readiness check, use Goethe's official sample examination with its own recordings. Completing this website alone cannot guarantee passing.</p>
-        </div>
-      </section>
-
-      <section id="lessons" class="lower-section lessons-section" aria-labelledby="lesson-title">
-        <div class="lower-heading"><div><span class="eyebrow">STEP-BY-STEP GERMAN · OFFLINE</span><h2 id="lesson-title">Quick beginner flash drills.</h2></div><p>Short lessons in English, German and नेपाली. Progress stays in your browser.</p></div>
-        <div class="lesson-head"><div><strong id="lessonProgress">0 / 6 lessons completed</strong><small id="lessonStreak">Start your first lesson today</small></div><div class="progress-track" role="progressbar" aria-label="A1 lesson progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="lessonProgressBar"><span id="lessonProgressFill"></span></div></div>
-        <div class="lesson-grid" id="lessonGrid"></div>
-        <div class="mini-panel lesson-player" id="lessonPlayer" hidden>
-          <div class="lesson-player-top"><div><span class="eyebrow" id="lessonStep">LESSON</span><h3 id="lessonQuestion">Learn German step by step</h3><p class="subtle" id="lessonTip"></p></div><button type="button" class="tiny-button" id="closeLesson" aria-label="Close lesson">Close ×</button></div>
-          <div class="lesson-prompt" id="lessonPrompt"></div>
-          <div class="quiz-options" id="lessonOptions" role="group" aria-label="Choose the German translation"></div>
-          <p class="quiz-feedback" id="lessonFeedback" role="status" aria-live="polite"></p>
-          <div class="lesson-controls"><button class="secondary-btn" type="button" id="lessonListen" hidden>🔊 Listen in German</button><button class="primary-btn" type="button" id="lessonNext" hidden>Continue →</button></div>
-        </div>
-      </section>
-
-      <section id="practice" class="lower-section" aria-labelledby="practice-title"><div class="lower-heading"><div><span class="eyebrow">A LITTLE PRACTICE GOES A LONG WAY</span><h2 id="practice-title">Make it a daily habit.</h2></div><p>Your progress is stored on this device, no sign-in needed.</p></div>
-        <div class="practice-grid">
-          <article class="mini-panel daily-card"><div class="card-title"><span class="card-icon">✦</span><h3>Daily flashcard</h3><span class="mini-tag">OFFLINE</span></div><div class="flashcard" id="flashcard"><div class="flash-label">TRANSLATE THIS INTO GERMAN</div><div id="flashEnglish" class="flash-english"></div><div id="flashReveal" class="flash-reveal" hidden><strong id="flashGerman" lang="de"></strong><div id="flashNepali" lang="ne"></div><div class="flash-pron" id="flashPron"></div></div></div><div class="flash-buttons"><button class="secondary-btn" id="revealFlash" type="button">Show answer</button><button class="primary-btn" id="nextFlash" type="button">Next phrase →</button><button class="icon-btn" id="speakFlash" aria-label="Hear flashcard in German" type="button">🔊</button></div></article>
-          <article class="mini-panel saved-card"><div class="card-title"><span class="card-icon purple">♡</span><h3>Saved phrases</h3><span class="counter" id="savedCount">0</span></div><p class="subtle">Save your favorite translations for practice.</p><div class="saved-list" id="savedList"></div></article>
-          <article class="mini-panel saved-card recent-card"><div class="card-title"><span class="card-icon">↺</span><h3>Recent translations</h3><span class="counter" id="recentCount">0</span></div><p class="subtle">Automatically saved after a successful online translation. Tap to reuse offline.</p><div class="saved-list" id="recentList"></div></article>
-        </div>
-      </section>
-
-      <section class="backup-section" aria-labelledby="backup-title"><div class="mini-panel backup-panel"><div><h2 id="backup-title">Keep your learning history</h2><p class="subtle">Back up your favorites, recent translations and lesson progress, or restore a previous backup. Your data stays on this device unless you export it.</p></div><div class="backup-actions"><button class="secondary-btn" id="exportLearning" type="button">↓ Export progress</button><button class="secondary-btn" id="importLearning" type="button">↑ Restore backup</button><input type="file" id="backupFile" accept="application/json,.json" hidden aria-label="Choose a saved DeutschDaily JSON backup"></div></div></section>
-      <section id="alphabet" class="alphabet-section" aria-labelledby="alphabet-title"><div class="lower-heading"><div><span class="eyebrow">FIRST STEPS</span><h2 id="alphabet-title">German alphabet, one tap at a time.</h2></div><p>Tap a letter to hear its German name. Includes Ä, Ö, Ü and ß.</p></div><div id="alphabetGrid" class="alphabet-grid"></div></section>
-    </main>
-    <footer><div><strong>DeutschDaily</strong> <span>· English → German → नेपाली</span></div><span>Independent A1 preparation · Not affiliated with Goethe-Institut · Translation services may have usage limits. Check our referenced official resources.</span></footer>
-  </div>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-</body>
+<div class="page-shell">
+<header class="site-header">
+<a aria-label="DeutschDaily home" class="brand" href="#/dashboard"><span class="brand-mark">D<span>.</span></span><span class="brand-name">DeutschDaily<small>Speak a little, every day.</small></span></a><nav aria-label="Academy sections" class="academy-nav" id="academyNav"><a data-route="dashboard" href="#/dashboard">Overview</a><a data-route="course" href="#/course">A1 Course</a><a data-route="vocabulary" href="#/vocabulary">Vocabulary</a><a data-route="exam" href="#/exam">Exam Prep</a><a data-route="translator" href="#/translator">Translator</a><a data-route="practice" href="#/practice">Practice</a><a data-route="resources" href="#/resources">Resources</a></nav><details class="academy-more"><summary aria-label="More academy sections">More ▾</summary><div class="academy-more-menu"><a data-route="practice" href="#/practice">Daily practice</a><a data-route="resources" href="#/resources">Sources &amp; backup</a></div></details>
+<button aria-label="Switch color mode" class="tiny-button theme-toggle" id="themeToggle" type="button">☀ Light</button><span class="offline-indicator" id="connection"><i aria-hidden="true"></i> Checking…</span>
+</header>
+<main id="home">
+<section aria-labelledby="intro-title" class="intro academy-view" data-academy-view="dashboard">
+<div><div class="eyebrow"><span class="star">✦</span> YOUR EVERYDAY LANGUAGE COMPANION</div><h1 id="intro-title">Learn German <em>A1</em> step by step.<br/>With Nepali by your side.</h1><p>Study an independent 36-unit Goethe A1–aligned pathway, practice listening, reading, writing and speaking, and use the English → German → नेपाली translator.</p><p><a class="hero-course-link" href="#/course">Start the A1 course →</a></p></div>
+</section><section aria-labelledby="dash-heading" class="academy-view academy-overview" data-academy-view="dashboard">
+<div class="dash-main-card">
+<div><span class="eyebrow">YOUR A1 STUDY SPACE</span><h2 id="dash-heading">Start small. Practice all four skills.</h2><p>Follow a structured course, revise vocabulary and practice realistic everyday German. Your work stays on this browser.</p>
+<a class="primary-btn academy-cta" href="#/course">Explore 36 learning units →</a></div>
+<div class="dash-score"><strong id="academyDashPercent">0%</strong><span>Activities practiced</span><small>Not an exam grade</small></div>
+</div>
+<div class="academy-action-grid">
+<a class="academy-action-card" href="#/course"><span class="academy-action-icon">📘</span><strong>Follow the A1 course</strong><span>Grammar, vocabulary and practice across 36 units</span><small id="academyDashUnits">0 of 36 units practiced →</small></a>
+<a class="academy-action-card" href="#/vocabulary"><span class="academy-action-icon">🧠</span><strong>Review vocabulary</strong><span>Revisit words with spaced repetition</span><small>Practice a few words today →</small></a>
+<a class="academy-action-card" href="#/exam"><span class="academy-action-icon">🎧</span><strong>Exam-style practice</strong><span>Listening, reading, writing and speaking</span><small>Practice activities, not a mock score →</small></a>
+<a class="academy-action-card" href="#/translator"><span class="academy-action-icon">🇳🇵</span><strong>Translate and listen</strong><span>English → German with Nepali explanations</span><small>Use the translation companion →</small></a>
+</div>
+<div class="academy-guidance"><h3>How to use DeutschDaily effectively</h3>
+<ol><li>Study one unit, then answer its listening and reading questions.</li><li>Write your own German response and say it aloud. Compare with the example, preferably with a teacher or partner.</li><li>Review saved vocabulary. For actual exam readiness, complete Goethe's official model test with its recordings.</li></ol>
+<a href="https://www.goethe.de/en/spr/prf/ueb/pa1.html" rel="noopener noreferrer" target="_blank">Official Goethe A1 exam practice ↗</a>
+</div>
+</section><div class="academy-disclaimer academy-view" data-academy-view="dashboard"><strong>Independent course · not a Goethe product.</strong>
+DeutschDaily is a self-study aid. Practice completion and automatic multiple-choice results do not establish A1 certification or exam readiness. Seek human feedback for writing and speaking.</div>
+<section aria-label="English German Nepali translator" class="translator-grid academy-view" data-academy-view="translator" id="translator">
+<div class="panel input-panel">
+<div class="panel-top"><div class="section-heading"><span class="step-num">01</span><div><h2>Start with English</h2><p>Letters, words or complete sentences</p></div></div><span class="mini-tag">EN → DE + NE</span></div>
+<label class="field-label" for="englishInput">YOUR ENGLISH</label>
+<textarea aria-describedby="inputHelp" id="englishInput" maxlength="450" placeholder="e.g. What is your name?" rows="5" spellcheck="true"></textarea>
+<div class="input-tools"><span id="inputHelp">Translation starts after a short pause. New text uses an online service.</span><button class="tiny-button" id="clearInput" type="button">Clear ×</button></div>
+<div class="divider"></div>
+<div class="field-label">TRY A PHRASE</div>
+<div class="chip-list" id="suggestions"><button class="chip" data-phrase="How are you?">How are you?</button><button class="chip" data-phrase="What is your name?">What is your name?</button><button class="chip" data-phrase="Good morning">Good morning</button><button class="chip" data-phrase="I am learning German">I am learning German</button><button class="chip" data-phrase="Where is the train station?">Where is the train station?</button></div>
+<div class="notice"><span aria-hidden="true">✳</span><span>Built-in phrases and previously translated words work offline. New text is sent to a free third-party translator when online; translations are saved on this device.</span></div>
+</div>
+<div aria-atomic="false" aria-live="polite" class="panel result-panel">
+<div class="panel-top"><div class="section-heading"><span class="step-num green">02</span><div><h2>Your translation</h2><p>See it. Hear it. Remember it.</p></div></div><span class="result-state" id="resultStatus">READY</span></div>
+<div hidden="" id="resultContent">
+<div class="translation-label"><span class="flag">🇩🇪</span> GERMAN <button aria-label="Copy German translation" class="icon-btn" id="copyGerman" title="Copy German" type="button">⧉ Copy</button></div>
+<div class="german-output" id="germanOutput" lang="de"></div>
+<div aria-label="Tap individual German words to hear them" class="word-strip" id="wordStrip"></div>
+<div class="audio-actions"><button class="primary-btn" id="speakGerman" type="button">🔊   Listen in German</button><button class="secondary-btn" id="slowGerman" type="button">◷   Slow</button><button aria-label="Save to favorites" aria-pressed="false" class="secondary-btn square" id="savePhrase" type="button">♡</button></div><div class="voice-row"><label for="germanVoice">German voice</label><select aria-label="Select German speech voice" id="germanVoice"><option value="">Detecting German voices…</option></select><span id="voiceStatus" role="status"></span></div>
+<div class="result-divider"></div>
+<div class="translation-label">🔤 ENGLISH-SOUND GUIDE <span class="small-note">Curated phrases only</span></div>
+<div class="pronunciation" id="pronEnglish"></div>
+<div class="translation-label second-label">🇳🇵 नेपाली उच्चारण <span class="small-note">सिकाइका लागि मात्र</span></div>
+<div class="pronunciation nepali" id="pronNepali" lang="ne"></div>
+<div class="result-divider"></div>
+<div class="translation-label">🇳🇵 NEPALI MEANING</div>
+<div class="nepali-meaning" id="nepaliOutput" lang="ne"></div>
+<div class="translation-foot" id="translationSource"></div><button class="secondary-btn jump-btn" id="backToInput" type="button">← Type another sentence</button>
+</div>
+<div class="empty-result" id="emptyResult"><div class="empty-illustration">Aa <span>→</span> Ää</div><h3>Every word is progress.</h3><p>Type a sentence on the left, or select a sample phrase to begin.</p><button class="secondary-btn retry-btn" hidden="" id="retryTranslation" type="button">↻ Try again</button></div>
+</div>
+</section>
+<section aria-labelledby="a1Heading" class="lower-section a1-full-course academy-view" data-academy-view="course" id="a1course">
+<div class="lower-heading"><div><span class="eyebrow">INDEPENDENT CEFR A1 PATHWAY · ENGLISH + नेपाली</span><h2 id="a1Heading">Explore your A1 study pathway.</h2></div><p>Original, structured lessons across essential A1 topics. Aligned with publicly described Goethe-Zertifikat A1 objectives; not an official Goethe course or certification.</p></div>
+<div aria-label="Course progress" class="a1-stats"><div><strong id="a1Total">36</strong><span>Study units</span></div><div><strong id="a1VocabularyCount">0</strong><span>Unique words &amp; phrases</span></div><div><strong id="a1Done">0</strong><span>Units practiced</span></div><div><strong id="a1Percent">0%</strong><span>Practice completion</span></div></div>
+<div aria-label="A1 skill practice completion" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-track a1-track" id="a1ProgressTrack" role="progressbar"><span id="a1ProgressFill"></span></div>
+<p class="subtle">Completion means you practiced all six activities. It does not certify A1 ability or predict a Goethe exam grade.</p>
+<div class="a1-toolbar"><label for="a1Filter">Topics <select class="a1-control" id="a1Filter"></select></label><label for="a1Search">Find a unit <input class="a1-control" id="a1Search" placeholder="e.g. family, verbs, booking" type="search"/></label></div>
+<div class="a1-unit-grid" id="a1UnitGrid"></div><p class="subtle" hidden="" id="a1EmptySearch">No units match. Try another search.</p>
+<div class="mini-panel a1-workspace" hidden="" id="a1Workspace">
+<div class="a1-work-top"><div><span class="eyebrow">STUDY · PRACTICE · SELF-CHECK</span><h3 id="a1UnitTitle"></h3><p class="subtle" id="a1UnitSubtitle"></p></div><button class="secondary-btn" id="a1Close" type="button">Close ×</button></div>
+<div aria-label="Six lesson activities" class="a1-skill-tabs" id="a1SkillProgress" role="group"></div>
+<p class="a1-unit-status" id="a1UnitProgress"></p><p class="a1-note" hidden="" id="courseNote" role="status"></p>
+<div class="a1-tab-content" id="a1TabContent"></div>
+<div class="a1-navigation"><button class="secondary-btn" id="a1Prev" type="button">← Previous unit</button><button class="secondary-btn" id="a1Next" type="button">Next unit →</button></div>
+</div>
+</section>
+<section aria-labelledby="a1ReviewHeading" class="lower-section a1-review-section academy-view" data-academy-view="vocabulary" id="a1review">
+<div class="lower-heading"><div><span class="eyebrow">ACTIVE RECALL · OFFLINE VOCABULARY</span><h2 id="a1ReviewHeading">Remember the words, not just the lesson.</h2></div><p>Practice vocabulary with simple spaced repetition. Again, Good and Easy schedule words for later review on this device.</p></div>
+<div class="mini-panel a1-review-panel"><p class="subtle" id="a1ReviewStatus" role="status">Preparing your vocabulary cards…</p>
+<div id="a1ReviewCard"><span class="eyebrow">SAY THE GERMAN WORD</span><div class="a1-review-word" id="a1ReviewWord" lang="de"></div>
+<div class="a1-review-answer" hidden="" id="a1ReviewAnswer"><strong id="a1ReviewEnglish"></strong><p id="a1ReviewNepali" lang="ne"></p></div>
+<div class="a1-review-buttons"><button class="secondary-btn" id="a1ReviewListen" type="button">🔊 Listen</button><button class="primary-btn" id="a1ReviewReveal" type="button">Show meaning</button></div>
+<div class="a1-review-buttons" hidden="" id="a1ReviewGrades"><button class="secondary-btn" id="a1ReviewAgain" type="button">Again · today</button><button class="secondary-btn" id="a1ReviewGood" type="button">Good · later</button><button class="secondary-btn" id="a1ReviewEasy" type="button">Easy · later</button></div>
+</div></div>
+</section>
+<section aria-labelledby="a1ExamHeading" class="lower-section a1-exam-section academy-view" data-academy-view="exam" id="a1exam">
+<div class="lower-heading"><div><span class="eyebrow">ORIGINAL SELF-CHECK · NOT AN OFFICIAL EXAM</span><h2 id="a1ExamHeading">Independent Goethe A1–style skill practice.</h2></div><p>Four areas similar to the official format: Hören ~20 min, Lesen 25 min, Schreiben 20 min, Sprechen 15 min. These practice sets are shorter and cannot predict your exam result.</p></div>
+<div aria-label="Choose exam skill" class="a1-exam-tabs" id="a1ExamTabs" role="group"><button data-skill="listening" type="button">🔊 Listening</button><button data-skill="reading" type="button">📖 Reading</button><button data-skill="writing" type="button">✍ Writing</button><button data-skill="speaking" type="button">🗣 Speaking</button></div><div aria-label="Optional practice timer" class="exam-timer-panel">
+<div><span class="eyebrow">OPTIONAL TRAINING TIMER</span><strong aria-live="off" id="examTimer" role="timer">20:00</strong><p>Official section duration; these are shorter original drills, not full official exam simulations.</p></div>
+<div class="exam-timer-controls">
+<button class="secondary-btn" id="examTimerStart" type="button">▶ Start</button>
+<button class="secondary-btn" disabled="" id="examTimerPause" type="button">Pause</button>
+<button class="secondary-btn" id="examTimerReset" type="button">↻ Reset</button>
+</div>
+</div>
+<div class="mini-panel a1-exam-body"><h3 id="a1ExamTitle">Listening</h3><p class="subtle" id="a1ExamInfo"></p><div id="a1ExamContent"></div><p class="a1-exam-warning">Listening uses your device's text-to-speech, not Goethe audio. Writing and speaking require human feedback for meaningful assessment. Do not treat this exercise score as an official Goethe result.</p></div>
+</section>
+<section aria-labelledby="referenceHeading" class="lower-section a1-reference-section academy-view" data-academy-view="resources" id="references">
+<div class="mini-panel a1-sources"><h2 id="referenceHeading">Sources, credit &amp; exam resources</h2><p>This independent course was designed around publicly described A1 skills and exam categories. All lesson questions and dialogues here are original DeutschDaily material. Goethe-Institut and CEFR are referenced for study alignment only; there is no endorsement, collaboration, licensing claim or certificate.</p>
+<ul><li><a href="https://www.goethe.de/ins/de/en/prf/gzsd1.cfm" rel="noopener noreferrer" target="_blank">Goethe-Institut — Goethe-Zertifikat A1: Start Deutsch 1 (official exam description)</a></li>
+<li><a href="https://www.goethe.de/en/spr/prf/ueb/pa1.html" rel="noopener noreferrer" target="_blank">Goethe-Institut — free official A1 practice tests, audio &amp; vocabulary list</a></li>
+<li><a href="https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-descriptors-search" rel="noopener noreferrer" target="_blank">Council of Europe — CEFR A1 language ability descriptors</a></li><li><a href="https://www.goethe.de/ins/de/en/prf/gzsd1.cfm" rel="noopener noreferrer" target="_blank">Exam description and exact skill tasks (Goethe-Institut)</a></li></ul>
+<p class="subtle">For authentic listening tests and a real readiness check, use Goethe's official sample examination with its own recordings. Completing this website alone cannot guarantee passing.</p>
+</div>
+</section>
+<section aria-labelledby="lesson-title" class="lower-section lessons-section academy-view" data-academy-view="practice" id="lessons">
+<div class="lower-heading"><div><span class="eyebrow">STEP-BY-STEP GERMAN · OFFLINE</span><h2 id="lesson-title">Quick beginner flash drills.</h2></div><p>Short lessons in English, German and नेपाली. Progress stays in your browser.</p></div>
+<div class="lesson-head"><div><strong id="lessonProgress">0 / 6 lessons completed</strong><small id="lessonStreak">Start your first lesson today</small></div><div aria-label="A1 lesson progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="progress-track" id="lessonProgressBar" role="progressbar"><span id="lessonProgressFill"></span></div></div>
+<div class="lesson-grid" id="lessonGrid"></div>
+<div class="mini-panel lesson-player" hidden="" id="lessonPlayer">
+<div class="lesson-player-top"><div><span class="eyebrow" id="lessonStep">LESSON</span><h3 id="lessonQuestion">Learn German step by step</h3><p class="subtle" id="lessonTip"></p></div><button aria-label="Close lesson" class="tiny-button" id="closeLesson" type="button">Close ×</button></div>
+<div class="lesson-prompt" id="lessonPrompt"></div>
+<div aria-label="Choose the German translation" class="quiz-options" id="lessonOptions" role="group"></div>
+<p aria-live="polite" class="quiz-feedback" id="lessonFeedback" role="status"></p>
+<div class="lesson-controls"><button class="secondary-btn" hidden="" id="lessonListen" type="button">🔊 Listen in German</button><button class="primary-btn" hidden="" id="lessonNext" type="button">Continue →</button></div>
+</div>
+</section>
+<section aria-labelledby="practice-title" class="lower-section academy-view" data-academy-view="practice" id="practice"><div class="lower-heading"><div><span class="eyebrow">A LITTLE PRACTICE GOES A LONG WAY</span><h2 id="practice-title">Make it a daily habit.</h2></div><p>Your progress is stored on this device, no sign-in needed.</p></div>
+<div class="practice-grid">
+<article class="mini-panel daily-card"><div class="card-title"><span class="card-icon">✦</span><h3>Daily flashcard</h3><span class="mini-tag">OFFLINE</span></div><div class="flashcard" id="flashcard"><div class="flash-label">TRANSLATE THIS INTO GERMAN</div><div class="flash-english" id="flashEnglish"></div><div class="flash-reveal" hidden="" id="flashReveal"><strong id="flashGerman" lang="de"></strong><div id="flashNepali" lang="ne"></div><div class="flash-pron" id="flashPron"></div></div></div><div class="flash-buttons"><button class="secondary-btn" id="revealFlash" type="button">Show answer</button><button class="primary-btn" id="nextFlash" type="button">Next phrase →</button><button aria-label="Hear flashcard in German" class="icon-btn" id="speakFlash" type="button">🔊</button></div></article>
+<article class="mini-panel saved-card"><div class="card-title"><span class="card-icon purple">♡</span><h3>Saved phrases</h3><span class="counter" id="savedCount">0</span></div><p class="subtle">Save your favorite translations for practice.</p><div class="saved-list" id="savedList"></div></article>
+<article class="mini-panel saved-card recent-card"><div class="card-title"><span class="card-icon">↺</span><h3>Recent translations</h3><span class="counter" id="recentCount">0</span></div><p class="subtle">Automatically saved after a successful online translation. Tap to reuse offline.</p><div class="saved-list" id="recentList"></div></article>
+</div>
+</section>
+<section aria-labelledby="backup-title" class="backup-section academy-view" data-academy-view="resources"><div class="mini-panel backup-panel"><div><h2 id="backup-title">Keep your learning history</h2><p class="subtle">Back up your favorites, recent translations and lesson progress, or restore a previous backup. Your data stays on this device unless you export it.</p></div><div class="backup-actions"><button class="secondary-btn" id="exportLearning" type="button">↓ Export progress</button><button class="secondary-btn" id="importLearning" type="button">↑ Restore backup</button><input accept="application/json,.json" aria-label="Choose a saved DeutschDaily JSON backup" hidden="" id="backupFile" type="file"/></div></div></section>
+<section aria-labelledby="alphabet-title" class="alphabet-section academy-view" data-academy-view="practice" id="alphabet"><div class="lower-heading"><div><span class="eyebrow">FIRST STEPS</span><h2 id="alphabet-title">German alphabet, one tap at a time.</h2></div><p>Tap a letter to hear its German name. Includes Ä, Ö, Ü and ß.</p></div><div class="alphabet-grid" id="alphabetGrid"></div></section>
+</main>
+<footer><div><strong>DeutschDaily</strong> <span>· English → German → नेपाली</span></div><span>Independent A1 preparation · Not affiliated with Goethe-Institut · Translation services may have usage limits. Check our referenced official resources.</span></footer>
+</div>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<nav aria-label="Mobile academy navigation" class="academy-mobile-dock">
+<a data-route="dashboard" href="#/dashboard"><span>⌂</span>Home</a>
+<a data-route="course" href="#/course"><span>▤</span>Course</a>
+<a data-route="vocabulary" href="#/vocabulary"><span>◈</span>Words</a>
+<a data-route="exam" href="#/exam"><span>◉</span>Exam</a>
+<a data-route="translator" href="#/translator"><span>文</span>Translate</a>
+</nav></body>
 </html>

@@ -60,7 +60,7 @@ for(const pack of nouns){
   const [de,en,ne,plural]=item;
   bilingual(de,en,ne,pack.id+'.nouns['+i+']');
   if(!/^(der|die|das) /u.test(de))fail(pack.id+'.nouns['+i+'].de','noun lacks nominative article');
-  if(typeof plural!=='string'||!(plural==='—'||/^die \S/u.test(plural)))
+  if(typeof plural!=='string'||!(plural==='—'||plural==='plural-only'||/^die \S/u.test(plural)))
    fail(pack.id+'.nouns['+i+'].plural','plural must be die ... or explicit mass/noncount marker');
  }
 }
@@ -102,6 +102,14 @@ for(const [setId,scenes] of Object.entries(guides.dialogues)){
    checkedTurns++;
   }
  }
+}
+const notes=source.DEUTSCH_A1_NOUN_USAGE_NOTES;
+if(nouns.find(p=>p.id==='social')?.items.find(x=>x[0]==='die Eltern')?.[3]!=='plural-only')
+ fail('noun:die Eltern','plural-only lexeme must not be marked as a singular mass noun');
+for(const label of ['die Eltern','das Wort','das Gleis']){
+ const note=notes?.[label];
+ if(!note||!note.en||!note.ne||!note.source||!/^https:\/\/www\.duden\.de\//u.test(note.source))
+  fail('noun:'+label,'dictionary-backed bilingual usage note missing');
 }
 const spelling=guides.dialogues['a1-mock-2'][0].turns[1][3];
 if(spelling!=='S-H-A-R-M-A.')fail('mock-2.spelling','surname Sharma requires S-H-A-R-M-A, not S-C-H-A-R-M-A');

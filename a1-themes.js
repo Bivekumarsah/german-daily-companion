@@ -62,7 +62,15 @@ function showList(){
   const card=el('article','a1-theme-card');
   const name=el('strong','a1-theme-word',de);name.lang='de';
   card.append(name,el('p','',en+' · '+ne),
-   el('small','',plural==='—'?'No common singular/plural pair to memorise.':'Plural: '+plural));
+   el('small','',plural==='plural-only'?'Plural-only word · nur Plural':plural==='—'?'Usually used without an everyday plural.':'Plural: '+plural));
+  const note=window.DEUTSCH_A1_NOUN_USAGE_NOTES?.[de];
+  if(note){
+   const usage=el('div','a1-theme-usage');
+   usage.append(el('p','',note.en),el('p','a1-theme-nepali',note.ne));
+   const link=el('a','a1-theme-source','Dictionary reference');
+   link.href=note.source;link.target='_blank';link.rel='noopener noreferrer';
+   usage.append(link);card.append(usage);
+  }
   const actions=el('div','a1-theme-actions');
   actions.append(button('🔊 Hear',()=>speech(de,false)),
      button('◷ Slow',()=>speech(de,true)));

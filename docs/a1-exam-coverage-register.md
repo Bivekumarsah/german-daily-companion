@@ -36,6 +36,10 @@ All six guided roleplays (18 partner turns) now offer optional **on-device audio
 
 Every one of the six roleplay scenes and 18 speaking turns now contains an independently written English/Nepali **communicative objective** and a short German model phrase. Learners can optionally **type their own remembered spoken response**; the app shows previously tested, very narrow offline writing-rule warnings, never claiming to transcribe or automatically judge the audio. The text is not stored or uploaded and disappears when moving to a new turn. Tests validate source/goal alignment, safe content fields, 18 separate cues, and 320px/390px/desktop browser layout. Existing recording, progress and draft behavior are retained. This remains self-practice, not official Goethe grading or an expert bilingual content audit.
 
+## Editorial review and Safari-engine quality pass (29 October 2026)
+
+Three dictionary-backed noun teaching corrections are now live in the source bank: *die Eltern* (plural-only), *das Wort* (*Wörter* for individual lexical units versus *Worte* for utterances) and *das Gleis* (track rather than platform). Referenced bilingual usage notes and links are displayed on their cards. The [review worksheet exporter](a1-human-editorial-review.md) covers **762 original source records**, all explicitly marked unreviewed, with separate German/Nepali specialist fields. A new Chromium-independent [WebKit/Safari-engine browser test](real-device-qa.md) checks mobile-sized behavior. **Neither constitutes native German/Nepali human proofreading nor a physical iPhone test**.
+
 ## Current internal unit mapping (preserved IDs, no migrations)
 
 | A1 competency | Current DeutschDaily units | Status |

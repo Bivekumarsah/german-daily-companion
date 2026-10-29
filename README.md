@@ -4,6 +4,14 @@
 
 A free static progressive-web-app for personal German study, with English explanations and Nepali meanings. The **36-unit A1 syllabus** is independently written to cover the everyday CEFR A1 objectives described publicly by the Goethe-Institut and the Council of Europe. **Not an official Goethe-Institut product, partnership, licensed textbook or certificate.** Completing the site is not proof of A1 proficiency and cannot guarantee exam success.
 
+## Human editorial and physical-device validation status
+
+A new [review worksheet generator](scripts/export-editorial-review.mjs) exports **762 original content rows** covering 576 vocabulary entries plus grammar examples, writing/speaking models, dialogues and pronunciation examples. Every entry remains **pending German and Nepali professional editorial review**, with independent editor fields blank. GitHub Actions uploads the worksheet as a temporary artifact. See the [human editorial procedure](docs/a1-human-editorial-review.md).
+
+A new Linux Playwright **WebKit/Safari-engine emulator** complements Chromium 320px/390px/desktop testing, but **not a physical iPhone**. The [real Android/iPhone QA checklist](docs/real-device-qa.md) remains explicitly **not tested** until people use actual devices.
+
+Dictionary-supported teaching fixes: **die Eltern** is marked plural-only; **das Wort** explains *die Wörter* versus *die Worte*; **das Gleis** now has an accurate railway-track English/Nepali explanation. The source references appear in the cards and [editorial report](docs/a1-human-editorial-review.md).
+
 ## Current features
 
 - 36 structured A1 units across foundations, people & home, grammar, everyday life, practical situations and exam preparation

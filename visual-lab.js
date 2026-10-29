@@ -103,8 +103,9 @@
     'das sprechen':'🗣️','üben':'🔄'
   };
   function sceneFor(unit){
-    if(!unit?.id || !Array.isArray(unit.vocab) || unit.vocab.length<3)return null;
+    if(!unit?.id)return null;
     if(lessons[unit.id])return lessons[unit.id];
+    if(!Array.isArray(unit.vocab) || unit.vocab.length<3)return null;
     const icon=topicIcons[unit.group]||'📘';
     return {
       title:'Picture & word practice: '+unit.title,

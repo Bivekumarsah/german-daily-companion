@@ -31,7 +31,7 @@ for(const filename of ['visual-stories.js','visual-lab.js'])
   vm.runInContext(read(filename),mock,{filename});
 const scenes=mock.window.DEUTSCH_VISUAL_LAB.scenes;
 const stories=mock.window.DEUTSCH_VISUAL_STORIES;
-assert.equal(Object.keys(stories).length,8);
+assert.equal(Object.keys(stories).length,12);
 assert.deepEqual(Object.keys(scenes).sort(),Object.keys(stories).sort());
 const texts=new Set();
 for(const [id,scene] of Object.entries(scenes)){
@@ -83,7 +83,7 @@ for(const [id,scene] of Object.entries(scenes)){
   next.click();
   assert(title.textContent.includes('1 of 3'),'Repeat should reset the challenge');
 }
-assert(texts.size>=20);
+assert(texts.size>=30);
 const nonexistent=new FakeNode();
 assert.equal(mock.window.DEUTSCH_VISUAL_LAB.render(nonexistent,{id:'a1-99'},()=>{}),false);
-console.log('Visual dialogue checks passed: 8 scenes, 24 conversation turns, audio/slow actions, translation toggles, wrong-answer feedback, challenge completion and replay.');
+console.log('Visual dialogue checks passed: 12 scenes, 36 conversation turns, audio/slow actions, translation toggles, wrong-answer feedback, challenge completion and replay.');

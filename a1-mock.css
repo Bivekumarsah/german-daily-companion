@@ -1,0 +1,58 @@
+/* Original A1 mock exam studio. Mobile-first; leaves existing short skill sampler intact. */
+.a1-mock-studio{margin:22px 0;border:1px solid #4a6c81;border-radius:17px;background:#193146;padding:22px}
+.a1-mock-head{display:grid;gap:13px}
+.a1-mock-lead{font-size:12px;line-height:1.65;color:#daeaf0;margin:0}
+.a1-mock-sets,.a1-mock-skills{display:flex;flex-wrap:wrap;gap:8px}
+.a1-mock-selector,.a1-mock-skill,.a1-mock-btn,.a1-mock-small,.a1-mock-choice,.a1-mock-primary{font:inherit;font-size:13px;font-weight:750;line-height:1.45;border:1px solid #7698ad;background:#28475e;color:#f5fbff;border-radius:11px;min-height:45px;padding:10px 13px;cursor:pointer}
+.a1-mock-selector.is-active,.a1-mock-skill.is-active,.a1-mock-choice.is-selected{border-color:#cdf8a9;background:#244c3e;color:#f2ffe9}
+.a1-mock-primary{background:#caed94;color:#163225;border-color:#caed94}
+.a1-mock-choice{display:block;width:100%;text-align:left;min-height:52px}
+.a1-mock-choice:hover,.a1-mock-btn:hover,.a1-mock-small:hover{border-color:#c8f19c}
+.a1-mock-primary:hover{background:#e2ffb7;color:#12301d}
+.a1-mock-btn:disabled,.a1-mock-primary:disabled{opacity:.45;cursor:default}
+.a1-mock-selector:focus-visible,.a1-mock-skill:focus-visible,.a1-mock-btn:focus-visible,.a1-mock-choice:focus-visible,.a1-mock-primary:focus-visible,.a1-mock-small:focus-visible{outline:3px solid #a7dcff;outline-offset:3px}
+.a1-mock-clock{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px;background:#12283c;border:1px solid #496980;border-radius:12px}
+.a1-mock-timer-label{font-size:12px;font-weight:750;color:#c7d9eb}
+.a1-mock-timer-controls{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.a1-mock-time{font:inherit;font-size:21px;font-weight:850;font-variant-numeric:tabular-nums;min-width:65px}
+.a1-mock-notice{font-size:12px;line-height:1.5;color:#d5e9f4;margin:0}
+.a1-mock-content{margin-top:19px;border-radius:13px;border:1px solid #506c86;background:#20374e;padding:19px}
+.a1-mock-title{font-size:21px;line-height:1.35;margin:0 0 13px}
+.a1-mock-count,.a1-mock-help{color:#d1e2f2;font-size:13px;line-height:1.7}
+.a1-mock-question{font-size:17px;margin:15px 0;line-height:1.5}
+.a1-mock-passage{display:block;margin:15px 0;border-left:4px solid #b1e38e;background:#132c3c;border-radius:8px;padding:17px;font-size:16px;line-height:1.7;white-space:pre-wrap}
+.a1-mock-options{display:grid;grid-template-columns:1fr;gap:10px;margin:15px 0}
+.a1-mock-audio{display:flex;flex-wrap:wrap;gap:10px}
+.a1-mock-navigation{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin:20px 0 10px}
+.a1-mock-navigation button{flex:1 1 145px}
+.a1-mock-result{border:1px solid #7ab597;border-radius:14px;padding:17px;background:#1c433e}
+.a1-mock-result h5{font-size:19px;margin:0 0 10px}
+.a1-mock-result p{font-size:13px;line-height:1.6}
+.a1-mock-review{padding:12px;margin:15px 0;border:1px solid #7898a7;border-radius:10px}
+.a1-mock-review summary{cursor:pointer;font-weight:750}
+.a1-mock-review-item{border-bottom:1px solid #5f768c;padding:10px 0}
+.a1-mock-review-item:last-child{border-bottom:none}
+.a1-mock-review-item strong{font-size:13px;line-height:1.5}
+.a1-mock-review-item p{font-size:13px;margin:6px 0}
+.a1-mock-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.a1-mock-field{display:flex;flex-direction:column;gap:8px;font-size:13px;font-weight:750}
+.a1-mock-input,.a1-mock-textarea{width:100%;box-sizing:border-box;border-radius:9px;border:1px solid #83a1b8;padding:12px;background:#101f30;color:#eff9ff;font:inherit;font-size:15px}
+.a1-mock-textarea{min-height:135px;line-height:1.65}
+.a1-mock-instructions{font-size:14px;line-height:1.75}
+.a1-mock-model{border:1px solid #7596a8;background:#173f3c;border-radius:11px;padding:15px;margin:13px 0}
+.a1-mock-model strong{font-size:13px}
+.a1-mock-checklist{border:1px solid #688da3;border-radius:11px;padding:14px;margin:16px 0}
+.a1-mock-check{display:flex;gap:10px;align-items:flex-start;margin-top:11px;font-size:13px;line-height:1.5}
+.a1-mock-check input{width:19px;height:19px;flex:none}
+html[data-theme="light"] .a1-mock-studio{background:#f1f8fc;border-color:#bad1df;color:#203547}
+html[data-theme="light"] .a1-mock-lead,html[data-theme="light"] .a1-mock-help,html[data-theme="light"] .a1-mock-count,html[data-theme="light"] .a1-mock-notice{color:#506278}
+html[data-theme="light"] .a1-mock-selector,html[data-theme="light"] .a1-mock-skill,html[data-theme="light"] .a1-mock-btn,html[data-theme="light"] .a1-mock-small,html[data-theme="light"] .a1-mock-choice{background:#fff;border-color:#acc2d4;color:#203b51}
+html[data-theme="light"] .a1-mock-selector.is-active,html[data-theme="light"] .a1-mock-skill.is-active,html[data-theme="light"] .a1-mock-choice.is-selected{background:#ddf3e0;color:#164326;border-color:#5ba270}
+html[data-theme="light"] .a1-mock-primary{background:#285f30;border-color:#285f30;color:#fff}
+html[data-theme="light"] .a1-mock-clock,html[data-theme="light"] .a1-mock-content{background:#fff;border-color:#c6d6e4}
+html[data-theme="light"] .a1-mock-timer-label{color:#53687b}
+html[data-theme="light"] .a1-mock-passage{background:#e9f6ef;border-color:#5eaa76}
+html[data-theme="light"] .a1-mock-result,html[data-theme="light"] .a1-mock-model{background:#e7f6ea;border-color:#9ec9aa}
+html[data-theme="light"] .a1-mock-input,html[data-theme="light"] .a1-mock-textarea{background:#fff;color:#1e3145;border-color:#a9c0d0}
+@media(max-width:650px){.a1-mock-studio{padding:12px}.a1-mock-content{padding:12px}.a1-mock-sets button{width:100%}.a1-mock-skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.a1-mock-skills button{font-size:12px}.a1-mock-form{grid-template-columns:1fr}.a1-mock-audio button{flex:1 1 125px}.a1-mock-time{font-size:18px}.a1-mock-passage{padding:12px}}
+@media(prefers-reduced-motion:reduce){.a1-mock-studio *{transition:none!important;animation:none!important}}

@@ -35,7 +35,7 @@
           <div class="divider"></div>
           <div class="field-label">TRY A PHRASE</div>
           <div class="chip-list" id="suggestions"><button class="chip" data-phrase="How are you?">How are you?</button><button class="chip" data-phrase="What is your name?">What is your name?</button><button class="chip" data-phrase="Good morning">Good morning</button><button class="chip" data-phrase="I am learning German">I am learning German</button><button class="chip" data-phrase="Where is the train station?">Where is the train station?</button></div>
-          <div class="notice"><span aria-hidden="true">✳</span><span>Common phrases work offline. New translations use a free online service when available.</span></div>
+          <div class="notice"><span aria-hidden="true">✳</span><span>Built-in phrases and previously translated words work offline. New text is sent to a free third-party translator when online; translations are saved on this device.</span></div>
         </div>
 
         <div class="panel result-panel" aria-live="polite" aria-atomic="false">
@@ -55,20 +55,21 @@
             <div class="nepali-meaning" id="nepaliOutput" lang="ne"></div>
             <div class="translation-foot" id="translationSource"></div>
           </div>
-          <div id="emptyResult" class="empty-result"><div class="empty-illustration">Aa <span>→</span> Ää</div><h3>Every word is progress.</h3><p>Type a sentence on the left, or select a sample phrase to begin.</p></div>
+          <div id="emptyResult" class="empty-result"><div class="empty-illustration">Aa <span>→</span> Ää</div><h3>Every word is progress.</h3><p>Type a sentence on the left, or select a sample phrase to begin.</p><button class="secondary-btn retry-btn" id="retryTranslation" type="button" hidden>↻ Try again</button></div>
         </div>
       </section>
 
       <section id="practice" class="lower-section" aria-labelledby="practice-title"><div class="lower-heading"><div><span class="eyebrow">A LITTLE PRACTICE GOES A LONG WAY</span><h2 id="practice-title">Make it a daily habit.</h2></div><p>Your progress is stored on this device, no sign-in needed.</p></div>
         <div class="practice-grid">
           <article class="mini-panel daily-card"><div class="card-title"><span class="card-icon">✦</span><h3>Daily flashcard</h3><span class="mini-tag">OFFLINE</span></div><div class="flashcard" id="flashcard"><div class="flash-label">TRANSLATE THIS INTO GERMAN</div><div id="flashEnglish" class="flash-english"></div><div id="flashReveal" class="flash-reveal" hidden><strong id="flashGerman" lang="de"></strong><div id="flashNepali" lang="ne"></div><div class="flash-pron" id="flashPron"></div></div></div><div class="flash-buttons"><button class="secondary-btn" id="revealFlash" type="button">Show answer</button><button class="primary-btn" id="nextFlash" type="button">Next phrase →</button><button class="icon-btn" id="speakFlash" aria-label="Hear flashcard in German" type="button">🔊</button></div></article>
-          <article class="mini-panel saved-card"><div class="card-title"><span class="card-icon purple">♡</span><h3>Saved phrases</h3><span class="counter" id="savedCount">0</span></div><p class="subtle">Save useful translations and practice them any time.</p><div class="saved-list" id="savedList"></div></article>
+          <article class="mini-panel saved-card"><div class="card-title"><span class="card-icon purple">♡</span><h3>Saved phrases</h3><span class="counter" id="savedCount">0</span></div><p class="subtle">Save your favorite translations for practice.</p><div class="saved-list" id="savedList"></div></article>
+          <article class="mini-panel saved-card recent-card"><div class="card-title"><span class="card-icon">↺</span><h3>Recent translations</h3><span class="counter" id="recentCount">0</span></div><p class="subtle">Automatically saved after a successful online translation. Tap to reuse offline.</p><div class="saved-list" id="recentList"></div></article>
         </div>
       </section>
 
       <section id="alphabet" class="alphabet-section" aria-labelledby="alphabet-title"><div class="lower-heading"><div><span class="eyebrow">FIRST STEPS</span><h2 id="alphabet-title">German alphabet, one tap at a time.</h2></div><p>Tap a letter to hear its German name. Includes Ä, Ö, Ü and ß.</p></div><div id="alphabetGrid" class="alphabet-grid"></div></section>
     </main>
-    <footer><div><strong>DeutschDaily</strong> <span>· English → German → नेपाली</span></div><span>Free personal learning tool · Translations and pronunciation guides may need checking.</span></footer>
+    <footer><div><strong>DeutschDaily</strong> <span>· English → German → नेपाली</span></div><span>Free personal learning tool · Translation services may have usage limits. Pronunciation spellings are approximate.</span></footer>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>

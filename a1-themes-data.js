@@ -11,7 +11,7 @@ const packs=[
  ['die Verspätung','delay','ढिलाइ','die Verspätungen'],
  ['die Abfahrt','departure','प्रस्थान','die Abfahrten'],
  ['die Ankunft','arrival','आगमन','die Ankünfte'],
- ['das Gleis','railway platform track','रेलको प्लेटफर्म नम्बर','die Gleise'],
+ ['das Gleis','railway track (at a station)','रेलको लिक / पटरी','die Gleise'],
  ['der Eingang','entrance','प्रवेशद्वार','die Eingänge'],
  ['der Ausgang','exit','निकास','die Ausgänge']
  ]},
@@ -64,7 +64,7 @@ const packs=[
  ['der Termin','appointment','अपोइन्टमेन्ट','die Termine']
  ]},
  {id:'social',title:'👥 People and occasions',items:[
- ['die Eltern','parents','आमाबुबा','—'],
+ ['die Eltern','parents','आमाबुबा','plural-only'],
  ['das Kind','child','बच्चा','die Kinder'],
  ['der Freund','male friend','साथी (पुरुष)','die Freunde'],
  ['die Freundin','female friend','साथी (महिला)','die Freundinnen'],
@@ -125,4 +125,21 @@ const packs=[
  ]}
 ];
 window.DEUTSCH_A1_THEME_PACKS=packs;
+window.DEUTSCH_A1_NOUN_USAGE_NOTES={
+ 'die Eltern':{
+   en:'Plural-only noun in everyday German: die Eltern (parents). To say one parent, use ein Elternteil.',
+   ne:'सामान्य जर्मनमा “die Eltern” बहुवचन मात्र हो। एक अभिभावक भन्न “ein Elternteil” प्रयोग गर्नुहोस्।',
+   source:'https://www.duden.de/rechtschreibung/Eltern'
+ },
+ 'das Wort':{
+   en:'“die Wörter” = separate vocabulary words; “die Worte” = a saying, speech or connected remarks.',
+   ne:'अलग-अलग शब्दहरूका लागि “die Wörter” र भनाइ वा बोलिएका वाक्यांशका लागि “die Worte” प्रयोग हुन्छ।',
+   source:'https://www.duden.de/sprachwissen/sprachratgeber/worte-oder-woerter'
+ },
+ 'das Gleis':{
+   en:'A Gleis is the railway track. “Gleis 5” on a station sign can mean track/platform number 5.',
+   ne:'“Gleis” भनेको रेलको लिक हो। स्टेसनमा “Gleis 5” ले पाँच नम्बरको ट्र्याक/प्लेटफर्म जनाउन सक्छ।',
+   source:'https://www.duden.de/rechtschreibung/Gleis'
+ }
+};
 })();

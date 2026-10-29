@@ -28,7 +28,7 @@ for(const [unitId,scene] of Object.entries(visual.scenes)){
 }
 assert.equal(a1.units.length,36);
 const dailyHtml=read('index.html');
-const dailySw=read('dailySw.js');
+const dailySw=read('sw.js');
 for(const f of ['daily-journey-data.js','daily-journey.js','daily-journey.css']){
  assert(dailyHtml.includes(f)&&dailySw.includes(f),'Guided study asset must be loaded and precached: '+f);
 }

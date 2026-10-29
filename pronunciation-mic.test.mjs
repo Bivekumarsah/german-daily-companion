@@ -10,6 +10,7 @@ class Node {
  append(...els){this.children.push(...els)}
  replaceChildren(...els){this.children=els}
  addEventListener(k,cb){this.events[k]=cb}
+ click(){if(!this.disabled)this.events.click?.()}
  setAttribute(){}
  querySelector(c){const k=c.slice(1);if(this.className.split(' ').includes(k))return this;for(const v of this.children){const a=v.querySelector(c);if(a)return a;}return null}
  scrollIntoView(){}

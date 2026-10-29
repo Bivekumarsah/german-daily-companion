@@ -213,6 +213,56 @@
  ["der Ausweis","identity card / ID","परिचयपत्र","Ich zeige meinen Ausweis am Schalter.","I show my ID at the counter."],
  ["das Auto","car","कार / गाडी","Unser Auto ist alt.","Our car is old."],
  ["der Urlaub","holiday / vacation","बिदा / छुट्टी","Im Urlaub besuche ich meine Familie.","On holiday I visit my family."]
+ ]},
+ {id:"full-audit-services",title:"🚉 Stations, forms and services",items:[
+ ["abfliegen","to depart by plane","विमानबाट प्रस्थान गर्नु","Unser Flugzeug fliegt um sechs Uhr ab.","Our plane departs at six."],
+ ["anklicken","to click","क्लिक गर्नु","Bitte klicken Sie den Link an.","Please click the link."],
+ ["drucken","to print","प्रिन्ट गर्नु","Ich drucke heute das Formular.","I am printing the form today."],
+ ["drücken","to press","थिच्नु","Drücken Sie bitte diesen Knopf.","Please press this button."],
+ ["benutzen","to use","प्रयोग गर्नु","Sie können den Aufzug benutzen.","You can use the lift."],
+ ["besetzt","occupied / engaged","भरिएको / व्यस्त","Dieser Platz ist besetzt.","This seat is occupied."],
+ ["der Bahnsteig","railway platform","रेल प्लेटफर्म","Der Zug fährt von Bahnsteig drei ab.","The train departs from platform three."],
+ ["der Buchstabe","letter of the alphabet","वर्ण / अक्षर","Mein Name beginnt mit dem Buchstaben A.","My name begins with the letter A."]
+ ]},
+ {id:"full-audit-actions",title:"🗣️ Important verbs and relationships",items:[
+ ["aussehen","to look / appear","देखिनु","Du siehst heute müde aus.","You look tired today."],
+ ["baden","to bathe / swim recreationally","नुहाउनु / पानीमा खेल्नु","Die Kinder baden im See.","The children are bathing in the lake."],
+ ["bedeuten","to mean","अर्थ हुनु","Was bedeutet dieses Wort?","What does this word mean?"],
+ ["bekommen","to receive / get","प्राप्त गर्नु","Ich bekomme heute einen Brief.","I am receiving a letter today."],
+ ["heiraten","to marry","विवाह गर्नु","Sie heiraten im Sommer.","They are getting married in summer."],
+ ["gehören","to belong to","को हुनु / स्वामित्वमा हुनु","Wem gehört dieses Fahrrad?","Who does this bicycle belong to?"],
+ ["geboren","born","जन्मिएको","Ich bin in Nepal geboren.","I was born in Nepal."],
+ ["gegen","against","विरुद्ध / सँग प्रतिस्पर्धा","Ich spiele gegen meinen Bruder.","I am playing against my brother."]
+ ]},
+ {id:"full-audit-descriptions",title:"✨ Describing daily situations",items:[
+ ["automatisch","automatic / automatically","स्वचालित रूपमा","Die Tür öffnet sich automatisch.","The door opens automatically."],
+ ["bar","in cash","नगद","Kann ich bar bezahlen?","Can I pay in cash?"],
+ ["beide","both","दुवै","Beide Kinder gehen zur Schule.","Both children go to school."],
+ ["bekannt","well-known / familiar","परिचित / प्रसिद्ध","Dieses Restaurant ist sehr bekannt.","This restaurant is very well known."],
+ ["eilig","in a hurry","हतार भएको","Ich habe es heute eilig.","I am in a hurry today."],
+ ["einfach","easy / simple","सजिलो","Diese Aufgabe ist einfach.","This exercise is easy."],
+ ["fertig","finished / ready","सकिएको / तयार","Ich bin mit den Hausaufgaben fertig.","I have finished my homework."],
+ ["fremd","unfamiliar / foreign","अपरिचित","Diese Stadt ist mir noch fremd.","This city is still unfamiliar to me."]
+ ]},
+ {id:"full-audit-home",title:"🏡 Family, body and neighbourhood",items:[
+ ["die Bäckerei","bakery","पाउरोटी पसल","Die Bäckerei öffnet um sieben Uhr.","The bakery opens at seven."],
+ ["der Balkon","balcony","बार्दली","Wir sitzen auf dem Balkon.","We are sitting on the balcony."],
+ ["der Baum","tree","रूख","Der Baum steht vor dem Haus.","The tree stands in front of the house."],
+ ["das Bein","leg","खुट्टा","Mein rechtes Bein tut weh.","My right leg hurts."],
+ ["der Durst","thirst","तिर्खा","Nach dem Sport habe ich Durst.","I am thirsty after exercising."],
+ ["die Geschwister","siblings","दाजुभाइ दिदीबहिनी","Ich habe zwei Geschwister.","I have two siblings."],
+ ["der Herd","cooker / stove","चुलो","Der Herd steht in der Küche.","The stove is in the kitchen."],
+ ["der Herr","Mr. / gentleman","श्री / महोदय","Herr Müller arbeitet heute.","Mr Müller is working today."]
+ ]},
+ {id:"full-audit-conversation",title:"💬 Extra common A1 expressions",items:[
+ ["also","so / well / therefore","त्यसो भए / अर्थात्","Also, wir beginnen jetzt.","Well, we are starting now."],
+ ["durch","through","हुँदै / भित्रबाट","Wir gehen durch den Park.","We are walking through the park."],
+ ["glücklich","happy","खुसी","Heute bin ich sehr glücklich.","I am very happy today."],
+ ["gültig","valid","मान्य","Mein Ticket ist noch gültig.","My ticket is still valid."],
+ ["hell","bright / light","उज्यालो","Das Zimmer ist hell.","The room is bright."],
+ ["das Hähnchen","chicken (food)","कुखुराको मासु","Ich esse heute Hähnchen mit Reis.","I am eating chicken with rice today."],
+ ["das Gespräch","conversation / meeting","कुराकानी","Das Gespräch beginnt um zehn Uhr.","The conversation begins at ten."],
+ ["die Großeltern","grandparents","हजुरबुबा र हजुरआमा","Meine Großeltern wohnen in Kathmandu.","My grandparents live in Kathmandu."]
  ]}
  ];
  window.DEUTSCH_A1_ESSENTIALS=groups;

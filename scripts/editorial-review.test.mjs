@@ -8,7 +8,7 @@ try{
  const file=path.join(root,'review.tsv');
  const proc=spawnSync(process.execPath,['scripts/export-editorial-review.mjs','--out',file],{cwd:new URL('..',import.meta.url).pathname,encoding:'utf8'});
  assert.equal(proc.status,0,proc.stderr||'Export process failed');
- const text=fs.readFileSync(file,'utf8').trimEnd();
+ const text=fs.readFileSync(file,'utf8').replace(/\n$/u,'');
  const lines=text.split('\n');
  assert.equal(lines.length,763,'Exactly 762 original study rows plus header');
  const header=lines[0].split('\t');

@@ -28,12 +28,17 @@ const questions=(unit,kind,seed)=> {
  const ordered=shuffle(value.choices.map((label,index)=>({label,index})),unit.id+kind+seed);
  return {text:value.text,prompt:value.question,options:ordered,correct:value.answer};
 };
-const recap=(unit,mistakes,seed)=>{
- const bank=unit.vocab;
- const recent=mistakes.find(x=>x.unitId===unit.id&&x.kind==='vocab'&&bank.some(v=>v.de===x.value));
- const target=bank.find(x=>x.de===recent?.value)||bank[(seed.length+unit.number)%bank.length];
- const alternatives=shuffle(bank.filter(x=>x.de!==target.de),seed+unit.id).slice(0,2);
- return {target,options:shuffle([target,...alternatives],seed+'recap'+unit.id)};
+const recap=(unit,mistakes,seed,units=[unit])=>{
+ const issues=Array.isArray(mistakes)?mistakes:[];
+ const recent=issues.find(x=>x.unitId===unit.id)||issues[0];
+ const related=units.find(u=>u.id===recent?.unitId);
+ if(related&&['listening','reading'].includes(recent.kind)&&related[recent.kind]?.text===recent.value)
+  return {kind:recent.kind,unitId:related.id,value:recent.value,question:questions(related,recent.kind,seed+'review')};
+ const targetUnit=related&&recent.kind==='vocab'&&related.vocab.some(x=>x.de===recent.value)?related:unit;
+ const bank=targetUnit.vocab;
+ const target=bank.find(x=>x.de===recent?.value)||bank[(seed.length+targetUnit.number)%bank.length];
+ const alternatives=shuffle(bank.filter(x=>x.de!==target.de),seed+targetUnit.id).slice(0,2);
+ return {kind:'vocab',unitId:targetUnit.id,value:target.de,target,options:shuffle([target,...alternatives],seed+'recap'+targetUnit.id)};
 };
 function normalizeSession(units,course,session,date=today()){
  const next=selectUnit(units,course);

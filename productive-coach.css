@@ -27,5 +27,23 @@ html[data-theme="light"] .productive-turn{background:#e9f3f8;border-color:#b6d0d
 html[data-theme="light"] .productive-transcript,html[data-theme="light"] .productive-example{background:#fff;border-color:#6aad79}
 html[data-theme="light"] .productive-btn{background:#fff;color:#234057;border-color:#95b3c6}
 html[data-theme="light"] .productive-primary{background:#2f6d36;color:#fff;border-color:#2f6d36}
+.productive-language-hints{margin:16px 0;padding:13px;border:1px solid #7196a9;border-radius:10px;background:#102f42}
+.productive-language-hints h6{font-size:14px;line-height:1.5;margin:0 0 9px}
+.productive-hint-list{padding-left:22px;margin:8px 0}
+.productive-hint-item{line-height:1.6;font-size:13px;margin:12px 0}
+.productive-hint-item strong{font-weight:750}
+.productive-hint-ne{font-family:system-ui,"Noto Sans Devanagari",sans-serif;margin:4px 0;color:#d6e8ee}
+.productive-hint-example{font-weight:750;font-size:15px;margin:5px 0;color:#dbf8ba}
+.productive-hint-empty{font-size:13px;line-height:1.6;color:#d1e3ec}
+html[data-theme="light"] .productive-language-hints{background:#e8f4f8;border-color:#afced9}
+html[data-theme="light"] .productive-hint-ne,html[data-theme="light"] .productive-hint-empty{color:#4c6277}
+html[data-theme="light"] .productive-hint-example{color:#21653a}
+.a1-official-audio{border:1px solid #729eb5;padding:14px;border-radius:12px;background:#142e43;margin:12px 0 17px}
+.a1-official-audio strong{font-size:15px}
+.a1-official-audio p{font-size:13px;line-height:1.65}
+.a1-official-audio a{font-size:13px;color:#d1f4af;font-weight:750;text-decoration:underline;display:inline-block;line-height:1.5}
+.a1-official-audio a:focus-visible{outline:3px solid #b9e6ff;outline-offset:3px}
+html[data-theme="light"] .a1-official-audio{background:#eef8fd;border-color:#b3ccdc}
+html[data-theme="light"] .a1-official-audio a{color:#1d683c}
 @media(max-width:650px){.productive-writing,.productive-speaking,.productive-turn{padding:12px}.productive-actions>*{flex:1 1 125px}}
 @media(prefers-reduced-motion:reduce){.productive-writing *,.productive-speaking *{animation:none!important;transition:none!important}}

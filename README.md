@@ -57,3 +57,13 @@ Use a local development web server (e.g. VS Code's Live Server extension).
 ## Free use
 
 This starter app may be modified for your personal learning or deployed to your own GitHub Pages repository.
+
+## Translation behavior (v2)
+
+- Built-in common phrases and alphabet letters work offline.
+- Other input is translated using MyMemory when connected to the internet. The service has quotas and may be unavailable.
+- Successful online German translations are **automatically saved on this device** (up to 250 recent items) and shown in **Recent translations** for reuse offline. The Nepali meaning is added when available.
+- An unchanged English response is rejected rather than displayed as German, except for a short allowlist of words spelled identically in both languages. This is a safety check, not a guarantee of translation quality.
+- When the translator fails, the app displays a clear error and a **Try again** button.
+- English and Nepali pronunciation guides for newly translated text are approximate; device speech synthesis is best for listening.
+- No backend, login or account is required; translations and favorites are stored in the local browser only. Clearing browser data may remove them. Inputs sent for online translation are handled by a third-party service.

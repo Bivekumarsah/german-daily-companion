@@ -61,7 +61,7 @@ const dialogues={
  'a1-mock-2':[
   {title:'Introduce yourself and spell a name',turns:[
    ['Wie heißen Sie?','What is your name?','तपाईंको नाम के हो?','Ich heiße Suman Sharma.'],
-   ['Können Sie Ihren Nachnamen bitte buchstabieren?','Could you spell your surname, please?','कृपया आफ्नो थरको हिज्जे भन्नुहुन्छ?','S-C-H-A-R-M-A.'],
+   ['Können Sie Ihren Nachnamen bitte buchstabieren?','Could you spell your surname, please?','कृपया आफ्नो थरको हिज्जे भन्नुहुन्छ?','S-H-A-R-M-A.'],
    ['Wie alt sind Sie?','How old are you?','तपाईं कति वर्षको हुनुहुन्छ?','Ich bin vierundzwanzig Jahre alt.']
   ]},
   {title:'Buy a notebook',turns:[

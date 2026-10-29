@@ -15,6 +15,7 @@
 <link href="pronunciation-lab.css" rel="stylesheet"/>
 <link href="a1-mock.css" rel="stylesheet"/>
 <link href="a1-themes.css" rel="stylesheet"/>
+<link href="a1-bridge.css" rel="stylesheet"/>
 <script defer="" src="phrases.js"></script>
 <script defer="" src="lessons.js"></script>
 <script defer="" src="a1-course-data.js"></script>
@@ -28,6 +29,9 @@
 <script defer="" src="a1-mock.js"></script>
 <script defer="" src="a1-themes-data.js"></script>
 <script defer="" src="a1-themes.js"></script>
+<script defer="" src="a1-essentials-data.js"></script>
+<script defer="" src="a1-grammar-bridge-data.js"></script>
+<script defer="" src="a1-bridge.js"></script>
 <script defer="" src="a1-course.js"></script>
 <script defer="" src="app.js"></script>
 <script defer="" src="academy.js"></script></head>
@@ -98,6 +102,7 @@ DeutschDaily is a self-study aid. Practice completion and automatic multiple-cho
 <div><span class="eyebrow">YOUR NEXT 10 MINUTES</span><h3 id="a1ContinueTitle">Choose your next A1 lesson</h3><p class="subtle" id="a1ContinueStatus">See a picture · Hear German · Practise a sentence · Check what you remember</p></div>
 <button class="primary-btn" id="a1Continue" type="button">Continue learning →</button>
 </div>
+<details class="a1-bridge-studio" id="a1GrammarBridgeStudio"><summary>🧠 A1 Grammar Clinic · 12 quick workshops</summary><p class="a1-bridge-intro">Short explanations in English and नेपाली, 36 original mini-challenges, real-life German sentences and tap-to-hear speech. These workshops complement your original 36 units.</p><div id="a1GrammarBridgeRoot"></div></details>
 <div class="a1-toolbar"><label for="a1Filter">Topics <select class="a1-control" id="a1Filter"></select></label><label for="a1Search">Find a unit <input class="a1-control" id="a1Search" placeholder="e.g. family, verbs, booking" type="search"/></label></div>
 <div class="a1-unit-grid" id="a1UnitGrid"></div><p class="subtle" hidden="" id="a1EmptySearch">No units match. Try another search.</p>
 <div class="mini-panel a1-workspace" hidden="" id="a1Workspace">
@@ -110,6 +115,7 @@ DeutschDaily is a self-study aid. Practice completion and automatic multiple-cho
 </section>
 <section aria-labelledby="a1ReviewHeading" class="lower-section a1-review-section academy-view" data-academy-view="vocabulary" id="a1review">
 <div class="lower-heading"><div><span class="eyebrow">ACTIVE RECALL · OFFLINE VOCABULARY</span><h2 id="a1ReviewHeading">Remember the words, not just the lesson.</h2></div><p>Practice vocabulary with simple spaced repetition. Again, Good and Easy schedule words for later review on this device.</p></div>
+<details class="a1-bridge-studio" id="a1EssentialsStudio"><summary>💬 Essential German · verbs, connectors and useful phrases</summary><p class="a1-bridge-intro">72 English–German–नेपाली study cards in nine everyday categories, with example sentences and quick listening and recall exercises. A supplement to your current vocabulary; exact Goethe word-list matching is still under editorial review.</p><div id="a1EssentialsRoot"></div></details>
 <div class="a1-theme-studio" aria-labelledby="a1ThemesHeading"><h3 id="a1ThemesHeading">Explore ten everyday vocabulary themes</h3><p class="subtle">100 original bilingual entries with German noun articles, plural forms, tap-to-hear practice, and short quizzes. These supplement the existing 36 lessons; official Goethe word-list coverage is still being audited.</p><div id="a1ThemesRoot"></div></div>
 <div class="mini-panel a1-review-panel"><p class="subtle" id="a1ReviewStatus" role="status">Preparing your vocabulary cards…</p>
 <div id="a1ReviewCard"><span class="eyebrow">SAY THE GERMAN WORD</span><div class="a1-review-word" id="a1ReviewWord" lang="de"></div>

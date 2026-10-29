@@ -84,3 +84,20 @@ html[data-theme="light"] .visual-lab-meaning p,html[data-theme="light"] .visual-
 html[data-theme="light"] .visual-lab-small-btn{background:#f4f8fb;border-color:#9fb9ce;color:#172a40}
 html[data-theme="light"] .visual-lab-small-btn:hover{background:#e0ecf5}
 @media(max-width:550px){.visual-lab-story{padding:12px}.visual-lab-turn{max-width:100%;padding:12px}.visual-lab-sentence{font-size:17px}.visual-lab-story-head{align-items:flex-start;flex-direction:column}}
+
+/* Progressive three-round ear training; transcripts are shown only after the learner answers. */
+.visual-lab-ear-help{font-size:11px;color:#c9d9e8;line-height:1.65;margin:0 0 12px}
+.visual-lab-ear-progress{font-size:13px;font-weight:800;color:#c7f783;margin:11px 0 12px}
+.visual-lab-ear-reveal{border-left:3px solid #bce783;background:#102f40;border-radius:10px;padding:14px;margin:13px 0 0}
+.visual-lab-ear-german{display:block;font-size:20px;color:#fff;line-height:1.45}
+.visual-lab-ear-reveal p{font-size:14px;margin:8px 0;line-height:1.6;color:#dce9f9}
+.visual-lab-ear-reveal small{display:block;font-size:11px;color:#c3d5e9;line-height:1.7}
+.visual-lab-ear-next{width:100%;min-height:48px;margin-top:13px}
+.visual-lab-ears .visual-lab-option{min-height:48px}
+.visual-lab-ears .visual-lab-option:focus-visible,.visual-lab-ear-next:focus-visible{outline:3px solid #a4d7ff;outline-offset:3px}
+html[data-theme="light"] .visual-lab-ear-progress{color:#286b22}
+html[data-theme="light"] .visual-lab-ear-help{color:#485d6c}
+html[data-theme="light"] .visual-lab-ear-reveal{background:#fff;border-color:#4f9763}
+html[data-theme="light"] .visual-lab-ear-german{color:#163824}
+html[data-theme="light"] .visual-lab-ear-reveal p,html[data-theme="light"] .visual-lab-ear-reveal small{color:#425b66}
+@media(max-width:600px){.visual-lab-ear-reveal{padding:12px}.visual-lab-ears .visual-lab-options{display:grid;grid-template-columns:1fr}.visual-lab-ear-next{width:100%}}

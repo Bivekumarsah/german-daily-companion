@@ -27,7 +27,7 @@ class FakeNode {
 }
 const mock={window:{},document:{createElement:tag=>new FakeNode(tag)}};
 vm.createContext(mock);
-for(const filename of ['a1-course-data.js','visual-stories.js','visual-lab.js'])
+for(const filename of ['a1-course-data.js','visual-stories.js','listening-lab.js','visual-lab.js'])
   vm.runInContext(read(filename),mock,{filename});
 const scenes=mock.window.DEUTSCH_VISUAL_LAB.scenes;
 const stories=mock.window.DEUTSCH_VISUAL_STORIES;

@@ -163,6 +163,56 @@
  ["der Opa","grandfather (informal)","हजुरबुबा","Mein Opa hört gern Musik.","My grandfather likes listening to music."],
  ["der Fuß","foot","खुट्टा","Mein rechter Fuß tut weh.","My right foot hurts."],
  ["der Mund","mouth","मुख","Öffnen Sie bitte den Mund.","Please open your mouth."]
+ ]},
+ {id:"official-small-words-2",title:"🔗 Connectors and essential little words",items:[
+ ["ab","from (time or place)","बाट / देखि","Ab morgen habe ich Urlaub.","I am on holiday from tomorrow."],
+ ["allein","alone","एक्लै","Ich wohne allein in Berlin.","I live alone in Berlin."],
+ ["anmachen","to switch on","खोल्नु / चालु गर्नु","Kannst du bitte die Lampe anmachen?","Can you switch on the lamp, please?"],
+ ["ausmachen","to switch off","बन्द गर्नु","Ich mache das Radio aus.","I switch off the radio."],
+ ["danken","to thank","धन्यवाद दिनु","Ich danke dir für deine Hilfe.","I thank you for your help."],
+ ["dann","then","त्यसपछि","Wir essen und dann gehen wir spazieren.","We eat and then go for a walk."],
+ ["dich","you (informal accusative)","तिमीलाई (कर्मकारक)","Ich kenne dich aus dem Kurs.","I know you from the course."],
+ ["dir","to you (informal dative)","तिमीलाई (दातिव)","Ich gebe dir das Buch.","I give you the book."]
+ ]},
+ {id:"official-place-2",title:"🏘️ People, surroundings and location",items:[
+ ["das Dorf","village","गाउँ","Meine Oma lebt in einem kleinen Dorf.","My grandmother lives in a small village."],
+ ["draußen","outside","बाहिर","Die Kinder spielen draußen.","The children are playing outside."],
+ ["das Foto","photo","फोटो","Auf dem Foto ist meine Familie.","My family is in the photo."],
+ ["die Frau","woman / wife / Ms.","महिला / श्रीमती","Die Frau wartet auf den Bus.","The woman is waiting for the bus."],
+ ["hier","here","यहाँ","Ich wohne hier in der Nähe.","I live near here."],
+ ["in","in / into","मा / भित्र","Meine Schlüssel sind in der Tasche.","My keys are in the bag."],
+ ["leben","to live","जीवन बिताउनु / बस्नु","Meine Eltern leben in Nepal.","My parents live in Nepal."],
+ ["das Licht","light","बत्ती / प्रकाश","Im Zimmer ist das Licht an.","The light is on in the room."]
+ ]},
+ {id:"official-everyday-2",title:"☕ Conversations and everyday situations",items:[
+ ["man","one / people (impersonal)","सामान्य रूपमा मानिसहरू","Hier kann man gut essen.","You can eat well here."],
+ ["mehr","more","अझ बढी","Möchten Sie noch mehr Wasser?","Would you like more water?"],
+ ["möchten","would like","चाहनु (विनम्र रूपमा)","Ich möchte ein Glas Wasser.","I would like a glass of water."],
+ ["mögen","to like","मन पराउनु","Ich mag Musik.","I like music."],
+ ["rauchen","to smoke","धूमपान गर्नु","Meine Freunde rauchen nicht.","My friends do not smoke."],
+ ["das Restaurant","restaurant","रेस्टुरेन्ट","Das Restaurant ist heute geöffnet.","The restaurant is open today."],
+ ["richtig","correct / right","सही","Deine Antwort ist richtig.","Your answer is correct."],
+ ["der Schuh","shoe (singular)","जुत्ता (एकवचन)","Wo ist mein linker Schuh?","Where is my left shoe?"]
+ ]},
+ {id:"official-family-grammar-2",title:"👨‍👩‍👧 Family, actions and descriptions",items:[
+ ["der Sohn","son","छोरा","Mein Sohn ist neun Jahre alt.","My son is nine years old."],
+ ["tun","to do","गर्नु","Was kann ich für Sie tun?","What can I do for you?"],
+ ["über","over / about","माथि / बारेमा","Wir sprechen über den Kurs.","We are talking about the course."],
+ ["verkaufen","to sell","बेच्नु","Sie verkauft Gemüse auf dem Markt.","She sells vegetables at the market."],
+ ["verheiratet","married","विवाहित","Meine Schwester ist verheiratet.","My sister is married."],
+ ["vor","in front of / before","अगाडि / पहिले","Der Bus hält vor der Schule.","The bus stops in front of the school."],
+ ["weiblich","female (on forms)","महिला (फारममा)","Im Formular steht weiblich.","The form says female."],
+ ["werden","to become","बन्नु","Ich möchte Lehrer werden.","I would like to become a teacher."]
+ ]},
+ {id:"official-forms-travel-2",title:"🪪 Essential forms and travel",items:[
+ ["willkommen","welcome","स्वागत छ","Herzlich willkommen in unserer Schule!","A warm welcome to our school!"],
+ ["wir","we","हामी","Wir lernen heute Deutsch.","We are learning German today."],
+ ["wissen","to know (a fact)","थाहा हुनु","Ich weiß seine Telefonnummer nicht.","I do not know his phone number."],
+ ["die Zeit","time","समय","Hast du heute Zeit?","Do you have time today?"],
+ ["zwischen","between","बीचमा","Die Bank liegt zwischen dem Kino und dem Hotel.","The bank is between the cinema and the hotel."],
+ ["der Ausweis","identity card / ID","परिचयपत्र","Ich zeige meinen Ausweis am Schalter.","I show my ID at the counter."],
+ ["das Auto","car","कार / गाडी","Unser Auto ist alt.","Our car is old."],
+ ["der Urlaub","holiday / vacation","बिदा / छुट्टी","Im Urlaub besuche ich meine Familie.","On holiday I visit my family."]
  ]}
  ];
  window.DEUTSCH_A1_ESSENTIALS=groups;

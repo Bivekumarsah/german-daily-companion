@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101729">
+  <meta name="description" content="A friendly English to German and Nepali speaking companion: translate, listen, save and practice every day.">
+  <title>DeutschDaily — English · Deutsch · नेपाली</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="phrases.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="DeutschDaily home"><span class="brand-mark">D<span>.</span></span><span class="brand-name">DeutschDaily<small>Speak a little, every day.</small></span></a>
+      <nav aria-label="Main navigation" class="main-nav"><a href="#translator">Translator</a><a href="#practice">Practice</a><a href="#alphabet">Alphabet</a></nav>
+      <span class="offline-indicator" id="connection"><i aria-hidden="true"></i> Checking…</span>
+    </header>
+
+    <main id="home">
+      <section class="intro" aria-labelledby="intro-title">
+        <div><div class="eyebrow"><span class="star">✦</span> YOUR EVERYDAY LANGUAGE COMPANION</div><h1 id="intro-title">From English to <em>Deutsch.</em><br>With Nepali by your side.</h1><p>Type anything in English, learn the German, understand it in नेपाली and hear how it sounds.</p></div>
+        <div class="hero-stats" aria-label="Learning features"><div><strong>3</strong><small>Languages</small></div><div><strong>2</strong><small>Speaking speeds</small></div><div><strong>∞</strong><small>Daily practice</small></div></div>
+      </section>
+
+      <section id="translator" class="translator-grid" aria-label="English German Nepali translator">
+        <div class="panel input-panel">
+          <div class="panel-top"><div class="section-heading"><span class="step-num">01</span><div><h2>Start with English</h2><p>Letters, words or complete sentences</p></div></div><span class="mini-tag">EN → DE + NE</span></div>
+          <label for="englishInput" class="field-label">YOUR ENGLISH</label>
+          <textarea id="englishInput" rows="5" maxlength="450" spellcheck="true" placeholder="e.g. What is your name?" aria-describedby="inputHelp"></textarea>
+          <div class="input-tools"><span id="inputHelp">Translation starts when you finish typing.</span><button class="tiny-button" id="clearInput" type="button">Clear ×</button></div>
+          <div class="divider"></div>
+          <div class="field-label">TRY A PHRASE</div>
+          <div class="chip-list" id="suggestions"><button class="chip" data-phrase="How are you?">How are you?</button><button class="chip" data-phrase="What is your name?">What is your name?</button><button class="chip" data-phrase="Good morning">Good morning</button><button class="chip" data-phrase="I am learning German">I am learning German</button><button class="chip" data-phrase="Where is the train station?">Where is the train station?</button></div>
+          <div class="notice"><span aria-hidden="true">✳</span><span>Common phrases work offline. New translations use a free online service when available.</span></div>
+        </div>
+
+        <div class="panel result-panel" aria-live="polite" aria-atomic="false">
+          <div class="panel-top"><div class="section-heading"><span class="step-num green">02</span><div><h2>Your translation</h2><p>See it. Hear it. Remember it.</p></div></div><span class="result-state" id="resultStatus">READY</span></div>
+          <div id="resultContent" hidden>
+            <div class="translation-label"><span class="flag">🇩🇪</span> GERMAN <button type="button" class="icon-btn" id="copyGerman" aria-label="Copy German translation" title="Copy German">⧉ Copy</button></div>
+            <div class="german-output" id="germanOutput" lang="de"></div>
+            <div class="word-strip" id="wordStrip" aria-label="Tap individual German words to hear them"></div>
+            <div class="audio-actions"><button class="primary-btn" id="speakGerman" type="button">🔊 &nbsp; Listen in German</button><button class="secondary-btn" id="slowGerman" type="button">◷ &nbsp; Slow</button><button class="secondary-btn square" id="savePhrase" type="button" aria-label="Save to favorites" aria-pressed="false">♡</button></div>
+            <div class="result-divider"></div>
+            <div class="translation-label">🔤 EASY PRONUNCIATION <span class="small-note">Approximate guide</span></div>
+            <div class="pronunciation" id="pronEnglish"></div>
+            <div class="translation-label second-label">🇳🇵 नेपाली उच्चारण <span class="small-note">अनुमानित</span></div>
+            <div class="pronunciation nepali" id="pronNepali" lang="ne"></div>
+            <div class="result-divider"></div>
+            <div class="translation-label">🇳🇵 NEPALI MEANING</div>
+            <div class="nepali-meaning" id="nepaliOutput" lang="ne"></div>
+            <div class="translation-foot" id="translationSource"></div>
+          </div>
+          <div id="emptyResult" class="empty-result"><div class="empty-illustration">Aa <span>→</span> Ää</div><h3>Every word is progress.</h3><p>Type a sentence on the left, or select a sample phrase to begin.</p></div>
+        </div>
+      </section>
+
+      <section id="practice" class="lower-section" aria-labelledby="practice-title"><div class="lower-heading"><div><span class="eyebrow">A LITTLE PRACTICE GOES A LONG WAY</span><h2 id="practice-title">Make it a daily habit.</h2></div><p>Your progress is stored on this device, no sign-in needed.</p></div>
+        <div class="practice-grid">
+          <article class="mini-panel daily-card"><div class="card-title"><span class="card-icon">✦</span><h3>Daily flashcard</h3><span class="mini-tag">OFFLINE</span></div><div class="flashcard" id="flashcard"><div class="flash-label">TRANSLATE THIS INTO GERMAN</div><div id="flashEnglish" class="flash-english"></div><div id="flashReveal" class="flash-reveal" hidden><strong id="flashGerman" lang="de"></strong><div id="flashNepali" lang="ne"></div><div class="flash-pron" id="flashPron"></div></div></div><div class="flash-buttons"><button class="secondary-btn" id="revealFlash" type="button">Show answer</button><button class="primary-btn" id="nextFlash" type="button">Next phrase →</button><button class="icon-btn" id="speakFlash" aria-label="Hear flashcard in German" type="button">🔊</button></div></article>
+          <article class="mini-panel saved-card"><div class="card-title"><span class="card-icon purple">♡</span><h3>Saved phrases</h3><span class="counter" id="savedCount">0</span></div><p class="subtle">Save useful translations and practice them any time.</p><div class="saved-list" id="savedList"></div></article>
+        </div>
+      </section>
+
+      <section id="alphabet" class="alphabet-section" aria-labelledby="alphabet-title"><div class="lower-heading"><div><span class="eyebrow">FIRST STEPS</span><h2 id="alphabet-title">German alphabet, one tap at a time.</h2></div><p>Tap a letter to hear its German name. Includes Ä, Ö, Ü and ß.</p></div><div id="alphabetGrid" class="alphabet-grid"></div></section>
+    </main>
+    <footer><div><strong>DeutschDaily</strong> <span>· English → German → नेपाली</span></div><span>Free personal learning tool · Translations and pronunciation guides may need checking.</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

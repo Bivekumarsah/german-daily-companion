@@ -35,6 +35,8 @@ The real **Goethe-Zertifikat A1: Start Deutsch 1** exam has four parts (the dura
 1. [Goethe-Institut — Goethe-Zertifikat A1: Start Deutsch 1 official exam description](https://www.goethe.de/ins/de/en/prf/gzsd1.cfm). Exam skill categories, purpose and general scope. © Goethe-Institut for its own website, exam materials and marks.
 2. [Goethe-Institut — official, free A1 model exercises, authentic audio, speaking videos, and vocabulary reference](https://www.goethe.de/en/spr/prf/ueb/pa1.html). **Use these for formal exam preparation.** Linked, not embedded or republished.
 3. [Council of Europe — CEFR descriptors](https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-descriptors-search). Publicly described A1 can-do competence areas. CEFR terminology attributed to the Council of Europe.
+4. [Goethe-Institut — free online pronunciation training](https://www.goethe.de/en/spr/ueb/ast.html). Optional professional pronunciation exercises and feedback, linked but not republished.
+5. [Deutsche Welle — German alphabet and pronunciation](https://www.dw.com/downloads/26294179/lektion1-learner-pronunciation.pdf). Reference on umlauts, diphthongs and ß; original copyrights remain with the source.
 
 **Attribution notice:** DeutschDaily is an independent application and is **not affiliated with, endorsed by or certified by Goethe-Institut or the Council of Europe**. "Goethe-Zertifikat" is used descriptively to identify the external examination and link to its official resources. Course examples and exercises are original DeutschDaily content. Official Goethe material remains on Goethe's own website under its own terms.
 

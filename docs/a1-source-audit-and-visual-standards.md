@@ -43,8 +43,8 @@ Every beginner module should follow **see → hear → say → choose → use �
 9. **Sources credited**, original explanations and examples, no unauthorized copying from PDFs or Goethe test content.
 
 ## Incremental implementation
-- **Stage 1 (this branch)**: self-contained, dependency-free `visual-lab.js` and `visual-lab.css` integrated with the existing A1 vocabulary tab for eight selected beginner contexts. Each contains three illustrated emoji word cards with audio and a three-round picture-to-German challenge. The current 36 lessons, progress rules and translator remain in place.
-- **Stage 2**: after terminology/proficiency review, extend to remaining core topics, add word-level vetted phonetics and original licensed picture assets, plus guided dialogues.
+- **Stage 1 (this branch)**: dependency-free `visual-stories.js`, `visual-lab.js`, and `visual-lab.css` integrated with the existing A1 vocabulary tab for 12 beginner contexts (alphabet, greetings, introductions, numbers, time, family, home, questions, food, clothes, transport, health). Each contains three original emoji-based word cards, six-language-field pronunciation/meaning support, a short three-turn everyday conversation with normal and slow audio, hide/reveal meanings, and a three-round replayable picture-to-German challenge. Dialogue panels collapse to reduce scrolling. The existing 36 units, progress keys, translator, pronunciation features, and offline functions remain in place. GitHub Actions runs the baseline checks and a simulated-DOM interaction test.
+- **Stage 2**: extend to remaining core topics after editorial review, add a vetted word-level pronunciation guide for all vocabulary, original illustrations and structured listening/speaking tasks. Curated pronunciation is approximate, not phonetic certification.
 - **Stage 3**: draft the proposed 12-module / 48-lesson curriculum by mapping existing unit IDs and creating new incremental lesson modules. Add spaced review and stronger four-skill practice.
 - **Stage 4**: original full-length exam-style tests and skill diagnostics. Continue linking to officially provided Goethe exam materials rather than copying them.
 

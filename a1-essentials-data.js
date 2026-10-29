@@ -263,6 +263,16 @@
  ["das Hähnchen","chicken (food)","कुखुराको मासु","Ich esse heute Hähnchen mit Reis.","I am eating chicken with rice today."],
  ["das Gespräch","conversation / meeting","कुराकानी","Das Gespräch beginnt um zehn Uhr.","The conversation begins at ten."],
  ["die Großeltern","grandparents","हजुरबुबा र हजुरआमा","Meine Großeltern wohnen in Kathmandu.","My grandparents live in Kathmandu."]
+ ]},
+ {id:"full-audit-meaning-variants",title:"📖 Same word, different meaning or form",items:[
+ ["die Bitte","request / plea","अनुरोध","Ich habe eine Bitte: Helfen Sie mir bitte.","I have a request: Please help me."],
+ ["das Leben","life","जीवन","Das Leben in meiner Stadt ist schön.","Life in my city is beautiful."],
+ ["sich treffen","to meet (each other)","एकअर्कालाई भेट्नु","Wir treffen uns morgen im Park.","We are meeting in the park tomorrow."],
+ ["sich vorstellen","to introduce oneself","आफ्नो परिचय दिनु","Ich stelle mich kurz vor: Ich heiße Anil.","Let me introduce myself briefly: My name is Anil."],
+ ["die Entschuldigung","apology / excuse","माफी / क्षमायाचना","Entschuldigung! Wo ist die Post?","Excuse me! Where is the post office?"],
+ ["sich duschen","to shower oneself","नुहाउनु","Ich dusche mich jeden Morgen.","I take a shower every morning."],
+ ["das Angebot","offer / special deal","प्रस्ताव / विशेष छुट","Das Angebot gilt nur heute.","The offer is valid only today."],
+ ["der Anfang","beginning","सुरुवात","Am Anfang ist alles neu.","At the beginning, everything is new."]
  ]}
  ];
  window.DEUTSCH_A1_ESSENTIALS=groups;

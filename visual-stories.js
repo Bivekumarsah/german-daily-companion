@@ -3,6 +3,34 @@
   'use strict';
   // speaker, German, English, Nepali meaning, approximate English sounds, approximate Nepali sounds
   const dialogues = {
+    'a1-01': {
+      scene:'🔤 Saying your name', goal:'Hear and practise a first introduction.',
+      turns:[
+        ['Eva','Wie heißt du?','What is your name?','तिम्रो नाम के हो?','vee HYST doo','वी हाइस्ट डू'],
+        ['Mia','Ich heiße Mia.','My name is Mia.','मेरो नाम मिया हो।','ikh HAI-suh MEE-ah','इख हाइसे मिया'],
+        ['Eva','Hallo, Mia!','Hello, Mia!','नमस्ते, मिया!','HAH-loh MEE-ah','हालो मिया']
+      ]},
+    'a1-03': {
+      scene:'🌍 Meeting someone new', goal:'Say your name and country.',
+      turns:[
+        ['Lea','Hallo! Ich heiße Lea.','Hello! My name is Lea.','नमस्ते! मेरो नाम लिया हो।','HAH-loh ikh HAI-suh LAY-ah','हालो इख हाइसे लिया'],
+        ['Tom','Woher kommst du?','Where do you come from?','तिमी कहाँबाट आएका हौ?','voh-HAIR KOMST doo','वोहेअर कोम्स्ट डू'],
+        ['Lea','Ich komme aus Nepal.','I come from Nepal.','म नेपालबाट आएको हुँ।','ikh KOM-uh ows neh-PAHL','इख कोमे आउस नेपाल']
+      ]},
+    'a1-06': {
+      scene:'🕘 Planning a meeting', goal:'Understand a day and a clock time.',
+      turns:[
+        ['Mira','Wann ist der Termin?','When is the appointment?','भेटघाट कहिले हो?','vahn ist dair tair-MEEN','वान इस्ट डेअर टेर्मिन'],
+        ['Paul','Am Montag um neun Uhr.','On Monday at nine o’clock.','सोमबार नौ बजे।','ahm MOHN-tahk oom NOYN oor','आम मोन्टाग उम नोइन ऊर'],
+        ['Mira','Danke. Bis Montag!','Thanks. See you Monday!','धन्यवाद। सोमबार भेटौँला!','DAHN-kuh. biss MOHN-tahk','डान्के। बिस मोन्टाग']
+      ]},
+    'a1-14': {
+      scene:'🏫 Finding a place', goal:'Ask a useful where-question.',
+      turns:[
+        ['Nina','Entschuldigung. Wo ist die Schule?','Excuse me. Where is the school?','माफ गर्नुहोस्। विद्यालय कहाँ छ?','ent-SHOOL-dee-goong. voh ist dee SHOO-luh','एन्टशुल्डिगुङ। वो इस्ट डी शुले'],
+        ['Tom','Die Schule ist hier.','The school is here.','विद्यालय यहाँ छ।','dee SHOO-luh ist HEER','डी शुले इस्ट हीर'],
+        ['Nina','Vielen Dank!','Thank you very much!','धेरै धन्यवाद!','FEE-len DAHNK','फीलन डान्क']
+      ]},
     'a1-02': {
       scene:'👋 Meeting a friend', goal:'Greet someone and ask how they are.',
       turns:[

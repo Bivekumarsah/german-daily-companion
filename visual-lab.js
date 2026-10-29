@@ -58,7 +58,7 @@
     wrap.setAttribute('aria-label','See, hear and practise German words');
     wrap.append(el('p','visual-lab-eyebrow','LOOK • LISTEN • REMEMBER'));
     wrap.append(el('h4','visual-lab-title',scene.title));
-    wrap.append(el('p','visual-lab-intro','Tap a picture to hear German. Learn it in English and नेपाली, then try a three-picture challenge.'));
+    wrap.append(el('p','visual-lab-intro','See the picture, hear the German, practise a short conversation, then solve a three-picture challenge.'));
     const cards=el('div','visual-lab-cards');
     for(const [emoji,de,en,ne,phonetic,nephonetic] of scene.items){
       const button=el('button','visual-lab-card');
@@ -74,6 +74,47 @@
       cards.append(button);
     }
     wrap.append(cards);
+    wrap.append(el('p','visual-lab-caveat','English and Nepali sound guides are approximations. The German audio is provided by your device, not by a recorded native speaker.'));
+    // A short everyday conversation connects memorised words to real A1 communication.
+    const dialogue=window.DEUTSCH_VISUAL_STORIES?.[unit.id];
+    if(dialogue?.turns?.length){
+      const story=el('section','visual-lab-story');
+      story.setAttribute('aria-label','Learn a short German conversation');
+      const storyTop=el('div','visual-lab-story-head');
+      storyTop.append(el('span','visual-lab-story-scene',dialogue.scene),el('strong','visual-lab-story-goal',dialogue.goal));
+      story.append(storyTop,el('p','visual-lab-story-tip','Listen to each speaker. Hide the translation and try to understand before looking again.'));
+      const conversation=el('ol','visual-lab-conversation');
+      for(const [person,de,en,ne,phonetic,nephonetic] of dialogue.turns){
+        const turn=el('li','visual-lab-turn');
+        const who=el('span','visual-lab-speaker',person);
+        const spoken=el('p','visual-lab-sentence',de);
+        spoken.lang='de';
+        const meaning=el('div','visual-lab-meaning');
+        meaning.append(el('p','',en),el('p','',ne),el('small','',phonetic+' · '+nephonetic));
+        const controls=el('div','visual-lab-turn-actions');
+        const listen=el('button','visual-lab-small-btn','🔊 Listen');
+        listen.type='button';
+        listen.setAttribute('aria-label','Listen to '+person+': '+de);
+        listen.addEventListener('click',()=>speak(de,false));
+        const slow=el('button','visual-lab-small-btn','◷ Slow');
+        slow.type='button';
+        slow.setAttribute('aria-label','Hear '+person+' slowly: '+de);
+        slow.addEventListener('click',()=>speak(de,true));
+        const toggle=el('button','visual-lab-small-btn','Hide meaning');
+        toggle.type='button';
+        toggle.setAttribute('aria-expanded','true');
+        toggle.addEventListener('click',()=>{
+          meaning.hidden=!meaning.hidden;
+          toggle.textContent=meaning.hidden?'Show meaning':'Hide meaning';
+          toggle.setAttribute('aria-expanded',String(!meaning.hidden));
+        });
+        controls.append(listen,slow,toggle);
+        turn.append(who,spoken,meaning,controls);
+        conversation.append(turn);
+      }
+      story.append(conversation);
+      wrap.append(story);
+    }
     const practice=el('div','visual-lab-practice');
     const title=el('h5','visual-lab-practice-title','Picture challenge');
     const cue=el('p','visual-lab-question');
@@ -86,48 +127,66 @@
     next.hidden=true;
     practice.append(title,cue,options,feedback,next);
     wrap.append(practice);
-    let round=0;
+    let round=0,firstTry=0,misclicked=false;
     const items=scene.items;
     function question(){
       next.hidden=true;
       options.replaceChildren();
       feedback.textContent='';
+      misclicked=false;
       const [emoji,de,en,ne]=items[round];
       title.textContent='Picture challenge · '+(round+1)+' of '+items.length;
       cue.replaceChildren();
-      cue.append(el('span','visual-lab-cue-icon',emoji),el('span','', 'Tap the German for '+en+' ('+ne+').'));
-      const mixed=[items[2],items[0],items[1]];
+      cue.append(el('span','visual-lab-cue-icon',emoji),el('span','', 'Choose the German for '+en+' ('+ne+').'));
+      // Rotate choices on each round instead of repeating the same answer order.
+      const offset=(round+(Number(unit.number)||0))%items.length;
+      const mixed=items.map((_,i)=>items[(i+offset)%items.length]);
       for(const item of mixed){
         const choice=el('button','visual-lab-option',item[1]);
         choice.type='button';
         choice.lang='de';
         choice.addEventListener('click',()=>{
+          if(choice.disabled)return;
           if(item[1]!==de){
+            misclicked=true;
             feedback.textContent='Not quite. Look at the picture and try another word.';
             choice.classList.add('visual-lab-try-again');
+            choice.disabled=true;
             return;
           }
+          if(!misclicked)firstTry++;
           for(const b of options.children)b.disabled=true;
           choice.classList.add('visual-lab-correct');
-          feedback.textContent='✓ Richtig! '+de+' means '+en+'. You can tap its picture above to listen again.';
-          next.textContent=round===items.length-1?'Finish picture challenge':'Next picture →';
+          feedback.textContent='✓ Richtig! '+de+' means '+en+'. Tap the picture above to listen again.';
+          next.textContent=round===items.length-1?'Finish challenge →':'Next picture →';
           next.hidden=false;
         });
         options.append(choice);
       }
     }
     next.addEventListener('click',()=>{
+      if(round>=items.length){
+        round=0;firstTry=0;question();return;
+      }
       round++;
       if(round<items.length)question();
-      else {
-        title.textContent='✓ Picture challenge complete';
-        cue.textContent='Great practice! Continue with the complete vocabulary below.';
+      else{
+        title.textContent='✓ Picture challenge completed';
+        cue.textContent='You recognised '+firstTry+' of '+items.length+' pictures on the first try.';
         options.replaceChildren();
-        feedback.textContent='These picture checks are practice, not an official exam grade.';
-        next.hidden=true;
+        feedback.textContent='This is practice feedback, not an official Goethe exam score. Review the words and try again whenever you want.';
+        next.textContent='Practise again ↻';
+        next.hidden=false;
       }
     });
     question();
+    const continueBtn=el('button','secondary-btn visual-lab-continue','Continue to all lesson words ↓');
+    continueBtn.type='button';
+    continueBtn.addEventListener('click',()=>{
+      const list=host.querySelector('.a1-vocab-grid');
+      if(list)list.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    wrap.append(continueBtn);
     host.append(wrap);
     return true;
   }

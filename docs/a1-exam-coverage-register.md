@@ -32,6 +32,10 @@ Original, deterministic **offline writing hints** now detect seven specific begi
 
 All six guided roleplays (18 partner turns) now offer optional **on-device audio recording and replay**, a trilingual speaking checklist, and explicit mic-on/mic-off status. Recording requires a tap, never posts audio or stores it in browser storage, and stops/removes in-memory audio on question changes, exam route changes, page hiding or disposal. The separate pronunciation lab's existing microphone handling is unchanged. A new CI script checks the entire local 36-unit bilingual curriculum structure, 100 thematic noun entries, 216 essential expressions, and 12 grammar workshops; it also guards a corrected *Sharma* spelling model. This is **data integrity checking**, not qualified editorial proofreading or a native-speaker pronunciation grade. Chromium mobile-viewport tests include recording controls and accessibility checks, not physical-device mic permission verification.
 
+## Communicative speaking reflection phase (29 October 2026)
+
+Every one of the six roleplay scenes and 18 speaking turns now contains an independently written English/Nepali **communicative objective** and a short German model phrase. Learners can optionally **type their own remembered spoken response**; the app shows previously tested, very narrow offline writing-rule warnings, never claiming to transcribe or automatically judge the audio. The text is not stored or uploaded and disappears when moving to a new turn. Tests validate source/goal alignment, safe content fields, 18 separate cues, and 320px/390px/desktop browser layout. Existing recording, progress and draft behavior are retained. This remains self-practice, not official Goethe grading or an expert bilingual content audit.
+
 ## Current internal unit mapping (preserved IDs, no migrations)
 
 | A1 competency | Current DeutschDaily units | Status |

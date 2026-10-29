@@ -10,7 +10,7 @@ const context={window:{}};
 vm.createContext(context);
 for(const name of [
  'a1-course-data.js','a1-themes-data.js','a1-essentials-data.js',
- 'a1-grammar-bridge-data.js','productive-guides.js'
+ 'a1-grammar-bridge-data.js','productive-guides.js','speaking-reflection-data.js'
 ])vm.runInContext(read(name),context,{filename:name});
 const source=context.window;
 const units=source.DEUTSCH_A1.units;
@@ -18,6 +18,7 @@ const nouns=source.DEUTSCH_A1_THEME_PACKS;
 const essentials=source.DEUTSCH_A1_ESSENTIALS;
 const grammar=source.DEUTSCH_A1_GRAMMAR_BRIDGE;
 const guides=source.DEUTSCH_PRODUCTIVE_GUIDES;
+const speakingCues=source.DEUTSCH_SPEAKING_CUES;
 const findings=[];
 const fail=(location,error)=>findings.push({location,error});
 function meaningful(value,location){
@@ -83,6 +84,25 @@ for(const topic of grammar){
    fail(topic.id+'.question['+i+']','invalid fill-in-the-blank format');
  }
 }
+let checkedTurns=0;
+for(const [setId,scenes] of Object.entries(guides.dialogues)){
+ const cues=speakingCues[setId];
+ if(!Array.isArray(cues)||cues.length!==scenes.length){
+  fail(setId+'.spokenCues','need one cue set per original scene');continue;
+ }
+ for(let i=0;i<scenes.length;i++){
+  if(!Array.isArray(cues[i])||cues[i].length!==scenes[i].turns.length){
+   fail(setId+'.spokenCues['+i+']','need one cue for every speaking turn');continue;
+  }
+  for(let j=0;j<scenes[i].turns.length;j++){
+   const entry=cues[i][j];
+   if(!Array.isArray(entry)||entry.length!==3){fail(setId+'.spokenCues['+i+']['+j+']','missing cue fields');continue;}
+   meaningful(entry[0],setId+'.speakingGoalEn['+i+']['+j+']');
+   bilingual(entry[2],entry[0],entry[1],setId+'.spokenCues['+i+']['+j+']');
+   checkedTurns++;
+  }
+ }
+}
 const spelling=guides.dialogues['a1-mock-2'][0].turns[1][3];
 if(spelling!=='S-H-A-R-M-A.')fail('mock-2.spelling','surname Sharma requires S-H-A-R-M-A, not S-C-H-A-R-M-A');
 const report={
@@ -90,7 +110,7 @@ const report={
  entries:{units:units.length,unitVocab:units.reduce((n,x)=>n+x.vocab.length,0),
  nounPacks:nouns.length,nounEntries:nouns.reduce((n,x)=>n+x.items.length,0),
  essentialPacks:essentials.length,essentialEntries:essentials.reduce((n,x)=>n+x.items.length,0),
- grammarTopics:grammar.length,grammarQuestions:grammar.reduce((n,x)=>n+x.questions.length,0)},
+ grammarTopics:grammar.length,grammarQuestions:grammar.reduce((n,x)=>n+x.questions.length,0),speakingGoalTurns:checkedTurns},
  spellingSample:spelling,
  errors:findings,
  limitations:[
@@ -106,4 +126,5 @@ for(const x of findings.slice(0,20))console.error(x.location+': '+x.error);
 assert.equal(units.length,36);assert.equal(report.entries.unitVocab,260);
 assert.equal(report.entries.nounEntries,100);assert.equal(report.entries.essentialEntries,216);
 assert.equal(report.entries.grammarQuestions,36);
+assert.equal(report.entries.speakingGoalTurns,18);
 assert.deepEqual(findings,[], 'Fix missing or malformed study content before deploying');

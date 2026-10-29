@@ -26,7 +26,7 @@ const context={
  navigator:{},console,Set,Map
 };
 vm.createContext(context);
-for(const file of ['a1-course-data.js','productive-guides.js','writing-hints.js','productive-coach.js'])
+for(const file of ['a1-course-data.js','productive-guides.js','speaking-reflection-data.js','writing-hints.js','productive-coach.js'])
  vm.runInContext(read(file),context,{filename:file});
 const unitData=context.window.DEUTSCH_A1.units;
 const guide=context.window.DEUTSCH_PRODUCTIVE_GUIDES;
@@ -68,6 +68,8 @@ for(const unit of unitData){
  }
 }
 assert.equal(Object.keys(guide.dialogues).length,2);
+const cueData=context.window.DEUTSCH_SPEAKING_CUES;
+assert.equal(Object.keys(cueData).length,2,'All mock speaking sets need specific cue coverage');
 let interactions=0;
 for(const setId of ['a1-mock-1','a1-mock-2']){
  assert.equal(guide.dialogues[setId].length,3);
@@ -77,6 +79,9 @@ for(const setId of ['a1-mock-1','a1-mock-2']){
   assert(host.querySelector('.productive-count').textContent.includes('Turn 1 of 3'));
   for(let turn=0;turn<3;turn++){
    const question=guide.dialogues[setId][taskIndex].turns[turn];
+   const specific=cueData[setId][taskIndex][turn];
+   assert(specific.length===3&&specific.every(s=>s.length>8),'Every dialogue turn needs English, Nepali and a German pattern');
+   assert(/[\u0900-\u097F]/u.test(specific[1]),'Nepali guidance is required');
    const panel=host.querySelector('.productive-turn');
    assert(panel.querySelector('.productive-transcript').hidden,'German prompt text hidden initially');
    const actions=panel.querySelector('.productive-actions');
@@ -85,10 +90,16 @@ for(const setId of ['a1-mock-1','a1-mock-2']){
    const readText=panel.children.find(n=>n.textContent==='Read the partner’s words');
    readText.click();
    assert(!panel.querySelector('.productive-transcript').hidden);
+   const typed=panel.querySelector('.productive-reflection-input');
+   assert(typed&&typed.maxLength===320,'Per-turn optional text reflection remains bounded and separate from recording');
+   typed.value='Ich habe 20 Jahre alt.';
    const confirmed=panel.children.find(n=>n.textContent==='✓ I answered aloud');
    confirmed.click();
    const example=panel.querySelector('.productive-example');
    assert(example&&example.textContent.includes(question[3]),'Model only after self-confirmation');
+   assert(example.querySelector('.productive-speaking-goal').textContent.includes(specific[0]));
+   assert(example.querySelector('.productive-spoken-review').textContent.includes('Ich bin 20 Jahre alt.'),
+    'Typed reflection receives only existing narrow rule-based reminders, not a score');
    panel.children.at(-1).click();
    interactions++;
   }
@@ -99,6 +110,8 @@ for(const setId of ['a1-mock-1','a1-mock-2']){
 }
 assert.equal(interactions,18);
 assert(!read('productive-coach.js').includes('fetch('),'Coach must never upload student text');
+assert(!read('productive-coach.js').includes('localStorage.setItem(safeKey+'),'Speaking reflection must not be stored');
+assert(!read('speaking-reflection-data.js').includes('fetch('),'Scenario cues stay available offline');
 assert(!read('productive-coach.js').includes('getUserMedia'),'Coach does not activate microphone');
 const html=read('index.html');
 for(const f of ['productive-guides.js','productive-coach.js','productive-coach.css'])assert(html.includes(f));

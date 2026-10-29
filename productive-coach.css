@@ -60,3 +60,16 @@ html[data-theme="light"] .a1-official-audio a{color:#1d683c}
 html[data-theme="light"] .productive-recorder{background:#e8f4f8;border-color:#92b5c4}
 html[data-theme="light"] .productive-mic-status{color:#205c39}
 @media(max-width:600px){.productive-recorder{padding:12px}.productive-recorder .productive-actions{display:grid;grid-template-columns:1fr}.productive-recorder .productive-btn{width:100%}}
+
+/* Speaking reflection: typed optional notes are not speech-to-text or saved audio. */
+.productive-reflection{margin:12px 0;padding:12px;border:1px solid #789aaf;border-radius:10px;background:#153447}
+.productive-reflection-label{display:grid;gap:8px;font-size:13px;font-weight:750;line-height:1.6}
+.productive-reflection-input{display:block;box-sizing:border-box;width:100%;min-height:82px;border:1px solid #9ab9c7;border-radius:8px;background:#f4f8fb;color:#1a3345;font:inherit;font-size:15px;padding:11px;resize:vertical}
+.productive-reflection-input:focus-visible{outline:3px solid #d3f7b6;outline-offset:2px}
+.productive-speaking-goal,.productive-spoken-review{padding:11px;margin:12px 0;border:1px solid #78a599;border-radius:10px;background:#173d47}
+.productive-speaking-goal strong,.productive-spoken-review strong{font-size:13px;line-height:1.5}
+.productive-speaking-goal .productive-german{font-size:16px}
+.productive-spoken-review .productive-german{overflow-wrap:anywhere;font-size:16px}
+html[data-theme="light"] .productive-reflection{background:#e5f1f8;border-color:#9cb9c9}
+html[data-theme="light"] .productive-speaking-goal,html[data-theme="light"] .productive-spoken-review{background:#eff8f2;border-color:#accdb3}
+@media(max-width:600px){.productive-reflection,.productive-speaking-goal,.productive-spoken-review{padding:10px}}

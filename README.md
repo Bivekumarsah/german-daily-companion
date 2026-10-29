@@ -12,6 +12,16 @@ A new Linux Playwright **WebKit/Safari-engine emulator** complements Chromium 32
 
 Dictionary-supported teaching fixes: **die Eltern** is marked plural-only; **das Wort** explains *die Wörter* versus *die Worte*; **das Gleis** now has an accurate railway-track English/Nepali explanation. The source references appear in the cards and [editorial report](docs/a1-human-editorial-review.md).
 
+## New daily guided learning journey (October 2026)
+
+The home dashboard now includes a **six-part, approximately 10-minute guided practice session**, available completely offline once the PWA assets are cached: **Discover four words (1 min), Listening comprehension (2 min), Sentence-building (2 min), Reading comprehension (2 min), Spoken self-practice (2 min), and Adaptive recall (1 min)**. It uses the existing 36-unit lessons and English/Nepali meanings. The learner may pause without a penalty, resume today's activity and advance to another unit after finishing. There is **no strict timer, forced streak, leaderboard or paid feature**.
+
+- The guided session stores its own small date/unit/step record, separate from existing official course completion and spaced repetition. Finishing a journey **means practice, not mastery or a Goethe exam score**.
+- A wrong answer explains how to try again. Missed listening/reading details and vocabulary words are remembered locally and prioritized in later daily recall. Successful later recall resolves the saved item. The queue is capped at 30 and never uploaded.
+- Existing version-2 progress export/restore now **optionally includes** the journey state and missed items, with validation against known lesson units and items; existing backups still import unchanged.
+- Includes German audio when an actual German device voice is available, slow playback, original bilingual grammar/example text, optional local speaking recording and 44px mobile controls.
+- Run `node daily-journey.test.mjs` and Chromium/WebKit browser smoke checks. See [daily learning implementation & limitations](docs/daily-learning-journey.md).
+
 ## Current features
 
 - 36 structured A1 units across foundations, people & home, grammar, everyday life, practical situations and exam preparation

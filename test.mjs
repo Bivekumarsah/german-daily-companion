@@ -27,6 +27,14 @@ for(const [unitId,scene] of Object.entries(visual.scenes)){
  for(const item of scene.items)assert(item.length===6&&item.every(x=>x.length),'Bilingual visual cue must include both phonetic scripts');
 }
 assert.equal(a1.units.length,36);
+const dailyHtml=read('index.html');
+const dailySw=read('sw.js');
+for(const f of ['daily-journey-data.js','daily-journey.js','daily-journey.css']){
+ assert(dailyHtml.includes(f)&&dailySw.includes(f),'Guided study asset must be loaded and precached: '+f);
+}
+assert(dailyHtml.includes('id="dailyJourneyRoot"'));
+assert(dailyHtml.indexOf('src="daily-journey-data.js"')<dailyHtml.indexOf('src="daily-journey.js"'));
+assert(dailyHtml.indexOf('src="a1-course-data.js"')<dailyHtml.indexOf('src="daily-journey.js"'));
 assert(a1.units.reduce((sum,u)=>sum+u.vocab.length,0)>=250);
 assert.equal(a1.exam.reading.length,12);
 assert.equal(a1.exam.listening.length,12);

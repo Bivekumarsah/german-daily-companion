@@ -96,6 +96,30 @@ try{
   assert.deepEqual(severeWriting.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')),[],
    'No serious or critical WCAG violations in bilingual writing coach');
   assert.deepEqual(errors,[],'Writing lesson must not throw browser exceptions');
+  await page.goto(host+'#/dashboard',{waitUntil:'domcontentloaded'});
+  const daily=page.locator('#dailyJourneyRoot');
+  await daily.locator('.dj-primary').first().waitFor({timeout:10000});
+  const startDaily=daily.locator('.dj-primary').first();
+  assert(await startDaily.evaluate(el=>el.getBoundingClientRect().height)>=44,'Daily start should be touch-friendly');
+  await startDaily.click();
+  assert.match(await daily.innerText(),/Discover useful words/);
+  assert.equal(await daily.locator('.dj-word').count(),4);
+  await daily.getByRole('button',{name:'I studied these words'}).click();
+  assert.match(await daily.innerText(),/Listen for one detail/);
+  await daily.locator('.dj-choice').filter({hasText:'T-A-M'}).click();
+  assert.match(await daily.locator('.dj-feedback').innerText(),/Not quite/);
+  await daily.locator('.dj-choice').filter({hasText:'T-O-M'}).click();
+  await daily.getByRole('button',{name:'Next activity'}).click();
+  assert.match(await daily.innerText(),/Build one German sentence/);
+  const safeScroll=await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2);
+  assert(safeScroll,'Daily journey should fit the mobile viewport');
+  await page.addScriptTag({content:axe.source});
+  const dailyAccessibility=await page.evaluate(async()=>window.axe.run(document.querySelector('#dailyJourneyRoot'),{
+   runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}
+  }));
+  assert.deepEqual(dailyAccessibility.violations.filter(v=>['critical','serious'].includes(v.impact))
+   .map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')),[],
+   'No serious or critical WCAG violations in guided daily learning');
   console.log('Viewport '+viewport.width+'×'+viewport.height+': exam language, keyboard, touch geometry and vocabulary route passed.');
   checked++;
   await context.close();

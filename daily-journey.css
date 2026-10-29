@@ -1,0 +1,54 @@
+/* Quiet, accessible daily study: practice first, rewards without streak pressure. */
+.dj-frame{border:1px solid #63879a;background:#102b3e;border-radius:20px;padding:21px;margin:20px 0;color:#f2faff}
+.dj-heading h2{font-size:clamp(21px,3vw,28px);margin:7px 0;line-height:1.3}
+.dj-heading p,.dj-help{font-size:14px;line-height:1.65;color:#d6e5ee;margin:9px 0}
+.dj-eyebrow{font-size:11px;font-weight:800;letter-spacing:.06em;color:#d3edb4}
+.dj-activity{margin-top:18px}
+.dj-activity h3{font-size:19px;line-height:1.4;margin:17px 0 8px}
+.dj-status{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;font-weight:750;color:#ddf4c6;margin-bottom:10px}
+.dj-progress{height:9px;border-radius:10px;background:#365368;overflow:hidden}
+.dj-progress-fill{display:block;background:#b7eea7;height:100%;border-radius:10px;transition:width .2s}
+.dj-steps{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.dj-step{border-radius:20px;border:1px solid #55788f;color:#d0e1ed;padding:5px 10px;font-size:11px;line-height:1.5}
+.dj-step.is-current{background:#d2f6a7;color:#153325;border-color:#d2f6a7;font-weight:800}
+.dj-step.is-done{color:#d9f5ca;border-color:#78b691}
+.dj-btn,.dj-choice,.dj-primary{border:1px solid #88afc0;background:#214861;color:#f4fcff;border-radius:11px;min-height:44px;padding:10px 14px;font:inherit;font-weight:720;font-size:13px;line-height:1.5;cursor:pointer;max-width:100%}
+.dj-btn:hover,.dj-choice:hover{background:#315e79}
+.dj-primary{background:#d3f2a7;color:#1c4128;border-color:#d3f2a7;margin:10px 8px 10px 0}
+.dj-btn{margin:6px 7px 6px 0}
+.dj-btn:focus-visible,.dj-choice:focus-visible,.dj-primary:focus-visible{outline:3px solid #b0e3ff;outline-offset:3px}
+.dj-btn:disabled,.dj-choice:disabled,.dj-primary:disabled{opacity:.62;cursor:default}
+.dj-word-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.dj-word{border:1px solid #5a839c;border-radius:13px;background:#1a3c52;padding:13px;min-width:0}
+.dj-word strong{font-size:20px}
+.dj-word p{font-size:13px;line-height:1.5;margin:5px 0}
+.dj-word .dj-btn{margin-top:8px}
+.dj-nepali{font-family:system-ui,"Noto Sans Devanagari",sans-serif}
+.dj-german,.dj-built{font-size:19px;line-height:1.7;font-weight:750;overflow-wrap:anywhere;border-radius:10px;background:#203f53;padding:12px}
+.dj-meaning,.dj-question{font-size:15px;line-height:1.65;font-weight:700;margin:15px 0}
+.dj-transcript{background:#1c3d51;border-left:3px solid #caefa4;border-radius:8px;padding:11px;font-size:15px;line-height:1.7}
+.dj-transcript[hidden]{display:none}
+.dj-actions{display:flex;gap:8px;flex-wrap:wrap;margin:11px 0}
+.dj-choices{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.dj-choice{min-width:105px;flex:1 1 auto}
+.dj-feedback,.dj-live{font-size:13px;line-height:1.7;min-height:20px}
+.dj-good{color:#dbf7ba;font-weight:760}
+.dj-again{color:#ffe2ac;font-weight:760}
+.dj-speaking-model{padding:12px;border-radius:12px;border:1px solid #729f8d;background:#153a46;margin:15px 0}
+.dj-speaking-model strong{font-size:13px}
+html[data-theme="light"] .dj-frame{background:#f2f9fd;border-color:#b4ccd9;color:#1b384a}
+html[data-theme="light"] .dj-help,html[data-theme="light"] .dj-heading p{color:#4c6478}
+html[data-theme="light"] .dj-eyebrow,html[data-theme="light"] .dj-status{color:#266237}
+html[data-theme="light"] .dj-progress{background:#d7e5ed}
+html[data-theme="light"] .dj-progress-fill{background:#3f944f}
+html[data-theme="light"] .dj-step{color:#426178;border-color:#9dbbcb}
+html[data-theme="light"] .dj-step.is-current{color:#1b512e;background:#d5f2d3;border-color:#7aa98b}
+html[data-theme="light"] .dj-step.is-done{color:#255838;border-color:#62a679}
+html[data-theme="light"] .dj-word,html[data-theme="light"] .dj-german,html[data-theme="light"] .dj-built,html[data-theme="light"] .dj-transcript,html[data-theme="light"] .dj-speaking-model{background:#fff;color:#1f3d50;border-color:#acc9d4}
+html[data-theme="light"] .dj-btn,html[data-theme="light"] .dj-choice{background:#fff;color:#21445b;border-color:#93b1c3}
+html[data-theme="light"] .dj-primary{background:#357c40;color:#fff;border-color:#357c40}
+html[data-theme="light"] .dj-good{color:#206c39}
+html[data-theme="light"] .dj-again{color:#8a4914}
+@media(max-width:570px){.dj-frame{padding:14px;border-radius:14px}.dj-word-grid{grid-template-columns:1fr 1fr;gap:8px}.dj-word{padding:10px}.dj-word strong{font-size:18px}.dj-steps{gap:5px}.dj-step{font-size:10px;padding:5px 7px}.dj-choices{display:grid;grid-template-columns:1fr}.dj-choice{width:100%}.dj-primary{width:100%;margin:8px 0}.dj-status{font-size:11px}}
+@media(max-width:360px){.dj-word-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.dj-progress-fill{transition:none!important}}

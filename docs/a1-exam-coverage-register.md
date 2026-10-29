@@ -24,6 +24,10 @@ All 36 core writing tasks now offer task-specific self-review checklists and an 
 
 Two original A1 practice mocks now offer a clear **English-guided vs German-task-language** switch for all 60 objective questions. Source questions, answer choices and normal/slow device speech remain original DeutschDaily material. The listening transcript is hidden until submission, and German-mode question review provides English explanations afterward; the mode change resets the attempt to avoid mixed-language scores. A dedicated GitHub Chromium workflow checks keyboard mode selection, 320px/390px/desktop viewport interaction, no horizontal page overflow and mobile touch sizes. These checks are **not** a certified Goethe exam simulation, physical mobile-device certification or authentic native-speaker recording test.
 
+## Bilingual writing hints and WCAG checks (29 October 2026)
+
+Original, deterministic **offline writing hints** now detect seven specific beginner-language error patterns, with example German corrections and Nepali-language explanation. This is a narrow educational reference and deliberately leaves many errors undetected; no automatic grammar score, reliability guarantee or professional review is claimed. Exam Prep now links directly to official Goethe model tests with their real listening audio, without copying recordings. Chromium desktop/mobile-viewport QA additionally uses axe-core to check **serious/critical WCAG 2.0/2.1 A/AA failures** in the active exam and writing interfaces. Other routes, actual iOS/Android devices, assistive technologies, and language-editor review are still unverified.
+
 ## Current internal unit mapping (preserved IDs, no migrations)
 
 | A1 competency | Current DeutschDaily units | Status |

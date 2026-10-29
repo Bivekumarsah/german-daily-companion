@@ -41,10 +41,15 @@ for(const pack of packs){
   assert(/^(der |die |das )/u.test(row[0]),'German nouns must include nominative articles');
   assert(!unique.has(row[0]),'No duplicate topic-bank items: '+row[0]);
   unique.add(row[0]);
-  assert(row[3]==='—'||/^(die )/u.test(row[3]),'Plural noun includes article or dash');
+  assert(row[3]==='—'||row[3]==='plural-only'||/^(die )/u.test(row[3]),'Plural noun includes article, dash or explicit plural-only marker');
  }
 }
 assert.equal(unique.size,100);
+const notes=context.window.DEUTSCH_A1_NOUN_USAGE_NOTES;
+assert(notes['die Eltern'].en.includes('Plural-only'));
+assert(notes['das Wort'].en.includes('die Worte'));
+assert(notes['das Gleis'].en.includes('railway track'));
+assert.equal(packs.find(p=>p.id==='social').items.find(x=>x[0]==='die Eltern')[3],'plural-only');
 assert.equal(context.window.DEUTSCH_A1_THEMES.packCount,10);
 const tabs=root.querySelector('.a1-theme-tabs'),list=root.querySelector('.a1-theme-list'),challenge=root.querySelector('.a1-theme-challenge');
 assert(tabs&&list&&challenge);
@@ -55,7 +60,7 @@ for(let packIndex=0;packIndex<10;packIndex++){
  const cards=list.querySelector('.a1-theme-cards');
  assert.equal(cards.children.length,10);
  assert(cards.children[0].textContent.includes(pack.items[0][2]));
- assert(cards.children[0].textContent.includes('Plural:')||cards.children[0].textContent.includes('No common'));
+ assert(cards.children[0].textContent.includes('Plural:')||cards.children[0].textContent.includes('without an everyday plural')||cards.children[0].textContent.includes('Plural-only'));
  cards.children[0].querySelector('.a1-theme-actions').children[0].click();
  assert.equal(spoken.at(-1).text,pack.items[0][0]);
  cards.children[0].querySelector('.a1-theme-actions').children[1].click();

@@ -67,6 +67,8 @@ assert(html.includes('not an official Goethe course'));
 for (const view of ['dashboard','course','vocabulary','exam','translator','practice','resources']) assert(html.includes('data-academy-view=\"'+view+'\"') || html.includes('data-academy-view=\''+view+'\''),'Missing routed view '+view);
 for(const id of ['examTimer','examTimerStart','examTimerPause','examTimerReset','academyDashPercent'])assert(html.includes('id=\"'+id+'\"'),'Missing academy widget '+id);
 assert(html.includes('href=\"#/course\"'));
+for(const id of ['a1Continue','a1ContinueTitle','a1ContinueStatus'])
+ assert(html.includes('id=\"'+id+'\"'),'Missing progress-aware continue element '+id);
 assert(a1.exam.writing[0].prompt.includes('Form'));
 assert(a1.exam.speaking.some(x=>x.prompt.includes('request')));
 

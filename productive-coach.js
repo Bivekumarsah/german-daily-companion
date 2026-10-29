@@ -107,12 +107,13 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
  const group=guides.dialogues[setId];
  const task=group?.[taskIndex];
  if(!host||!task||typeof speak!=='function')return;
- let round=0,answered=false;
+ let round=0,answered=false,recording=null;
  const box=make('section','productive-speaking');
  const help=make('p','productive-help','Listen to a partner in German. Answer aloud before showing one possible reply. This tool cannot hear or grade your speech.');
  box.append(make('h5','','🗣️ Conversation practice · '+task.title),help);
  const panel=make('div','productive-turn');box.append(panel);host.append(box);
  function render(){
+  recording?.dispose?.();recording=null;
   panel.replaceChildren();
   if(round>=task.turns.length){
    panel.append(make('p','productive-finished','✓ You practised all three conversation turns aloud.'),
@@ -134,6 +135,7 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
   panel.append(openText,transcript);
   const response=make('p','productive-help','Think of your own response, then say it aloud clearly.');
   panel.append(response);
+  recording=window.DEUTSCH_SPEAKING_RECORDER?.mount?.(panel)||null;
   const confirm=button('✓ I answered aloud',()=>{
    if(answered)return;
    answered=true;
@@ -149,7 +151,7 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
   panel.append(confirm);
  }
  render();
- return {restart:()=>{round=0;render();}};
+ return {restart:()=>{round=0;render();},dispose:()=>{recording?.dispose?.();recording=null;}};
 }
 window.DEUTSCH_PRODUCTIVE_COACH={addWriting,addSpeaking,wordCount};
 })();

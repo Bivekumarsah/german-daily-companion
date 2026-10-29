@@ -277,41 +277,8 @@
     });
     question();
     // Listening-only recall is intentionally separate from the official exam sampler.
-    const meanings=items.map(w=>w[2].trim().toLocaleLowerCase('en'));
-    if(new Set(meanings).size===items.length){
-      const ear=el('details','visual-lab-ears');
-      ear.append(el('summary','visual-lab-story-head','🎧 Optional: listen and choose (no text hint)'));
-      const instructions=el('p','visual-lab-story-tip','Listen to a German word. Choose its English meaning before revealing the text.');
-      ear.append(instructions);
-      const mystery=items[1];
-      const actions=el('div','visual-lab-turn-actions');
-      for(const [label,slow] of [['🔊 Hear word',false],['◷ Hear slowly',true]]){
-        const control=el('button','visual-lab-small-btn',label);
-        control.type='button';control.addEventListener('click',()=>speak(mystery[1],slow));actions.append(control);
-      }
-      ear.append(actions);
-      const result=el('p','visual-lab-feedback','');
-      result.setAttribute('role','status');
-      const answers=el('div','visual-lab-options');
-      const shuffled=items.map((_,i)=>items[(i+((Number(unit.number)||0)%3))%3]);
-      for(const candidate of shuffled){
-        const option=el('button','visual-lab-option',candidate[2]);
-        option.type='button';
-        option.addEventListener('click',()=>{
-          for(const control of answers.children)control.disabled=true;
-          if(candidate===mystery){
-            option.classList.add('visual-lab-correct');
-            result.textContent='✓ Correct! You heard: '+mystery[1]+' — '+mystery[2]+'.';
-          }else{
-            option.classList.add('visual-lab-try-again');
-            result.textContent='You heard: '+mystery[1]+' — '+mystery[2]+'. Replay it and try again later.';
-          }
-        });
-        answers.append(option);
-      }
-      ear.append(answers,result);
-      wrap.append(ear);
-    }
+    // Three-round listening is a separate, tested module.
+    if(window.DEUTSCH_LISTENING_LAB?.render)window.DEUTSCH_LISTENING_LAB.render(wrap,unit,items,speak);
     const continueBtn=el('button','secondary-btn visual-lab-continue','Continue to all lesson words ↓');
     continueBtn.type='button';
     continueBtn.addEventListener('click',()=>{

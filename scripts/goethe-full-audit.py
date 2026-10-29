@@ -81,8 +81,14 @@ def goethe_candidates(pdf_path: pathlib.Path) -> tuple[list[dict],dict]:
             debug=pieces[:24]
         combined=[]
         for y,x,text in pieces:
-            if combined and combined[-1]["term"].endswith("-") and text[0:1].islower():
-                combined[-1]["term"]=combined[-1]["term"][:-1]+text
+            # Prefix entries (all-, ander-, ein-) are real independent headwords,
+            # not broken compounds. Only join an article-led compound split over
+            # two PDF lines, such as der Anruf- / beantworter.
+            prior=combined[-1]["term"] if combined else ""
+            if (prior.endswith("-") and
+                    re.match(r"^(?:der|die|das)\s+",prior,re.I) and
+                    text[0:1].islower() and len(text.split())==1):
+                combined[-1]["term"]=prior[:-1]+text
             else:
                 combined.append({"term":text,"pdf_page":page_number+1,
                                  "printed_page":page_number+1,"x":round(x,1),

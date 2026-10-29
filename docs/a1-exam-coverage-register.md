@@ -20,6 +20,10 @@ The vocabulary data now includes **528 study entries / 469 distinct case-insensi
 
 All 36 core writing tasks now offer task-specific self-review checklists and an optional locally stored draft (not included in standard progress backup). The two original mock exams provide guided 18-turn speaking dialogues with English/Nepali clues, transcript reveal, model replies, and speech playback; mock writing tasks gain checklists and forms gain completeness feedback. **None of these features recognizes speech or verifies German grammar.** Full 9/10 writing/speaking ratings are contingent on independent teacher-level evaluation and real-device QA.
 
+## Exam-language and browser quality phase (October 2026)
+
+Two original A1 practice mocks now offer a clear **English-guided vs German-task-language** switch for all 60 objective questions. Source questions, answer choices and normal/slow device speech remain original DeutschDaily material. The listening transcript is hidden until submission, and German-mode question review provides English explanations afterward; the mode change resets the attempt to avoid mixed-language scores. A dedicated GitHub Chromium workflow checks keyboard mode selection, 320px/390px/desktop viewport interaction, no horizontal page overflow and mobile touch sizes. These checks are **not** a certified Goethe exam simulation, physical mobile-device certification or authentic native-speaker recording test.
+
 ## Current internal unit mapping (preserved IDs, no migrations)
 
 | A1 competency | Current DeutschDaily units | Status |

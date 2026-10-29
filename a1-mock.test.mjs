@@ -98,6 +98,8 @@ for(let mockIndex=0;mockIndex<2;mockIndex++){
   const result=content.querySelector('.a1-mock-result');
   assert(result,'Submitted section should display self-check');
   assert(result.textContent.includes('14 / 15'),'Only correct MCQ answers count');
+  assert(result.querySelector('.a1-mock-breakdown').textContent.includes('Practice feedback by text type'));
+  assert(result.querySelector('.a1-mock-breakdown').textContent.includes('Suggested next practice'));
   assert(result.textContent.includes('not a Goethe examination grade'));
   assert(result.querySelector('.a1-mock-review'),'Answer review is available');
  }

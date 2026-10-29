@@ -28,7 +28,7 @@ const writingGoals={
  'a1-23':['Start from a clear location.','Give at least two directions or turns.'],
  'a1-24':['Name local services near you.','Describe where at least one is located.'],
  'a1-25':['Explain why you need a doctor’s appointment.','Ask politely about a date or time.'],
- 'a1-26':['Describe the weather today.','Describe tomorrow's weather.'],
+ 'a1-26':['Describe the weather today.','Describe tomorrow’s weather.'],
  'a1-27':['Name an activity you enjoy.','State when or with whom you do it.','Use three short sentences.'],
  'a1-28':['Write three polite requests or permissions.','Use at least two modal verb patterns.'],
  'a1-29':['Request a room politely.','Mention a date or number of nights.'],

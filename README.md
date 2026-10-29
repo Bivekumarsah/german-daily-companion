@@ -14,7 +14,7 @@ A free static progressive-web-app for personal German study, with English explan
 - **Two additional full question-count independent A1 exam practice sets**: each has 15 listening questions and 15 reading questions (30 objective questions per set), 2 writing form/message tasks and 3 speaking preparation tasks. Timed practice, objective-score feedback and answer review; not official Goethe material or authentic recorded audio.
 - **Ten independent bilingual thematic vocabulary packs**: 100 noun entries with German article, English/Nepali meaning, plural notes, optional device audio and five-question practice. Of these 100 entries, 60 are new compared with the existing 244 unique course strings, 40 are purposeful reinforcement; the two banks together have 304 distinct case-folded German entries.
 - **A1 Grammar Clinic:** 12 short bilingual English/Nepali workshops with 36 original fill-in-the-blank grammar questions, instant retry/feedback and slow German listening; lessons link back to the existing course.
-- **German Essentials:** 128 bilingual verbs, connectors, prepositions and useful expression cards in 16 everyday groups, each with an original context sentence and tap-to-listen audio. These add 125 distinct entries beyond the prior 304, yielding **429 unique case-folded German entry strings across three banks**. This is not a Goethe headword count or confirmed 100% coverage.
+- **German Essentials:** 168 bilingual verbs, connectors, prepositions and useful expression cards in 21 everyday groups, each with an original context sentence and tap-to-listen audio. These add 165 distinct entries beyond the prior 304, yielding **469 unique case-folded German entry strings across three banks**. This is not a Goethe headword count or confirmed 100% coverage.
 - Original listening comprehension questions with German device text-to-speech; replay slowly, reveal transcript after answering
 - Original reading comprehension with short everyday messages and multiple choice
 - Guided writing prompts and examples; writing is **self-reviewed**, not auto-graded
@@ -30,7 +30,7 @@ A free static progressive-web-app for personal German study, with English explan
 - Mobile-friendly with a five-section bottom dock plus More menu for practice/resources, dark/light mode, versioned service worker, import/export including the new course progress
 - No backend, account, advertisement, tracking pixel, subscription, npm dependency or payment required
 
-**Editorial vocabulary audit:** See [the source-grounded Goethe checkpoint audit](docs/a1-vocabulary-accuracy-audit.md) and run `node audit-a1.mjs` to reproduce the 176 selected reference comparisons. The official complete word-list concordance has **not** been certified.
+**Editorial vocabulary audit:** See [the source-grounded Goethe checkpoint audit](docs/a1-vocabulary-accuracy-audit.md) and run `node audit-a1.mjs` to reproduce the 176 selected reference comparisons; all 37 previously missing exact-label entries in that fixed sample have now been added, but the entire official ~650-word list has **not** yet been exhaustively checked. The official complete word-list concordance has **not** been certified.
 
 **Coverage and gaps:** See [Goethe-aligned content register](docs/a1-exam-coverage-register.md) for what is implemented and what still requires vocabulary, language, phone-browser and exam-method validation.
 

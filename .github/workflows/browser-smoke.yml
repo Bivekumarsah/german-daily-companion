@@ -17,7 +17,7 @@ jobs:
           node-version: '22'
       - name: Install headless Chromium browser tools
         run: |
-          npm install --no-save --no-audit --no-fund playwright@1.64.1
+          npm install --no-save --no-audit --no-fund playwright@1.64.1 axe-core@4.10.3
           npx playwright install --with-deps chromium
       - name: Verify mobile-sized viewports and desktop keyboard navigation
         run: |

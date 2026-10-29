@@ -26,7 +26,7 @@ const context={
  navigator:{},console,Set,Map
 };
 vm.createContext(context);
-for(const file of ['a1-course-data.js','productive-guides.js','productive-coach.js'])
+for(const file of ['a1-course-data.js','productive-guides.js','writing-hints.js','productive-coach.js'])
  vm.runInContext(read(file),context,{filename:file});
 const unitData=context.window.DEUTSCH_A1.units;
 const guide=context.window.DEUTSCH_PRODUCTIVE_GUIDES;
@@ -45,6 +45,14 @@ for(const unit of unitData){
  editor.value=unit.writing.model;
  editor.events.input();
  assert(host.textContent.includes('German words'));
+ assert(host.querySelector('.productive-language-hints'),'Bilingual guidance container should be present');
+ if(unit.id==='a1-03'){
+  editor.value='Ich habe 20 Jahre alt.';editor.events.input();
+  assert(host.querySelector('.productive-language-hints').textContent.includes('Ich bin 20 Jahre alt.'),'Age correction example shown');
+  editor.value='Ich bin 20 Jahre alt.';editor.events.input();
+  assert(host.querySelector('.productive-language-hints').textContent.includes('No supported common patterns detected'),'Correct example not flagged');
+  editor.value=unit.writing.model;editor.events.input();
+ }
  const checks=host.querySelector('.productive-checklist').children.slice(1);
  for(const item of checks){item.children[0].checked=true;item.children[0].events.change();}
  assert(host.querySelector('.productive-review').textContent.includes('All goals checked'));

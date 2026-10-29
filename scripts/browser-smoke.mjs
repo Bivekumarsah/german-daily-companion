@@ -4,6 +4,7 @@
    node scripts/browser-smoke.mjs */
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
+import axe from 'axe-core';
 const host=process.env.DEUTSCH_BROWSER_URL||'http://127.0.0.1:8765/';
 const browser=await chromium.launch({headless:true});
 let checked=0;
@@ -39,10 +40,39 @@ try{
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
   assert.equal(overflow,false,'Page should not scroll horizontally at '+viewport.width);
   assert.deepEqual(errors,[],'No JS exceptions after route, keyboard switching and mock answers');
+  await page.addScriptTag({content:axe.source});
+  const examAccessibility=await page.evaluate(async()=>window.axe.run(document.querySelector('#a1MockRoot'),{
+   runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}
+  }));
+  const severeExam=examAccessibility.violations.filter(v=>['critical','serious'].includes(v.impact));
+  assert.deepEqual(severeExam.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')),[],
+   'No serious or critical WCAG violations in active exam mock');
   await page.goto(host+'#/vocabulary',{waitUntil:'domcontentloaded'});
   await page.locator('#a1EssentialsStudio > summary').click();
   await page.locator('#a1EssentialsRoot .a1-bridge-card').first().waitFor({timeout:10000});
   assert.deepEqual(errors,[],'Vocabulary view must remain functional');
+  await page.goto(host+'#/course/a1-03',{waitUntil:'domcontentloaded'});
+  await page.locator('#a1SkillProgress button').filter({hasText:'Writing'}).click();
+  const editor=page.locator('#a1TabContent textarea');
+  await editor.waitFor({timeout:10000});
+  await editor.fill('Ich habe 20 Jahre alt.');
+  const hints=page.locator('#a1TabContent .productive-language-hints');
+  assert.match(await hints.innerText(),/Ich bin 20 Jahre alt/,'Local feedback shows a safe, concrete example');
+  await editor.fill('Ich bin 20 Jahre alt.');
+  assert.match(await hints.innerText(),/No supported common patterns detected/,'Correct age example not flagged');
+  const saveButtons=page.locator('#a1TabContent .productive-actions .productive-btn');
+  assert(await saveButtons.count()>=2,'Save and delete controls remain available');
+  const hintBounds=await hints.boundingBox();
+  assert(hintBounds?.width>200,'Bilingual hints should fit mobile screen width');
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2),false,'No page overflow in writing lesson');
+  await page.addScriptTag({content:axe.source});
+  const writingAccessibility=await page.evaluate(async()=>window.axe.run(document.querySelector('#a1TabContent .productive-writing'),{
+   runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}
+  }));
+  const severeWriting=writingAccessibility.violations.filter(v=>['critical','serious'].includes(v.impact));
+  assert.deepEqual(severeWriting.map(v=>v.id+': '+v.nodes.map(n=>n.target.join(' ')).join(', ')),[],
+   'No serious or critical WCAG violations in bilingual writing coach');
+  assert.deepEqual(errors,[],'Writing lesson must not throw browser exceptions');
   console.log('Viewport '+viewport.width+'×'+viewport.height+': exam language, keyboard, touch geometry and vocabulary route passed.');
   checked++;
   await context.close();

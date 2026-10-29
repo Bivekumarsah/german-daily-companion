@@ -1,0 +1,35 @@
+/* Additional independent bilingual A1 vocabulary packs. */
+.a1-theme-studio{margin:20px 0;padding:20px;border-radius:16px;background:#19334a;border:1px solid #4d7087}
+.a1-theme-caption,.a1-theme-status{font-size:12px;line-height:1.7;color:#d3e7f4}
+.a1-theme-tabs{display:flex;flex-wrap:wrap;gap:9px;margin:17px 0}
+.a1-theme-tab,.a1-theme-btn,.a1-theme-option,.a1-theme-primary{font:inherit;font-size:13px;font-weight:750;padding:10px 12px;min-height:44px;border:1px solid #6e98ae;background:#254b62;border-radius:10px;color:#ecf9ff}
+.a1-theme-tab.is-selected{background:#276049;border-color:#c6f199}
+.a1-theme-tab:focus-visible,.a1-theme-btn:focus-visible,.a1-theme-option:focus-visible,.a1-theme-primary:focus-visible{outline:3px solid #a6daff;outline-offset:3px}
+.a1-theme-title{font-size:21px;margin:14px 0}
+.a1-theme-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.a1-theme-card{padding:14px;border:1px solid #58788f;background:#122b42;border-radius:12px}
+.a1-theme-word{font-size:20px;line-height:1.5;display:block}
+.a1-theme-card p{font-size:13px;line-height:1.65;margin:8px 0}
+.a1-theme-card small{font-size:12px;color:#c6deee;display:block;line-height:1.6}
+.a1-theme-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.a1-theme-challenge{padding:18px;margin-top:20px;border-radius:14px;border:1px solid #72938e;background:#1a3a3c}
+.a1-theme-challenge h5{font-size:18px;margin:0 0 10px}
+.a1-theme-progress,.a1-theme-prompt,.a1-theme-final,.a1-theme-feedback{font-size:14px;line-height:1.7}
+.a1-theme-prompt{font-weight:750}
+.a1-theme-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0}
+.a1-theme-option{font-size:14px}
+.a1-theme-option.is-correct{background:#24613d;border-color:#bdedb0}
+.a1-theme-option.is-wrong{background:#633745;border-color:#e6b0bd}
+.a1-theme-primary{background:#c7f492;color:#19351e;border-color:#c7f492;margin-top:10px}
+html[data-theme="light"] .a1-theme-studio{background:#f3f8fc;border-color:#bbd0df;color:#1d3046}
+html[data-theme="light"] .a1-theme-caption,html[data-theme="light"] .a1-theme-status{color:#4c6175}
+html[data-theme="light"] .a1-theme-card{background:#fff;border-color:#bed0df}
+html[data-theme="light"] .a1-theme-card small{color:#50657a}
+html[data-theme="light"] .a1-theme-btn,html[data-theme="light"] .a1-theme-option,html[data-theme="light"] .a1-theme-tab{background:#fff;border-color:#9ab3c9;color:#203851}
+html[data-theme="light"] .a1-theme-tab.is-selected{background:#dcf2de;border-color:#68a778;color:#19412a}
+html[data-theme="light"] .a1-theme-challenge{background:#e9f5ed;border-color:#acc7b1}
+html[data-theme="light"] .a1-theme-primary{background:#286b22;color:#fff;border-color:#286b22}
+html[data-theme="light"] .a1-theme-option.is-correct{background:#d5efda;color:#214d29}
+html[data-theme="light"] .a1-theme-option.is-wrong{background:#fbdde3;color:#5b2534}
+@media(max-width:760px){.a1-theme-cards{grid-template-columns:1fr}.a1-theme-options{grid-template-columns:1fr}.a1-theme-studio{padding:13px}.a1-theme-tab{flex:1 1 140px}}
+@media(prefers-reduced-motion:reduce){.a1-theme-studio *{animation:none!important;transition:none!important}}

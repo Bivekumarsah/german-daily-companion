@@ -19,7 +19,7 @@ class Recorder {
  constructor(stream){this.stream=stream;this.events={};this.state='inactive';this.mimeType='audio/webm'}
  addEventListener(k,cb){this.events[k]=cb}
  start(){this.state='recording'}
- stop(){this.state='inactive';this.events.dataavailable?.({data:new Uint8Array([1,2,3])});this.events.stop?.()}
+ stop(){this.state='inactive';this.events.dataavailable?.({data:new Blob([new Uint8Array([1,2,3])],{type:'audio/webm'})});this.events.stop?.()}
 }
 const root=new Node(),navigator={mediaDevices:{getUserMedia:async()=>{
  const track={stopped:false,stop(){this.stopped=true}};tracks.push(track);

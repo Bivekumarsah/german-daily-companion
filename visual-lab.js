@@ -2,6 +2,26 @@
 (() => {
   'use strict';
   const lessons = {
+    'a1-01': {title:'Meet the German alphabet',items:[
+      ['🅰️','A','letter A','अक्षर ए','AH','आ'],
+      ['🅱️','B','letter B','अक्षर बी','BAY','बे'],
+      ['Ⓒ','C','letter C','अक्षर सी','TSAY','त्से']
+    ]},
+    'a1-03': {title:'I, you and polite you',items:[
+      ['🙋','ich','I','म','ikh','इख'],
+      ['👉','du','you (informal)','तिमी','doo','डू'],
+      ['🤝','Sie','you (formal)','तपाईं','zee','जी']
+    ]},
+    'a1-06': {title:'Time and appointments',items:[
+      ['🕘','neun Uhr','nine o’clock','नौ बजे','NOYN oor','नोइन ऊर'],
+      ['📅','Montag','Monday','सोमबार','MOHN-tahk','मोन्टाग'],
+      ['☀️','heute','today','आज','HOY-tuh','होइटे']
+    ]},
+    'a1-14': {title:'Ask simple questions',items:[
+      ['👤','wer','who','को','vair','वेर'],
+      ['📍','wo','where','कहाँ','voh','वो'],
+      ['⏰','wann','when','कहिले','vahn','वान']
+    ]},
     'a1-02': {title:'Greetings you can picture',items:[
       ['👋','Hallo','hello','नमस्ते','HAH-loh','हालो'],
       ['☀️','Guten Morgen','good morning','शुभ प्रभात','GOO-ten MOR-gen','गुटेन मोर्गेन'],
@@ -78,9 +98,10 @@
     // A short everyday conversation connects memorised words to real A1 communication.
     const dialogue=window.DEUTSCH_VISUAL_STORIES?.[unit.id];
     if(dialogue?.turns?.length){
-      const story=el('section','visual-lab-story');
+      const story=el('details','visual-lab-story');
+      story.open=true;
       story.setAttribute('aria-label','Learn a short German conversation');
-      const storyTop=el('div','visual-lab-story-head');
+      const storyTop=el('summary','visual-lab-story-head');
       storyTop.append(el('span','visual-lab-story-scene',dialogue.scene),el('strong','visual-lab-story-goal',dialogue.goal));
       story.append(storyTop,el('p','visual-lab-story-tip','Listen to each speaker. Hide the translation and try to understand before looking again.'));
       const conversation=el('ol','visual-lab-conversation');

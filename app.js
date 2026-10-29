@@ -8,6 +8,8 @@ const KEY_PROGRESS = 'deutschdaily-lessons-v1';
 const KEY_A1_PROGRESS = 'deutschdaily-a1-pathway-v1';
 const KEY_A1_REVIEW = 'deutschdaily-a1-vocabulary-review-v1';
 const KEY_PRONUNCIATION = 'deutschdaily-pronunciation-v1';
+const KEY_DAILY_JOURNEY = 'deutschdaily-daily-journey-v1';
+const KEY_DAILY_MISTAKES = 'deutschdaily-daily-mistakes-v1';
 const KEY_THEME = 'deutschdaily-theme-v1';
 const KEY_FAV = 'deutschdaily-favorites-v1';
 const KEY_CACHE = 'deutschdaily-translations-v1';
@@ -306,6 +308,25 @@ function importLearning(event){
     const ids=[...new Set(data.pronunciationProgress.filter(id=>typeof id==='string'&&validIds.has(id)))];
     ok.push(writeStorage(KEY_PRONUNCIATION,ids));
    }
+   const courseUnits=window.DEUTSCH_A1?.units||[];
+   if(data.dailyJourney && typeof data.dailyJourney==='object' && !Array.isArray(data.dailyJourney)){
+    const d=data.dailyJourney;
+    if(typeof d.date==='string' && /^\d{4}-\d{2}-\d{2}$/.test(d.date) &&
+       courseUnits.some(u=>u.id===d.unitId) && Number.isInteger(d.step) && d.step>=0 && d.step<=6){
+     ok.push(writeStorage(KEY_DAILY_JOURNEY,{date:d.date,unitId:d.unitId,step:d.step}));
+    }
+   }
+   if(Array.isArray(data.dailyMistakes)){
+    const safeMistakes=[];
+    for(const m of data.dailyMistakes.slice(-60)){
+     const u=courseUnits.find(x=>x.id===m?.unitId);
+     if(!u||!['vocab','reading','listening'].includes(m?.kind)||typeof m.value!=='string')continue;
+     if(m.kind==='vocab' ? !u.vocab.some(x=>x.de===m.value) : u[m.kind]?.text!==m.value)continue;
+     if(!safeMistakes.some(x=>x.unitId===u.id&&x.kind===m.kind&&x.value===m.value))
+      safeMistakes.push({unitId:u.id,kind:m.kind,value:m.value});
+    }
+    ok.push(writeStorage(KEY_DAILY_MISTAKES,safeMistakes.slice(-30)));
+   }
    if(data.vocabularyReview&&typeof data.vocabularyReview==='object'&&!Array.isArray(data.vocabularyReview)){
     const validWords=new Set((window.DEUTSCH_A1?.units||[]).flatMap(u=>u.vocab.map(w=>w.de.toLowerCase())));
     const cleanReview={};
@@ -325,7 +346,7 @@ function importLearning(event){
  }).catch(()=>notify('Could not read this backup. Select a DeutschDaily JSON export.'));
 }
 function exportLearning(){
- const exportData={version:2,exportedAt:new Date().toISOString(),favorites,translationCache,progress,courseProgress:readStorage(KEY_A1_PROGRESS,{}),vocabularyReview:readStorage(KEY_A1_REVIEW,{}),pronunciationProgress:readStorage(KEY_PRONUNCIATION,[])};
+ const exportData={version:2,exportedAt:new Date().toISOString(),favorites,translationCache,progress,courseProgress:readStorage(KEY_A1_PROGRESS,{}),vocabularyReview:readStorage(KEY_A1_REVIEW,{}),pronunciationProgress:readStorage(KEY_PRONUNCIATION,[]),dailyJourney:readStorage(KEY_DAILY_JOURNEY,null),dailyMistakes:readStorage(KEY_DAILY_MISTAKES,[])};
  const blob=new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='deutschdaily-progress-'+dayKey()+'.json';document.body.append(a);a.click();a.remove();
  setTimeout(()=>URL.revokeObjectURL(url),5000);notify('Learning data exported. Keep your backup file safe.');

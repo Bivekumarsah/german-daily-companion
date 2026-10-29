@@ -89,6 +89,8 @@ for(let i=0;i<15;i++){
 }
 const result=content.querySelector('.a1-mock-result');
 assert(result&&result.textContent.includes('15 / 15'),'Correct German answers must map to original answer indices');
+assert(result.querySelector('.a1-mock-breakdown').textContent.includes('Practice feedback by text type'));
+assert(result.querySelector('.a1-mock-breakdown').textContent.includes('correct'));
 assert(result.textContent.includes('German')===false||result.textContent.includes('English'),'Result bilingual review available');
 const review=result.querySelector('.a1-mock-review');
 assert(review.textContent.includes('English: When does the consultation begin?'));

@@ -57,8 +57,8 @@ const referenced=new Set([...read('app.js').matchAll(/\$\('([^']+)'\)/g),...read
 for(const id of referenced)assert(html.includes('id="'+id+'"'),`Missing DOM element ${id}`);
 const allIds=[...html.matchAll(/id="([^"]+)"/g)].map(m=>m[1]);
 assert.equal(allIds.length,new Set(allIds).size,'Duplicate DOM IDs');
-for(const filename of ['app.js','lessons.js','phrases.js','a1-course.js','a1-course-data.js','visual-stories.js','listening-lab.js','visual-lab.js','visual-lab.css','sentence-builder.js','sentence-builder.css','academy.js','sw.js','styles.css','manifest.webmanifest','icon.svg'])assert(fs.existsSync(new URL(filename,root)),`${filename} missing`);
-const sw=read('sw.js');for(const file of ['a1-course.js','a1-course-data.js','visual-stories.js','listening-lab.js','visual-lab.js','visual-lab.css','sentence-builder.js','sentence-builder.css','academy.js'])assert(sw.includes(file),`Offline cache missing ${file}`);
+for(const filename of ['app.js','lessons.js','phrases.js','a1-course.js','a1-course-data.js','visual-stories.js','listening-lab.js','visual-lab.js','visual-lab.css','sentence-builder.js','sentence-builder.css','pronunciation-data.js','pronunciation-lab.js','pronunciation-lab.css','academy.js','sw.js','styles.css','manifest.webmanifest','icon.svg'])assert(fs.existsSync(new URL(filename,root)),`${filename} missing`);
+const sw=read('sw.js');for(const file of ['a1-course.js','a1-course-data.js','visual-stories.js','listening-lab.js','visual-lab.js','visual-lab.css','sentence-builder.js','sentence-builder.css','pronunciation-data.js','pronunciation-lab.js','pronunciation-lab.css','academy.js'])assert(sw.includes(file),`Offline cache missing ${file}`);
 assert(html.includes('https://www.goethe.de/en/spr/prf/ueb/pa1.html'));
 assert(html.includes('src="visual-lab.js"')&&html.includes('href="visual-lab.css"'));
 assert(html.indexOf('src="visual-stories.js"')<html.indexOf('src="visual-lab.js"'),'Conversation dataset must load before lesson UI');
@@ -68,6 +68,10 @@ assert(html.indexOf('src="visual-lab.js"')<html.indexOf('src="a1-course.js"'),'V
 assert(html.includes('src="sentence-builder.js"')&&html.includes('href="sentence-builder.css"'));
 assert(html.indexOf('src="sentence-builder.js"')<html.indexOf('src="a1-course.js"'),'Sentence builder must load before course engine');
 assert(html.includes('not an official Goethe course'));
+assert(html.includes('id="pronunciationRoot"')&&html.includes('id="pronunciationHeading"'));
+assert(html.includes('src="pronunciation-data.js"')&&html.includes('src="pronunciation-lab.js"'));
+assert(html.indexOf('src="pronunciation-data.js"')<html.indexOf('src="pronunciation-lab.js"'));
+assert(html.includes('href="pronunciation-lab.css"'));
 for (const view of ['dashboard','course','vocabulary','exam','translator','practice','resources']) assert(html.includes('data-academy-view=\"'+view+'\"') || html.includes('data-academy-view=\''+view+'\''),'Missing routed view '+view);
 for(const id of ['examTimer','examTimerStart','examTimerPause','examTimerReset','academyDashPercent'])assert(html.includes('id=\"'+id+'\"'),'Missing academy widget '+id);
 assert(html.includes('href=\"#/course\"'));

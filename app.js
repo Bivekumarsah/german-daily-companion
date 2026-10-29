@@ -7,6 +7,7 @@ const LESSONS = window.DEUTSCH_LESSONS || [];
 const KEY_PROGRESS = 'deutschdaily-lessons-v1';
 const KEY_A1_PROGRESS = 'deutschdaily-a1-pathway-v1';
 const KEY_A1_REVIEW = 'deutschdaily-a1-vocabulary-review-v1';
+const KEY_PRONUNCIATION = 'deutschdaily-pronunciation-v1';
 const KEY_THEME = 'deutschdaily-theme-v1';
 const KEY_FAV = 'deutschdaily-favorites-v1';
 const KEY_CACHE = 'deutschdaily-translations-v1';
@@ -300,6 +301,11 @@ function importLearning(event){
   const ok=[writeStorage(KEY_FAV,favorites),writeStorage(KEY_CACHE,translationCache),writeStorage(KEY_PROGRESS,progress)];
   if(data.version===2){
    ok.push(writeStorage(KEY_A1_PROGRESS,newA1));
+   if(Array.isArray(data.pronunciationProgress)){
+    const validIds=new Set((window.DEUTSCH_PRONUNCIATION_DATA||[]).map(x=>x.id));
+    const ids=[...new Set(data.pronunciationProgress.filter(id=>typeof id==='string'&&validIds.has(id)))];
+    ok.push(writeStorage(KEY_PRONUNCIATION,ids));
+   }
    if(data.vocabularyReview&&typeof data.vocabularyReview==='object'&&!Array.isArray(data.vocabularyReview)){
     const validWords=new Set((window.DEUTSCH_A1?.units||[]).flatMap(u=>u.vocab.map(w=>w.de.toLowerCase())));
     const cleanReview={};
@@ -319,7 +325,7 @@ function importLearning(event){
  }).catch(()=>notify('Could not read this backup. Select a DeutschDaily JSON export.'));
 }
 function exportLearning(){
- const exportData={version:2,exportedAt:new Date().toISOString(),favorites,translationCache,progress,courseProgress:readStorage(KEY_A1_PROGRESS,{}),vocabularyReview:readStorage(KEY_A1_REVIEW,{})};
+ const exportData={version:2,exportedAt:new Date().toISOString(),favorites,translationCache,progress,courseProgress:readStorage(KEY_A1_PROGRESS,{}),vocabularyReview:readStorage(KEY_A1_REVIEW,{}),pronunciationProgress:readStorage(KEY_PRONUNCIATION,[])};
  const blob=new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='deutschdaily-progress-'+dayKey()+'.json';document.body.append(a);a.click();a.remove();
  setTimeout(()=>URL.revokeObjectURL(url),5000);notify('Learning data exported. Keep your backup file safe.');

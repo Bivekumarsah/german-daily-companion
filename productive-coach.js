@@ -37,7 +37,13 @@ function addWriting(host,textarea,{key,goals}={}){
   checks.push(check);list.append(label);
  }
  const result=make('p','productive-review','');result.setAttribute('role','status');
- box.append(stats,list,result);
+ const languageHints=make('section','productive-language-hints');
+ languageHints.append(make('h6','','German writing hints · Deutsch + नेपाली'));
+ const hintBody=make('div','productive-hint-body','');
+ languageHints.append(hintBody,make('p','productive-help','Pattern-based reminders only; no comprehensive grammar, word-order, spelling or Goethe writing grade.'));
+ box.append(stats,list,result,languageHints);
+ textarea.lang='de';
+ textarea.spellcheck=true;
  const safeKey=typeof key==='string'&&/^[a-z0-9-]{3,30}$/.test(key)?'deutschdaily-draft-'+key:null;
  const controls=make('div','productive-actions');
  if(safeKey){
@@ -70,6 +76,23 @@ function addWriting(host,textarea,{key,goals}={}){
   const words=wordCount(textarea.value);
   const done=checks.filter(x=>x.checked).length;
   stats.textContent=words+' German word'+(words===1?'':'s')+' written · '+done+' / '+points.length+' goals self-checked';
+  const hints=window.DEUTSCH_WRITING_HINTS?.analyze?.(textarea.value)||[];
+  hintBody.replaceChildren();
+  if(!textarea.value.trim()){
+   hintBody.append(make('p','productive-hint-empty','Write a German sentence to see simple rule reminders.'));
+  }else if(!hints.length){
+   hintBody.append(make('p','productive-hint-empty','No supported common patterns detected. This does NOT mean the German is correct.'));
+  }else{
+   const list=make('ul','productive-hint-list');
+   for(const hint of hints){
+    const item=make('li','productive-hint-item');
+    item.append(make('strong','',hint.en),make('p','productive-hint-ne',hint.ne));
+    const example=make('p','productive-hint-example',hint.example);
+    example.lang='de';
+    item.append(example);list.append(item);
+   }
+   hintBody.append(list);
+  }
   if(!textarea.value.trim())result.textContent='Start with a short German sentence. Check each goal after writing.';
   else if(words<3)result.textContent='Try to complete your response. This is too short for most A1 writing tasks.';
   else if(done===points.length)result.textContent='All goals checked by you. Compare with the model answer; grammatical correctness still needs human review.';

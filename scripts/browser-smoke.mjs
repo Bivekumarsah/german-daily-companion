@@ -56,6 +56,14 @@ try{
   const start=recorder.locator('button').first();
   const micSize=await start.evaluate(el=>el.getBoundingClientRect().height);
   assert(micSize>=44,'Recording start button has usable touch geometry');
+  const typedReply=speaking.locator('.productive-reflection-input');
+  await typedReply.fill('Ich habe 20 Jahre alt.');
+  await speaking.getByRole('button',{name:'I answered aloud'}).click();
+  const goal=speaking.locator('.productive-speaking-goal');
+  await goal.waitFor({timeout:10000});
+  assert.match(await goal.innerText(),/Give your own first name/,'Speaking scenario must have an explicit communicative goal');
+  assert.match(await speaking.locator('.productive-spoken-review').innerText(),/Ich bin 20 Jahre alt/,'Optional typed reflection should surface narrow bilingual language reminder');
+  assert(!await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2),'Speaking feedback should not cause horizontal overflow');
   const speakingAccessibility=await page.evaluate(async()=>window.axe.run(document.querySelector('#a1MockRoot .productive-speaking'),{
    runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}
   }));

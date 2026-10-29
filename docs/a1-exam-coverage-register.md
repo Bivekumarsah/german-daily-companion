@@ -28,6 +28,10 @@ Two original A1 practice mocks now offer a clear **English-guided vs German-task
 
 Original, deterministic **offline writing hints** now detect seven specific beginner-language error patterns, with example German corrections and Nepali-language explanation. This is a narrow educational reference and deliberately leaves many errors undetected; no automatic grammar score, reliability guarantee or professional review is claimed. Exam Prep now links directly to official Goethe model tests with their real listening audio, without copying recordings. Chromium desktop/mobile-viewport QA additionally uses axe-core to check **serious/critical WCAG 2.0/2.1 A/AA failures** in the active exam and writing interfaces. Other routes, actual iOS/Android devices, assistive technologies, and language-editor review are still unverified.
 
+## Speaking recording and bilingual language QA (29 October 2026)
+
+All six guided roleplays (18 partner turns) now offer optional **on-device audio recording and replay**, a trilingual speaking checklist, and explicit mic-on/mic-off status. Recording requires a tap, never posts audio or stores it in browser storage, and stops/removes in-memory audio on question changes, exam route changes, page hiding or disposal. The separate pronunciation lab's existing microphone handling is unchanged. A new CI script checks the entire local 36-unit bilingual curriculum structure, 100 thematic noun entries, 216 essential expressions, and 12 grammar workshops; it also guards a corrected *Sharma* spelling model. This is **data integrity checking**, not qualified editorial proofreading or a native-speaker pronunciation grade. Chromium mobile-viewport tests include recording controls and accessibility checks, not physical-device mic permission verification.
+
 ## Current internal unit mapping (preserved IDs, no migrations)
 
 | A1 competency | Current DeutschDaily units | Status |

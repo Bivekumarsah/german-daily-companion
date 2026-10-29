@@ -107,12 +107,13 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
  const group=guides.dialogues[setId];
  const task=group?.[taskIndex];
  if(!host||!task||typeof speak!=='function')return;
- let round=0,answered=false;
+ let round=0,answered=false,recording=null;
  const box=make('section','productive-speaking');
  const help=make('p','productive-help','Listen to a partner in German. Answer aloud before showing one possible reply. This tool cannot hear or grade your speech.');
  box.append(make('h5','','🗣️ Conversation practice · '+task.title),help);
  const panel=make('div','productive-turn');box.append(panel);host.append(box);
  function render(){
+  recording?.dispose?.();recording=null;
   panel.replaceChildren();
   if(round>=task.turns.length){
    panel.append(make('p','productive-finished','✓ You practised all three conversation turns aloud.'),
@@ -134,6 +135,7 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
   panel.append(openText,transcript);
   const response=make('p','productive-help','Think of your own response, then say it aloud clearly.');
   panel.append(response);
+  recording=window.DEUTSCH_SPEAKING_RECORDER?.mount?.(panel)||null;
   const confirm=button('✓ I answered aloud',()=>{
    if(answered)return;
    answered=true;
@@ -144,12 +146,24 @@ function addSpeaking(host,{setId,taskIndex,speak}={}){
    const repeat=make('div','productive-actions');
    repeat.append(button('🔊 Hear example',()=>speak(answer)),button('◷ Slow example',()=>speak(answer,true)));
    example.append(repeat,make('p','productive-help','Compare what you said with the example. Is your meaning clear? Do not treat this as a grade.'));
+   const selfCheck=make('fieldset','productive-speaking-checklist');
+   selfCheck.append(make('legend','','Review your own answer · आफ्नो उत्तर जाँच्नुहोस्'));
+   for(const text of [
+    'I answered what my partner asked · मैले प्रश्नको जवाफ दिएँ',
+    'I spoke clearly and at a comfortable pace · मैले स्पष्ट र बिस्तारै बोलेँ',
+    'I can try again without reading · म नहेरी फेरि प्रयास गर्न सक्छु'
+   ]){
+    const line=make('label','productive-check');
+    const mark=make('input');mark.type='checkbox';
+    line.append(mark,make('span','',text));selfCheck.append(line);
+   }
+   example.append(selfCheck);
    panel.append(example,button(round===task.turns.length-1?'Finish dialogue →':'Next partner turn →',()=>{round++;render();},'productive-primary'));
   },'productive-primary');
   panel.append(confirm);
  }
  render();
- return {restart:()=>{round=0;render();}};
+ return {restart:()=>{round=0;render();},dispose:()=>{recording?.dispose?.();recording=null;}};
 }
 window.DEUTSCH_PRODUCTIVE_COACH={addWriting,addSpeaking,wordCount};
 })();

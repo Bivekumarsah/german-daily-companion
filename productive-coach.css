@@ -47,3 +47,16 @@ html[data-theme="light"] .a1-official-audio{background:#eef8fd;border-color:#b3c
 html[data-theme="light"] .a1-official-audio a{color:#1d683c}
 @media(max-width:650px){.productive-writing,.productive-speaking,.productive-turn{padding:12px}.productive-actions>*{flex:1 1 125px}}
 @media(prefers-reduced-motion:reduce){.productive-writing *,.productive-speaking *{animation:none!important;transition:none!important}}
+
+
+/* Explicit-consent local speaking recording: do not obscure skip/replay controls. */
+.productive-recorder{margin:14px 0;padding:13px;border:1px solid #78a1b5;border-radius:12px;background:#102d40}
+.productive-recorder h6{font-size:15px;line-height:1.4;margin:0 0 7px}
+.productive-recorder .productive-btn{min-height:45px}
+.productive-recorder .productive-btn:disabled{opacity:.65;cursor:not-allowed}
+.productive-replay{display:block;width:100%;max-width:480px;min-height:40px;margin:12px 0}
+.productive-replay[hidden]{display:none}
+.productive-mic-status{font-size:13px;line-height:1.6;font-weight:700;color:#d3f2c4;margin:10px 0}
+html[data-theme="light"] .productive-recorder{background:#e8f4f8;border-color:#92b5c4}
+html[data-theme="light"] .productive-mic-status{color:#205c39}
+@media(max-width:600px){.productive-recorder{padding:12px}.productive-recorder .productive-actions{display:grid;grid-template-columns:1fr}.productive-recorder .productive-btn{width:100%}}

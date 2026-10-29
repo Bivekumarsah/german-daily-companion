@@ -11,6 +11,7 @@ const skills=Object.keys(titles);
 let selected=0,skill='listening',index=0,completed=false,examLanguage='guided';
 let answers=[],startSeconds=0,remaining=minutes[skill]*60,timerId=null;
 const writingAnswers={};
+let activeSpeaking=null;
 const el=(tag,klass,txt)=>{
  const n=document.createElement(tag);
  if(klass)n.className=klass;
@@ -136,6 +137,7 @@ function render(){
 }
 function finishMCQ(){stopTimer();completed=true;showTask();}
 function showTask(){
+ activeSpeaking?.dispose?.();activeSpeaking=null;
  content.replaceChildren();
  const set=sets[selected];
  const items=set[skill];
@@ -273,7 +275,7 @@ function showTask(){
   }
  }else{
   response.append(el('p','a1-mock-help','Speak your answer aloud first. If possible, practise the question/request with a speaking partner; the Goethe speaking test is interactive.'));
-  if(window.DEUTSCH_PRODUCTIVE_COACH?.addSpeaking)window.DEUTSCH_PRODUCTIVE_COACH.addSpeaking(response,{setId:set.id,taskIndex:index,speak});
+  if(window.DEUTSCH_PRODUCTIVE_COACH?.addSpeaking)activeSpeaking=window.DEUTSCH_PRODUCTIVE_COACH.addSpeaking(response,{setId:set.id,taskIndex:index,speak});
  }
  content.append(response);
  const model=el('div','a1-mock-model');

@@ -1,4 +1,6 @@
-# DeutschDaily A1 — official vocabulary checkpoint audit
+# DeutschDaily A1 — historical selected-checkpoint audit
+
+**Newer, broader audit:** [Entire Goethe alphabetical-list concordance](goethe-full-concordance.md) reports 683 candidate labels across all printed pages 9–27, compared with 576 local study entries (517 distinct strings): 373 exact, 5 variant and 305 unmatched. This original document preserves the earlier **selected** 176-checkpoint history; numbers below describe the earlier release, not today's current corpus.
 
 **Updated 29 October 2026.** This report tracks a **selected 176-entry reference sample** from the official Goethe-Institut *Start Deutsch 1* word list, not the whole ~650-entry syllabus. This distinction matters: **zero gaps in this sample does not mean the site covers all A1 vocabulary**.
 

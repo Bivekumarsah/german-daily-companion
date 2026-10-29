@@ -13,5 +13,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --check app.js && node --check lessons.js && node --check phrases.js && node --check a1-course-data.js && node --check a1-course.js && node --check sw.js
+      - run: node --check app.js && node --check lessons.js && node --check phrases.js && node --check a1-course-data.js && node --check visual-lab.js && node --check a1-course.js && node --check sw.js
       - run: node test.mjs

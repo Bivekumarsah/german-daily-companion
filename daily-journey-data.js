@@ -19,7 +19,7 @@ const shuffle=(items,seed)=>{
  return result.map(v=>v.item);
 };
 const selectUnit=(units,completed)=>{
- const remaining=units.find(u=>steps.some(s=>!completed?.[u.id]?.[s.id]));
+ const remaining=units.find(u=>['vocabulary','grammar','listening','reading','writing','speaking'].some(s=>!completed?.[u.id]?.[s]));
  return remaining||units[0];
 };
 const questions=(unit,kind,seed)=> {

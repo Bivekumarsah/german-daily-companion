@@ -186,20 +186,25 @@
         cleanupRecording();
         try{
           const requested=await navigator.mediaDevices.getUserMedia({audio:true});
-          if(selected!==s.id){requested.getTracks().forEach(t=>t.stop());return;}
+          if(selected!==s.id || !/^#\/practice(?:\/|$)/.test(location.hash)){
+            requested.getTracks().forEach(t=>t.stop());return;
+          }
           stream=requested;
           const chunks=[];
-          recorder=new MediaRecorder(stream);
-          recorder.addEventListener('dataavailable',e=>{if(e.data?.size)chunks.push(e.data);});
-          recorder.addEventListener('stop',()=>{
-            if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
+          const activeRecorder=new MediaRecorder(requested);
+          recorder=activeRecorder;
+          activeRecorder.addEventListener('dataavailable',e=>{if(e.data?.size)chunks.push(e.data);});
+          activeRecorder.addEventListener('stop',()=>{
+            requested.getTracks().forEach(t=>t.stop());
+            if(stream===requested)stream=null;
+            if(recorder!==activeRecorder || selected!==s.id)return;
             if(chunks.length){
-              recordingUrl=URL.createObjectURL(new Blob(chunks,{type:recorder.mimeType||'audio/webm'}));
+              recordingUrl=URL.createObjectURL(new Blob(chunks,{type:activeRecorder.mimeType||'audio/webm'}));
               playback.src=recordingUrl;playback.hidden=false;
               recordStatus.textContent='Your recording is available below on this device only. Compare it with the German audio.';
             }else recordStatus.textContent='No recording was captured. You can retry.';
           });
-          recorder.start();
+          activeRecorder.start();
           playback.hidden=true;recordBtn.textContent='■ Stop recording';
           recordStatus.textContent='Recording locally… tap Stop recording when finished.';
         }catch{
@@ -222,6 +227,12 @@
     speaking.append(mark,el('p','pl-disclaimer','Practice marks are self-reported. They do not verify spoken accuracy or predict an A1 exam result.'));
     detail.append(speaking);
   }
+  window.addEventListener('hashchange',()=>{
+    if(!/^#\/practice(?:\/|$)/.test(location.hash))cleanupRecording();
+  });
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)cleanupRecording();
+  });
   document.addEventListener('deutschdaily:restore-a1',()=>{practised=stored();showCards();showDetail();});
   showCards();showDetail();
   window.DEUTSCH_PRONUNCIATION_LAB={sounds,renderSound:id=>select(id)};

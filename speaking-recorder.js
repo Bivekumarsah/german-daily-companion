@@ -116,7 +116,7 @@ function mount(parent){
  function onVisibility(){if(document.hidden){dispose();}}
  const controller={dispose,stop,forget,get active(){return !disposed;}};
  if(!supported){record.disabled=true;setState('Microphone recording is unavailable here. You can still listen and speak aloud.');}
- record.addEventListener('click',()=>{if(recorder?.state==='recording')stop();else start();});
+ record.addEventListener('click',()=>{if(recorder?.state==='recording')return stop();return start();});
  discard.addEventListener('click',forget);
  window.addEventListener?.('hashchange',onNavigation);
  window.addEventListener?.('pagehide',dispose);

@@ -93,6 +93,16 @@
  ['ein bisschen','a little','अलिकति','Ich spreche ein bisschen Deutsch.','I speak a little German.'],
  ['genau','exactly / correct','ठ्याक्कै / सही','Ja, genau!','Yes, exactly!'],
  ['natürlich','of course','अवश्य','Natürlich helfe ich dir.','Of course I will help you.']
+ ]},
+ {id:'directions',title:'🚆 Travel and exam instructions',items:[
+ ['abfahren','to depart (vehicle)','प्रस्थान गर्नु','Der Zug fährt um acht Uhr ab.','The train departs at eight.'],
+ ['ankommen','to arrive','आइपुग्नु','Wir kommen morgen an.','We arrive tomorrow.'],
+ ['anfangen','to start / begin','सुरु गर्नु','Der Unterricht fängt um neun Uhr an.','The lesson starts at nine.'],
+ ['abgeben','to hand in / submit','बुझाउनु','Bitte geben Sie das Formular hier ab.','Please hand in the form here.'],
+ ['sich anmelden','to register','दर्ता गर्नु','Ich möchte mich für den Kurs anmelden.','I would like to register for the course.'],
+ ['anbieten','to offer','प्रस्ताव गर्नु','Kann ich dir Tee anbieten?','Can I offer you tea?'],
+ ['ergänzen','to complete / fill in','पूरा गर्नु','Ergänzen Sie bitte das Wort.','Please complete the word.'],
+ ['aussteigen','to get off a vehicle','सवारीबाट ओर्लनु','Wir steigen an der nächsten Haltestelle aus.','We get off at the next stop.']
  ]}
  ];
  window.DEUTSCH_A1_ESSENTIALS=groups;

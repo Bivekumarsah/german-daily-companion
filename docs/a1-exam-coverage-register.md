@@ -8,7 +8,11 @@ Goethe-Institut's public descriptions:
 - [Official free exam-training examples and original audio](https://www.goethe.de/en/spr/prf/ueb/pa1.html): this is the authoritative way to check task delivery and authentic audio.
 - [Official adult A1 word list](https://www.goethe.de/pro/relaunch/prf/en/A1_SD1_Wortliste_02.pdf): should be used to perform a *manual, editorially reviewed* vocabulary concordance. Inclusion in DeutschDaily is NOT currently certified.
 
-## Most recent vocabulary audit status (29 October 2026)
+## Full-source audit update (29 October 2026)
+
+The latest [official Goethe whole-alphabet audit](goethe-full-concordance.md) programmatically examined all 19 printed alphabetic-list pages. It extracted **683 distinct candidate source labels** (principal and derived forms), compared against **576 current study entries / 517 distinct local German strings**, and reported **373 exact matches, 5 contextual variants for review, 305 unmatched source candidates**. Goethe's approximately 650 *principal* entries should **not** be equated with 683 extracted labels. The existing 176 selected headword checkpoints remain complete, but the **whole A1 course is still not independently certified complete**.
+
+## Previous sample vocabulary audit status (29 October 2026)
 
 The vocabulary data now includes **528 study entries / 469 distinct case-insensitive German entry strings**, including **168 essential-word cards**. All **37 previously missing exact-entry terms** from the fixed, hand-selected **176-checkpoint Goethe word-list sample** have now been added. That sample now has **176 exact string matches**, but **is NOT a full ~650-word-list concordance or percentage of A1 completion**. See [the latest A1 vocabulary accuracy audit](a1-vocabulary-accuracy-audit.md). Earlier counts below are historical milestones, not the current inventory.
 

@@ -45,3 +45,90 @@ html[data-theme="light"] .lesson-badge{color:#245030;background:#e2f3e3}
 html[data-theme="light"] .result-state.error{background:#9b3346;color:#fff}
 @media(max-width:520px){.backup-actions{width:100%}.backup-actions button{flex:1}}
 @media(max-width:700px){.main-nav{display:flex;order:3;flex-basis:100%;gap:18px;overflow-x:auto;padding-bottom:4px}.main-nav a{white-space:nowrap;padding:8px 3px;font-size:13px}}
+
+/* DeutschDaily A1 Pathway — responsive, accessible, no external fonts or icon dependencies */
+.hero-course-link{display:inline-flex;margin-top:16px;padding:13px 19px;border-radius:12px;background:var(--green);color:#102019;font-weight:800;letter-spacing:-.1px;box-shadow:0 8px 23px #0003}
+.hero-course-link:hover,.hero-course-link:focus-visible{background:#e0ffb2}
+.a1-full-course{scroll-margin-top:22px}
+.a1-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:22px}
+.a1-stats>div{border:1px solid #3e516b;border-radius:16px;padding:20px;background:linear-gradient(145deg,#202f4b,#152237);display:flex;flex-direction:column;gap:6px}
+.a1-stats strong{font-size:28px;color:var(--green);line-height:1.1;font-variant-numeric:tabular-nums}
+.a1-stats span{font-size:12px;color:#b8c7dd}
+.a1-track{margin:18px 0 10px;height:9px}
+.a1-toolbar{display:flex;gap:15px;align-items:flex-end;justify-content:space-between;margin:28px 0 15px}
+.a1-toolbar label{font-size:12px;display:flex;flex-direction:column;gap:8px;font-weight:750;color:var(--dim);flex:1}
+.a1-control{background:#10192b;color:#f0f4fc;border:1px solid #586987;padding:12px 14px;border-radius:10px;min-height:46px;width:100%;font:inherit;font-size:14px}
+.a1-control:focus,.a1-writing:focus{outline:3px solid #a4d7ff;outline-offset:2px}
+.a1-unit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.a1-unit-card{width:100%;border:1px solid #3a506f;border-radius:17px;background:linear-gradient(130deg,#1a2a42,#172238);text-align:left;color:#ebf4ff;padding:18px;display:flex;flex-direction:column;gap:7px;min-height:155px;transition:transform .16s,border-color .16s}
+.a1-unit-card:hover{transform:translateY(-2px);border-color:#a3d977}.a1-unit-card.is-done{border-color:#83bb6b}
+.a1-unit-num{color:#c7f783;font-size:10px;letter-spacing:1.3px;font-weight:850}
+.a1-unit-name{font-size:17px;line-height:1.3}
+.a1-unit-group,.a1-unit-skill{color:#bdcae0;font-size:12px}.a1-unit-skill{margin-top:auto}
+.a1-workspace{margin-top:26px;scroll-margin-top:20px;padding:25px;min-height:260px}
+.a1-work-top{display:flex;gap:16px;justify-content:space-between;align-items:flex-start}
+.a1-work-top h3{font-size:clamp(22px,3vw,30px);margin:12px 0 8px}
+.a1-skill-tabs,.a1-exam-tabs{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 14px}
+.a1-skill-tab,.a1-exam-tabs button{background:#243852;border:1px solid #4c627e;color:#dce7f9;border-radius:11px;padding:11px 13px;font-weight:750;font-size:13px;min-height:44px}
+.a1-skill-tab.active,.a1-exam-tabs button.active{background:var(--green);color:#122117;border-color:var(--green)}
+.a1-unit-status,.a1-help{color:#bbc8dc;font-size:12px;line-height:1.65}
+.a1-note{padding:12px;border:1px solid #5986a3;border-radius:10px;background:#203749;color:#e6f3ff;font-size:13px}
+.a1-tab-content{padding:17px 0 10px;min-height:180px}
+.a1-task-title{font-size:21px;margin:0 0 8px}.a1-grammar-copy,.a1-grammar-ne{line-height:1.8;font-size:15px}
+.a1-grammar-ne,.a1-word-ne{font-family:system-ui,"Noto Sans Devanagari",sans-serif;color:#c9dcf4}
+.a1-phon{font-size:12px;color:#b5cdde;line-height:1.6}
+.a1-vocab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:22px 0}
+.a1-word-card{display:flex;flex-direction:column;gap:6px;background:#112039;border:1px solid #354a69;padding:16px;border-radius:12px}
+.a1-word-de{font-size:19px;line-height:1.35}.a1-word-en{font-size:13px;color:#d4e1f4}.a1-word-ne{font-size:14px;line-height:1.6}
+.a1-audio-small{padding:9px 12px;min-height:39px;border-radius:9px;border:1px solid #618b99;background:#24435a;color:#ecfff1;text-align:center;align-self:flex-start;cursor:pointer;font-size:12px;font-weight:700}
+.a1-audio-small:hover{background:#355e72}
+.a1-example{display:flex;flex-direction:column;gap:10px;background:#172b43;border-left:4px solid var(--green);border-radius:12px;padding:18px;margin:18px 0 23px}
+.a1-example strong{font-size:20px}.a1-example span{line-height:1.5}
+.a1-question{border:1px solid #455976;border-radius:14px;padding:20px;margin:18px 0;background:#182943}
+.a1-passage{font-size:17px;line-height:1.85;white-space:pre-wrap}
+.a1-question-title{font-weight:750;font-size:16px;margin:21px 0 14px}
+.a1-options{display:grid;grid-template-columns:1fr;gap:10px}
+.a1-choice{background:#273c59;border:1px solid #526b87;text-align:left;border-radius:10px;padding:13px 15px;color:#f1f5ff;min-height:46px}
+.a1-choice:not(:disabled):hover{border-color:var(--green);background:#2c4a61}
+.a1-choice.correct{border-color:#7eca80;background:#235139;color:#e7ffe6}
+.a1-choice.incorrect{border-color:#f3a6ac;background:#5e2e39;color:white}
+.a1-choice:disabled{cursor:default}
+.a1-feedback{font-size:14px;font-weight:700;margin:16px 0 0;line-height:1.65}
+.a1-transcript{background:#294158;border-radius:9px;padding:14px;line-height:1.7}
+.a1-writing{display:block;resize:vertical;width:100%;min-height:135px;box-sizing:border-box;color:#f5fbff;background:#101d31;border:1px solid #546982;border-radius:12px;padding:16px;font:inherit;line-height:1.7}
+.a1-model{background:#20384b;border-radius:12px;padding:15px;margin:14px 0}
+.a1-record-controls{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.a1-tab-content>.primary-btn,.a1-tab-content>.secondary-btn{margin:12px 8px 5px 0}
+.a1-navigation{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #3b4d68;margin-top:15px;padding-top:18px}
+.a1-exam-section{scroll-margin-top:20px}.a1-exam-body{padding:25px}.a1-exam-body h3{font-size:25px;margin:0}
+.a1-exam-warning{font-size:12px;line-height:1.7;color:#bfd1e4;padding:12px;border-left:3px solid #d7a96c;background:#263445;border-radius:7px;margin-top:25px}
+.a1-sources{padding:27px;line-height:1.7}.a1-sources h2{margin-top:0}.a1-sources ul{padding-left:21px}.a1-sources li{margin:10px 0}.a1-sources a{text-decoration:underline;text-underline-offset:3px;color:#c7f783}
+.a1-sources a:hover{color:#fff}
+@media(max-width:940px){.a1-unit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+  .site-header{flex-wrap:wrap;gap:12px;padding:10px 0}.site-header .main-nav{display:flex;order:4;width:100%;overflow-x:auto;white-space:nowrap;gap:8px;padding:5px 0 10px;scrollbar-width:thin}
+  .site-header .main-nav a{padding:8px 10px;flex:0 0 auto;border:1px solid #344b69;border-radius:20px;font-size:12px}
+  .site-header .offline-indicator{display:none}.theme-toggle{margin-left:auto}
+  .a1-unit-grid{grid-template-columns:1fr;gap:10px}.a1-unit-card{min-height:118px;padding:15px}
+  .a1-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.a1-stats>div{padding:16px}.a1-stats strong{font-size:24px}
+  .a1-toolbar{flex-direction:column;align-items:stretch}.a1-vocab-grid{grid-template-columns:1fr}
+  .a1-workspace,.a1-exam-body,.a1-sources{padding:17px}.a1-skill-tabs,.a1-exam-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:7px}
+  .a1-skill-tab,.a1-exam-tabs button{white-space:nowrap;flex:0 0 auto}
+  .a1-work-top{flex-wrap:wrap}.a1-navigation .secondary-btn{flex:1;padding:12px 7px;font-size:12px}
+  .a1-question{padding:14px}.a1-passage{font-size:16px}
+}
+[data-theme="light"] .a1-stats>div,[data-theme="light"] .a1-unit-card,[data-theme="light"] .a1-question,[data-theme="light"] .a1-word-card,[data-theme="light"] .a1-example,[data-theme="light"] .a1-model,[data-theme="light"] .a1-sources,[data-theme="light"] .a1-exam-warning{background:#eef4fc;color:#15253e;border-color:#bccbde}
+[data-theme="light"] .a1-stats span,[data-theme="light"] .a1-unit-group,[data-theme="light"] .a1-unit-skill,[data-theme="light"] .a1-help,[data-theme="light"] .a1-unit-status,[data-theme="light"] .a1-word-en,[data-theme="light"] .a1-word-ne,[data-theme="light"] .a1-phon{color:#3c4d66}
+[data-theme="light"] .a1-unit-num,[data-theme="light"] .a1-stats strong,[data-theme="light"] .a1-sources a{color:#225d48}
+[data-theme="light"] .a1-control,[data-theme="light"] .a1-writing{background:white;color:#15253e;border-color:#91a6bf}
+[data-theme="light"] .a1-skill-tab,[data-theme="light"] .a1-exam-tabs button,[data-theme="light"] .a1-choice{background:#e5effa;color:#1b2c48;border-color:#a3bad5}
+[data-theme="light"] .a1-skill-tab.active,[data-theme="light"] .a1-exam-tabs button.active{background:#246447;color:white;border-color:#246447}
+[data-theme="light"] .a1-choice.correct{background:#dcf8df;color:#164b27}
+[data-theme="light"] .a1-choice.incorrect{background:#ffe1e1;color:#6c1f27}
+[data-theme="light"] .a1-transcript{background:#d8e6f6;color:#15253e}
+.a1-review-section{scroll-margin-top:20px}.a1-review-panel{padding:27px;max-width:760px}
+.a1-review-word{font-size:clamp(27px,4vw,43px);font-weight:820;line-height:1.25;margin:20px 0}
+.a1-review-answer{font-size:16px;background:#243a52;border-radius:12px;padding:17px;margin:15px 0;color:#eaf2ff}
+.a1-review-answer strong{font-size:20px}.a1-review-answer p{font-size:15px;line-height:1.7}
+.a1-review-buttons{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+[data-theme="light"] .a1-review-answer{background:#e6eff8;color:#162940}

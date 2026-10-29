@@ -5,6 +5,8 @@ const PHRASES = window.DAILY_PHRASES || [];
 const ALPHABET = window.GERMAN_ALPHABET || [];
 const LESSONS = window.DEUTSCH_LESSONS || [];
 const KEY_PROGRESS = 'deutschdaily-lessons-v1';
+const KEY_A1_PROGRESS = 'deutschdaily-a1-pathway-v1';
+const KEY_A1_REVIEW = 'deutschdaily-a1-vocabulary-review-v1';
 const KEY_THEME = 'deutschdaily-theme-v1';
 const KEY_FAV = 'deutschdaily-favorites-v1';
 const KEY_CACHE = 'deutschdaily-translations-v1';
@@ -278,20 +280,46 @@ function importLearning(event){
  if(file.size>2*1024*1024){notify('Backup file is too large (2 MB max).');return;}
  file.text().then(source=>{
   const data=JSON.parse(source);
-  if(data?.version!==1 || !Array.isArray(data.favorites) || typeof data.translationCache!=='object' || !data.translationCache || Array.isArray(data.translationCache) || typeof data.progress!=='object' || !data.progress?.completed)throw new Error('Invalid backup format');
+  if(![1,2].includes(data?.version) || !Array.isArray(data.favorites) || typeof data.translationCache!=='object' || !data.translationCache || Array.isArray(data.translationCache) || typeof data.progress!=='object' || !data.progress?.completed)throw new Error('Invalid backup format');
   const clean=(p)=>p&&typeof p.english==='string'&&typeof p.german==='string'&&p.english.length<=500&&p.german.length<=1000&&germanLooksValid(p.english,p.german);
   const importedFav=data.favorites.filter(clean).slice(0,100).map(x=>({english:x.english,german:x.german,nepali:typeof x.nepali==='string'?x.nepali.slice(0,2000):'',pronEnglish:typeof x.pronEnglish==='string'?x.pronEnglish.slice(0,500):'',pronNepali:typeof x.pronNepali==='string'?x.pronNepali.slice(0,500):'',source:'Saved offline'}));
   const importedCache=Object.fromEntries(Object.values(data.translationCache).filter(clean).slice(-CACHE_LIMIT).map(x=>[normalize(x.english),{english:x.english,german:x.german,nepali:typeof x.nepali==='string'?x.nepali.slice(0,2000):'',pronEnglish:'',pronNepali:'',source:'Online translation'}]));
   const cleanedCompleted={};for(const l of LESSONS){if(typeof data.progress.completed[l.id]==='string')cleanedCompleted[l.id]=data.progress.completed[l.id].slice(0,10);}
   favorites=importedFav;translationCache=importedCache;
   progress={completed:cleanedCompleted,lastDay:typeof data.progress.lastDay==='string'?data.progress.lastDay.slice(0,10):'',streak:Number.isSafeInteger(data.progress.streak)&&data.progress.streak>=0?Math.min(data.progress.streak,10000):0};
+  const newA1={};
+  if(data.version===2 && data.courseProgress && typeof data.courseProgress==='object' && !Array.isArray(data.courseProgress)){
+   const validIds=new Set((window.DEUTSCH_A1?.units||[]).map(u=>u.id));
+   for(const [id,val] of Object.entries(data.courseProgress)){
+    if(!validIds.has(id)||!val||typeof val!=='object')continue;
+    const entry={};for(const skill of ['vocabulary','grammar','listening','reading','writing','speaking'])if(val[skill]===true)entry[skill]=true;
+    if(typeof val.updated==='string')entry.updated=val.updated.slice(0,10);
+    newA1[id]=entry;
+   }
+  }
   const ok=[writeStorage(KEY_FAV,favorites),writeStorage(KEY_CACHE,translationCache),writeStorage(KEY_PROGRESS,progress)];
+  if(data.version===2){
+   ok.push(writeStorage(KEY_A1_PROGRESS,newA1));
+   if(data.vocabularyReview&&typeof data.vocabularyReview==='object'&&!Array.isArray(data.vocabularyReview)){
+    const validWords=new Set((window.DEUTSCH_A1?.units||[]).flatMap(u=>u.vocab.map(w=>w.de.toLowerCase())));
+    const cleanReview={};
+    for(const [word,value] of Object.entries(data.vocabularyReview)){
+     if(!validWords.has(word)||!value||typeof value!=='object')continue;
+     if(typeof value.due!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value.due))continue;
+     const interval=Number(value.interval),repetitions=Number(value.repetitions);
+     if(!Number.isInteger(interval)||interval<0||interval>120||!Number.isInteger(repetitions)||repetitions<0||repetitions>10000)continue;
+     cleanReview[word]={due:value.due,interval,repetitions};
+    }
+    ok.push(writeStorage(KEY_A1_REVIEW,cleanReview));
+   }
+  }
   renderFavorites();renderRecent();renderLessons();scheduleTranslation();
+  document.dispatchEvent(new CustomEvent('deutschdaily:restore-a1'));
   notify(ok.every(Boolean)?'Backup restored on this device.':'Some data could not be saved; check browser storage settings.');
  }).catch(()=>notify('Could not read this backup. Select a DeutschDaily JSON export.'));
 }
 function exportLearning(){
- const exportData={version:1,exportedAt:new Date().toISOString(),favorites,translationCache,progress};
+ const exportData={version:2,exportedAt:new Date().toISOString(),favorites,translationCache,progress,courseProgress:readStorage(KEY_A1_PROGRESS,{}),vocabularyReview:readStorage(KEY_A1_REVIEW,{})};
  const blob=new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='deutschdaily-progress-'+dayKey()+'.json';document.body.append(a);a.click();a.remove();
  setTimeout(()=>URL.revokeObjectURL(url),5000);notify('Learning data exported. Keep your backup file safe.');

@@ -46,6 +46,12 @@ The official adult *Start Deutsch 1* booklet (Goethe-Institut, **29-page word-li
 ### Word-list citation
 - [Goethe-Institut: Start Deutsch 1 Wortliste (PDF)](https://www.goethe.de/pro/relaunch/prf/en/A1_SD1_Wortliste_02.pdf), especially the preface (printed page 3), themes (page 4), and alphabetic lexicon (printed pages 9–27).
 
+## Goethe official vocabulary editorial pass (29 October 2026)
+
+The latest source-grounded pass has added **48 originally written German/English/Nepali cards** (6 more topic sets), bringing the 80 essential expressions to **128**. Combined course, noun and expression banks now contain **429 distinct case-folded German strings** across **488 study entries**. This is **not** equivalent to 429 of Goethe's approximately 650 official headwords.
+
+A [reproducible checkpoint audit](a1-vocabulary-accuracy-audit.md) tests 176 selected official headwords from pages 9–26 of the official list and reports **139 exact matches and 37 exact-entry gaps**, including singular *der Schuh* (the core course currently offers plural *die Schuhe*). The sample is deliberately nonrandom; **no full official-list coverage percentage** can be inferred. Run `node audit-a1.mjs` for the continuously calculated local inventory.
+
 ## Editorial findings and unfinished release gates
 1. **Official word-list gap audit is outstanding.** The original 244 and the supplementary 100 entries were not mechanically/linguistically matched to every official Goethe A1 word-list headword; spellings, word senses, plural forms, article distribution and coverage should be verified by a German-speaking editor.
 2. **Pronunciation audit is outstanding** for all 36 lessons, 100 supplementary words and 12 curated pronunciation tutorials. English-sound/Devanagari hints remain approximate, especially ich /ç/, ö and ü.

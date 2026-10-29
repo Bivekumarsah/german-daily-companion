@@ -150,6 +150,27 @@ function showTask(){
    result.append(el('h5','', 'Practice results: '+tally+' / '+items.length+' correct'),
     el('p','', 'Only the objective questions are checked automatically. This is not a Goethe examination grade, and it does not assess writing or speaking.'));
    result.append(el('p','', 'To judge exam readiness, use Goethe’s official model exam with original audio and ask a teacher to review writing and speaking.'));
+   const byKind=new Map();
+   for(const [i,item] of items.entries()){
+    const label=item[4]||'other';
+    if(!byKind.has(label))byKind.set(label,{correct:0,total:0});
+    const row=byKind.get(label);row.total++;
+    if(answers[i]===item[3])row.correct++;
+   }
+   const breakdown=el('section','a1-mock-breakdown');
+   breakdown.append(el('h6','','Practice feedback by text type'));
+   for(const [name,stats] of byKind){
+    breakdown.append(el('p','a1-mock-breakdown-row',
+      name[0].toUpperCase()+name.slice(1)+': '+stats.correct+' / '+stats.total+' correct'));
+   }
+   const weaknesses=[...byKind].filter(([,stats])=>stats.correct<stats.total);
+   if(weaknesses.length){
+    const weakest=weaknesses.sort((a,b)=>(a[1].correct/a[1].total)-(b[1].correct/b[1].total))[0][0];
+    breakdown.append(el('p','a1-mock-help','Suggested next practice: focus on '+weakest+' tasks and listen/read for the key detail. This is a study suggestion, not a diagnosis of proficiency.'));
+   }else{
+    breakdown.append(el('p','a1-mock-help','All answers were correct in this set. Try authentic Goethe audio or a new reading sample next.'));
+   }
+   result.append(breakdown);
    const review=el('details','a1-mock-review');
    review.append(el('summary','', 'Review the original questions and answer explanations'));
    for(const [i,q] of items.entries()){

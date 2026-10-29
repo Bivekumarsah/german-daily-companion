@@ -39,6 +39,19 @@ function renderDashboard(){
  $('a1Total').textContent=String(total);$('a1Done').textContent=String(done);$('a1Percent').textContent=total?`${Math.round(100*done/total)}%`:'0%';
  $('a1ProgressFill').style.width=(100*done/total)+'%';
  $('a1ProgressTrack').setAttribute('aria-valuenow',String(Math.round(100*done/total)));
+ const upNext=data.units.find(u=>skills.some(skill=>!pstate(u.id)[skill]))||data.units[0];
+ if(upNext){
+  const practiced=skills.filter(skill=>pstate(upNext.id)[skill]).length;
+  const label=$('a1ContinueTitle'),desc=$('a1ContinueStatus'),button=$('a1Continue');
+  if(label)label.textContent=(done===total?'Review: ':'Continue: ')+upNext.title;
+  if(desc)desc.textContent=done===total?
+   'All units practised. Revisit words, listen slowly, and check your four A1 skills.':
+   'Unit '+upNext.number+' · '+practiced+' / 6 activities practised · Try 10 focused minutes today';
+  if(button){
+   button.textContent=done===total?'Review Unit 1 →':(practiced?'Resume lesson →':'Start lesson →');
+   button.onclick=()=>openUnit(upNext.id);
+  }
+ }
  const list=$('a1UnitGrid');clear(list);
  const units=data.units.filter(u=>(filter==='All'||u.group===filter)&&(`${u.title} ${u.grammar.title} ${u.vocab.map(v=>v.en).join(' ')}`.toLowerCase().includes(keyword)));
  for(const u of units){

@@ -94,7 +94,7 @@
     }
     function advance() {
       if(index>=order.length) {
-        index=0;successes=0;round();return;
+        index=0;successes=0;actionRow.hidden=false;round();return;
       }
       if(!answered)return;
       index++;
@@ -108,8 +108,6 @@
       continueButton.hidden=false;
       // Keep the practice score separate from stored unit completion and Goethe results.
     }
-    // When replaying the complete practice, restore audio controls and counters.
-    continueButton.addEventListener('click',()=>{if(index===0)actionRow.hidden=false;});
     round();
     host.append(ear);
     return true;

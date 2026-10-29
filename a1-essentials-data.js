@@ -103,6 +103,66 @@
  ['anbieten','to offer','प्रस्ताव गर्नु','Kann ich dir Tee anbieten?','Can I offer you tea?'],
  ['ergänzen','to complete / fill in','पूरा गर्नु','Ergänzen Sie bitte das Wort.','Please complete the word.'],
  ['aussteigen','to get off a vehicle','सवारीबाट ओर्लनु','Wir steigen an der nächsten Haltestelle aus.','We get off at the next stop.']
+ ]},
+ {id:"official-paperwork",title:"✉️ Forms, messages and paperwork",items:[
+ ["der Absender","sender","पत्र पठाउने व्यक्ति","Der Absender steht auf dem Brief.","The sender is written on the letter."],
+ ["die Briefmarke","postage stamp","हुलाक टिकट","Ich kaufe eine Briefmarke bei der Post.","I buy a stamp at the post office."],
+ ["die Anzeige","advertisement","विज्ञापन","Ich lese eine Anzeige für ein Zimmer.","I read an advertisement for a room."],
+ ["die Ansage","announcement","घोषणा","Die Ansage kommt am Bahnhof.","The announcement is at the train station."],
+ ["das Datum","date","मिति","Bitte schreiben Sie das Datum hier.","Please write the date here."],
+ ["das Formular","form","फारम","Ich brauche ein Formular für den Kurs.","I need a form for the course."],
+ ["der Drucker","printer","प्रिन्टर","Der Drucker steht im Büro.","The printer is in the office."],
+ ["das Konto","bank account","बैंक खाता","Ich habe ein Konto bei dieser Bank.","I have an account at this bank."]
+ ]},
+ {id:"official-food-home",title:"🍐 Food and things at home",items:[
+ ["die Birne","pear","नासपाती","Ich esse eine Birne zum Frühstück.","I eat a pear for breakfast."],
+ ["die Butter","butter","मक्खन","Möchtest du Brot mit Butter?","Would you like bread with butter?"],
+ ["der Fisch","fish","माछा","Der Fisch ist heute frisch.","The fish is fresh today."],
+ ["das Gemüse","vegetables","तरकारी","Ich kaufe Gemüse auf dem Markt.","I buy vegetables at the market."],
+ ["das Obst","fruit","फलफूल","Das Obst ist im Kühlschrank.","The fruit is in the fridge."],
+ ["der Kühlschrank","refrigerator","फ्रिज","Die Milch steht im Kühlschrank.","The milk is in the fridge."],
+ ["das Öl","oil","तेल","Für den Salat brauche ich Öl.","I need oil for the salad."],
+ ["der Garten","garden","बगैँचा","Die Kinder spielen im Garten.","The children play in the garden."]
+ ]},
+ {id:"official-work",title:"💻 Work and public life",items:[
+ ["arbeitslos","unemployed","बेरोजगार","Mein Nachbar ist zurzeit arbeitslos.","My neighbour is unemployed at the moment."],
+ ["die Firma","company","कम्पनी","Mein Bruder arbeitet in einer Firma.","My brother works at a company."],
+ ["der Computer","computer","कम्प्युटर","Mein Computer ist heute langsam.","My computer is slow today."],
+ ["der Arbeitsplatz","workplace","कार्यस्थल","Mein Arbeitsplatz ist in der Stadt.","My workplace is in the city."],
+ ["der Kollege","male colleague","सहकर्मी (पुरुष)","Mein Kollege kommt um neun Uhr.","My colleague arrives at nine."],
+ ["die Polizei","police","प्रहरी","Die Polizei ist vor dem Bahnhof.","The police are in front of the station."],
+ ["der Koffer","suitcase","सुटकेस","Mein Koffer ist sehr schwer.","My suitcase is very heavy."],
+ ["die Freizeit","free time","फुर्सदको समय","In meiner Freizeit lese ich gern.","I like reading in my free time."]
+ ]},
+ {id:"official-travel-services",title:"✈️ Travel and service words",items:[
+ ["der Flughafen","airport","विमानस्थल","Der Bus fährt zum Flughafen.","The bus goes to the airport."],
+ ["die Rezeption","hotel reception","होटलको रिसेप्सन","Der Schlüssel ist an der Rezeption.","The key is at reception."],
+ ["die S-Bahn","suburban train","शहरी रेल सेवा","Ich fahre mit der S-Bahn zur Arbeit.","I travel to work on the S-Bahn."],
+ ["der Schalter","counter / service desk","काउन्टर","Wo ist der Schalter für Fahrkarten?","Where is the ticket counter?"],
+ ["der Aufzug","elevator","लिफ्ट","Der Aufzug ist rechts.","The lift is on the right."],
+ ["die Auskunft","information / enquiry desk","सूचना / सोधपुछ","Ich brauche eine Auskunft zum Zug.","I need information about the train."],
+ ["der Abflug","flight departure","उडान प्रस्थान","Der Abflug ist um sieben Uhr.","The departure is at seven."],
+ ["der Anschluss","connection (transport)","अर्को यातायातसँगको जडान","Wir haben in Köln Anschluss.","We have a connection in Cologne."]
+ ]},
+ {id:"official-instructions",title:"📋 Signs, tasks and instructions",items:[
+ ["Achtung","attention / caution","सावधान","Achtung! Der Boden ist nass.","Caution! The floor is wet."],
+ ["aufhören","to stop","रोक्नु","Der Unterricht hört um drei Uhr auf.","The lesson ends at three."],
+ ["dauern","to take (time)","समय लाग्नु","Wie lange dauert der Film?","How long does the film last?"],
+ ["reparieren","to repair","मर्मत गर्नु","Ich muss mein Fahrrad reparieren.","I must repair my bicycle."],
+ ["pünktlich","punctual / on time","समयमै","Der Zug ist heute pünktlich.","The train is on time today."],
+ ["der Fehler","mistake / error","गल्ती","Ich habe einen Fehler gemacht.","I made a mistake."],
+ ["der Bleistift","pencil","सिसाकलम","Ich schreibe mit einem Bleistift.","I write with a pencil."],
+ ["die Lösung","solution","समाधान","Die Lösung ist ganz einfach.","The solution is very simple."]
+ ]},
+ {id:"official-people-nature",title:"🌷 Body, family and nature",items:[
+ ["der Arm","arm","पाखुरा","Mein Arm tut weh.","My arm hurts."],
+ ["das Auge","eye","आँखा","Mein linkes Auge tut weh.","My left eye hurts."],
+ ["der Hund","dog","कुकुर","Der Hund schläft im Garten.","The dog is sleeping in the garden."],
+ ["die Blume","flower","फूल","Die Blume ist gelb.","The flower is yellow."],
+ ["die Oma","grandmother (informal)","हजुरआमा","Meine Oma wohnt in Bonn.","My grandmother lives in Bonn."],
+ ["der Opa","grandfather (informal)","हजुरबुबा","Mein Opa hört gern Musik.","My grandfather likes listening to music."],
+ ["der Fuß","foot","खुट्टा","Mein rechter Fuß tut weh.","My right foot hurts."],
+ ["der Mund","mouth","मुख","Öffnen Sie bitte den Mund.","Please open your mouth."]
  ]}
  ];
  window.DEUTSCH_A1_ESSENTIALS=groups;

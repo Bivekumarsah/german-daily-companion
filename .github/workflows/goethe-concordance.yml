@@ -1,0 +1,46 @@
+name: Goethe A1 source concordance
+on:
+  pull_request:
+    paths:
+      - 'scripts/goethe-full-audit.py'
+      - 'scripts/export-local-entries.mjs'
+      - 'a1-essentials-data.js'
+      - 'a1-course-data.js'
+      - 'a1-themes-data.js'
+      - '.github/workflows/goethe-concordance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official-lexicon-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install text extraction
+        run: python -m pip install --disable-pip-version-check pymupdf==1.26.5
+      - name: Download official reference PDF only for ephemeral audit
+        run: |
+          mkdir -p /tmp/deutschdaily-a1-source audit-results
+          curl -fSL --retry 3 --retry-delay 3 --connect-timeout 15 --max-time 80 \
+            'https://www.goethe.de/pro/relaunch/prf/en/A1_SD1_Wortliste_02.pdf' \
+            -o /tmp/deutschdaily-a1-source/goethe-start-deutsch1.pdf
+          test "$(head -c 4 /tmp/deutschdaily-a1-source/goethe-start-deutsch1.pdf)" = "%PDF"
+      - name: Extract all alphabetical pages and compare local corpus
+        run: |
+          python scripts/goethe-full-audit.py \
+            --pdf /tmp/deutschdaily-a1-source/goethe-start-deutsch1.pdf \
+            --report audit-results/goethe-full-concordance-summary.json \
+            --debug
+          python -m json.tool audit-results/goethe-full-concordance-summary.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goethe-a1-concordance-summary
+          path: audit-results/goethe-full-concordance-summary.json
+          retention-days: 14

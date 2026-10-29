@@ -72,7 +72,9 @@
     }catch{notice('Speech could not start on this device. Check your browser audio settings.');}
   }
   function cleanupRecording(){
-    if(recorder?.state==='recording')recorder.stop();
+    const oldRecorder=recorder;
+    recorder=null; // Invalidate pending recording callbacks before stopping the mic.
+    if(oldRecorder?.state==='recording')oldRecorder.stop();
     if(stream){for(const track of stream.getTracks())track.stop();stream=null;}
     recorder=null;
     if(recordingUrl && typeof URL!=='undefined' && URL.revokeObjectURL){URL.revokeObjectURL(recordingUrl);}

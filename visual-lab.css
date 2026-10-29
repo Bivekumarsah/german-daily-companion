@@ -1,0 +1,38 @@
+/* Original visual-first A1 learning cards; respects existing dark/light themes. */
+.visual-lab{background:linear-gradient(135deg,#1c3548,#1c2c42);border:1px solid #4c6b7f;border-radius:18px;padding:20px;margin:0 0 28px}
+.visual-lab-eyebrow{font-size:11px;font-weight:800;color:#b5eebc;letter-spacing:1.4px;margin:0 0 7px}
+.visual-lab-title{font-size:clamp(20px,2.5vw,25px);margin:0 0 8px}
+.visual-lab-intro{font-size:13px;line-height:1.65;color:#d2e4f1;margin:0 0 18px}
+.visual-lab-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.visual-lab-card{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;padding:14px 10px;background:#243c54;border:1px solid #5f7a8e;border-radius:14px;color:#ecf7ff;min-height:220px;text-align:center}
+.visual-lab-card:hover{border-color:#c7f783;transform:translateY(-2px)}
+.visual-lab-card:focus-visible,.visual-lab-option:focus-visible{outline:3px solid #a4d7ff;outline-offset:3px}
+.visual-lab-picture{font-size:clamp(34px,4vw,53px);line-height:1.3;min-height:68px;display:flex;align-items:center;justify-content:center}
+.visual-lab-german{font-size:18px;line-height:1.4;overflow-wrap:anywhere}
+.visual-lab-translation{font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.visual-lab-pronunciation{font-size:11px;color:#d2e2f7;line-height:1.6;overflow-wrap:anywhere}
+.visual-lab-listen{font-size:12px;font-weight:800;color:#cbfaa6;margin-top:auto}
+.visual-lab-practice{background:#122b3f;border:1px solid #4a7186;border-radius:14px;padding:15px;margin-top:17px}
+.visual-lab-practice-title{font-size:15px;margin:0 0 9px}
+.visual-lab-question{display:flex;align-items:center;gap:12px;font-size:14px;line-height:1.5;margin:0 0 15px}
+.visual-lab-cue-icon{font-size:30px;line-height:1.3}
+.visual-lab-options{display:flex;gap:10px;flex-wrap:wrap}
+.visual-lab-option{flex:1 1 120px;min-height:48px;border-radius:10px;background:#25445c;border:1px solid #7793aa;color:#eff6ff;font-weight:700;padding:10px}
+.visual-lab-option:hover:not(:disabled){border-color:#c7f783}
+.visual-lab-option.visual-lab-correct{background:#23513a;border-color:#92da9f}
+.visual-lab-option.visual-lab-try-again{border-color:#efbc85}
+.visual-lab-feedback{font-size:13px;line-height:1.5;min-height:20px;margin:10px 0 0}
+.visual-lab-next{margin-top:8px}
+html[data-theme="light"] .visual-lab{background:#f4f9fd;border-color:#aac3d2;color:#152236}
+html[data-theme="light"] .visual-lab-eyebrow{color:#26653f}
+html[data-theme="light"] .visual-lab-intro{color:#465669}
+html[data-theme="light"] .visual-lab-card{background:#fff;color:#152236;border-color:#c1d2de}
+html[data-theme="light"] .visual-lab-pronunciation{color:#4b6071}
+html[data-theme="light"] .visual-lab-listen{color:#245a37}
+html[data-theme="light"] .visual-lab-practice{background:#eaf2f8;border-color:#b7cad8}
+html[data-theme="light"] .visual-lab-option{background:#fff;color:#172b40;border-color:#a4becf}
+html[data-theme="light"] .visual-lab-option.visual-lab-correct{background:#d3f1d9;border-color:#528b5e}
+html[data-theme="light"] .visual-lab-option.visual-lab-try-again{border-color:#aa7218}
+@media(max-width:680px){.visual-lab{padding:14px}.visual-lab-cards{grid-template-columns:1fr 1fr}.visual-lab-card{min-height:196px;padding:12px 7px}.visual-lab-picture{min-height:53px}.visual-lab-german{font-size:16px}}
+@media(max-width:400px){.visual-lab-cards{grid-template-columns:1fr}.visual-lab-card{min-height:0}.visual-lab-picture{min-height:40px}}
+@media(prefers-reduced-motion:reduce){.visual-lab-card:hover{transform:none}}

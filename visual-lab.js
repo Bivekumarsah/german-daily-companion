@@ -71,8 +71,53 @@
     return n;
   }
 
+  const topicIcons={
+    'Foundations':'🔤','People & home':'🏡','Grammar & communication':'🧩',
+    'Everyday life':'☕','Situations':'🗺️','Exam preparation':'🎓'
+  };
+  const wordIcons={
+    'das land':'🌍','nepal':'🇳🇵','deutschland':'🇩🇪','indien':'🇮🇳',
+    'jung':'🧒','alt':'👴','groß':'📏','klein':'🔎',
+    'der beruf':'💼','arbeiten':'💼','studieren':'🎓','lernen':'📖',
+    'der tisch':'🪑','die lampe':'💡','das buch':'📘',
+    'machen':'🛠️','spielen':'⚽','fragen':'❓','hören':'👂',
+    'sein':'🙋','haben':'🎒','bin':'🙋','bist':'👉','ist':'✅',
+    'nicht':'🚫','kein':'🚫','keine':'🚫','nie':'🚫',
+    'die speisekarte':'📋','die rechnung':'🧾','die suppe':'🥣',
+    'kaufen':'🛒','kosten':'💶','billig':'🏷️','teuer':'💰',
+    'aufstehen':'⏰','duschen':'🚿','frühstücken':'🥐',
+    'anrufen':'📞','einkaufen':'🛒','fernsehen':'📺',
+    'der termin':'📅','die einladung':'💌','zeit haben':'⌚',
+    'die apotheke':'💊','die post':'📮','die bank':'🏦',
+    'der sommer':'☀️','der winter':'❄️','der frühling':'🌷','der herbst':'🍂',
+    'das hobby':'🎨','lesen':'📖','schwimmen':'🏊','tanzen':'💃',
+    'können':'💪','müssen':'❗','wollen':'💭','dürfen':'🟢',
+    'das hotel':'🏨','das zimmer':'🛏️','die nacht':'🌙',
+    'gestern':'🕰️','letzte woche':'📆','gemacht':'🛠️',
+    'die nachricht':'✉️','die e-mail':'📧','schreiben':'✍️',
+    'der vorname':'👤','der nachname':'🪪','das geburtsdatum':'🎂',
+    'geöffnet':'🟢','geschlossen':'🔒','der eingang':'🚪',
+    'die durchsage':'📢','wiederholen':'🔁','langsam':'🐢',
+    'vorstellen':'🙋','antworten':'💬','bitten':'🙏',
+    'die prüfung':'📝','das hören':'👂','das lesen':'📖','das schreiben':'✍️',
+    'das sprechen':'🗣️','üben':'🔄'
+  };
+  function sceneFor(unit){
+    if(!unit?.id || !Array.isArray(unit.vocab) || unit.vocab.length<3)return null;
+    if(lessons[unit.id])return lessons[unit.id];
+    const icon=topicIcons[unit.group]||'📘';
+    return {
+      title:'Picture & word practice: '+unit.title,
+      generic:true,
+      items:unit.vocab.slice(0,3).map(w=>[
+        wordIcons[w.de.toLocaleLowerCase('de')]||icon,
+        w.de,w.en,w.ne,'',''
+      ])
+    };
+  }
+
   function render(host, unit, speak) {
-    const scene=lessons[unit?.id];
+    const scene=sceneFor(unit);
     if(!scene || !host || typeof speak!=='function')return false;
     const wrap=el('section','visual-lab');
     wrap.setAttribute('aria-label','See, hear and practise German words');
@@ -87,7 +132,8 @@
       const picture=el('span','visual-lab-picture',emoji);picture.setAttribute('aria-hidden','true');
       const german=el('strong','visual-lab-german',de);german.lang='de';
       const translation=el('span','visual-lab-translation',en+' · '+ne);
-      const pronunciation=el('small','visual-lab-pronunciation',phonetic+' · '+nephonetic);
+      const pronunciation=el('small','visual-lab-pronunciation',
+        phonetic&&nephonetic ? phonetic+' · '+nephonetic : 'Tap to hear pronunciation in German');
       const audio=el('span','visual-lab-listen','🔊 Hear German');
       button.append(picture,german,translation,pronunciation,audio);
       button.addEventListener('click',()=>speak(de));
@@ -135,6 +181,34 @@
       }
       story.append(conversation);
       wrap.append(story);
+    }
+
+    // For units without a curated three-person story, practise the existing original
+    // grammar example as a short situational line, not an invented new translation.
+    if(!dialogue && unit.grammar?.example && unit.grammar?.exampleEn && unit.grammar?.exampleNe){
+      const scene=el('details','visual-lab-story visual-lab-example');
+      const summary=el('summary','visual-lab-story-head','💬 Hear a German sentence from this lesson');
+      const spoken=el('p','visual-lab-sentence',unit.grammar.example);
+      spoken.lang='de';
+      const translations=el('div','visual-lab-meaning');
+      translations.append(el('p','',unit.grammar.exampleEn),el('p','',unit.grammar.exampleNe));
+      if(unit.grammar.pronEnglish&&unit.grammar.pronNepali)translations.append(el('small','',unit.grammar.pronEnglish+' · '+unit.grammar.pronNepali));
+      const buttons=el('div','visual-lab-turn-actions');
+      for(const [label,slow] of [['🔊 Listen',false],['◷ Slow',true]]){
+        const btn=el('button','visual-lab-small-btn',label);
+        btn.type='button';btn.addEventListener('click',()=>speak(unit.grammar.example,slow));
+        buttons.append(btn);
+      }
+      const toggle=el('button','visual-lab-small-btn','Hide meaning');
+      toggle.type='button';toggle.setAttribute('aria-expanded','true');
+      toggle.addEventListener('click',()=>{
+        translations.hidden=!translations.hidden;
+        toggle.textContent=translations.hidden?'Show meaning':'Hide meaning';
+        toggle.setAttribute('aria-expanded',String(!translations.hidden));
+      });
+      buttons.append(toggle);
+      scene.append(summary,spoken,translations,buttons);
+      wrap.append(scene);
     }
     const practice=el('div','visual-lab-practice');
     const title=el('h5','visual-lab-practice-title','Picture challenge');
@@ -201,6 +275,42 @@
       }
     });
     question();
+    // Listening-only recall is intentionally separate from the official exam sampler.
+    const meanings=items.map(w=>w[2].trim().toLocaleLowerCase('en'));
+    if(new Set(meanings).size===items.length){
+      const ear=el('details','visual-lab-ears');
+      ear.append(el('summary','visual-lab-story-head','🎧 Optional: listen and choose (no text hint)'));
+      const instructions=el('p','visual-lab-story-tip','Listen to a German word. Choose its English meaning before revealing the text.');
+      ear.append(instructions);
+      const mystery=items[1];
+      const actions=el('div','visual-lab-turn-actions');
+      for(const [label,slow] of [['🔊 Hear word',false],['◷ Hear slowly',true]]){
+        const control=el('button','visual-lab-small-btn',label);
+        control.type='button';control.addEventListener('click',()=>speak(mystery[1],slow));actions.append(control);
+      }
+      ear.append(actions);
+      const result=el('p','visual-lab-feedback','');
+      result.setAttribute('role','status');
+      const answers=el('div','visual-lab-options');
+      const shuffled=items.map((_,i)=>items[(i+((Number(unit.number)||0)%3))%3]);
+      for(const candidate of shuffled){
+        const option=el('button','visual-lab-option',candidate[2]);
+        option.type='button';
+        option.addEventListener('click',()=>{
+          for(const control of answers.children)control.disabled=true;
+          if(candidate===mystery){
+            option.classList.add('visual-lab-correct');
+            result.textContent='✓ Correct! You heard: '+mystery[1]+' — '+mystery[2]+'.';
+          }else{
+            option.classList.add('visual-lab-try-again');
+            result.textContent='You heard: '+mystery[1]+' — '+mystery[2]+'. Replay it and try again later.';
+          }
+        });
+        answers.append(option);
+      }
+      ear.append(answers,result);
+      wrap.append(ear);
+    }
     const continueBtn=el('button','secondary-btn visual-lab-continue','Continue to all lesson words ↓');
     continueBtn.type='button';
     continueBtn.addEventListener('click',()=>{
@@ -211,5 +321,5 @@
     host.append(wrap);
     return true;
   }
-  window.DEUTSCH_VISUAL_LAB={render,scenes:lessons};
+  window.DEUTSCH_VISUAL_LAB={render,scenes:lessons,sceneFor};
 })();

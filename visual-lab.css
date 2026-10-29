@@ -56,6 +56,12 @@ html[data-theme="light"] .visual-lab-option.visual-lab-try-again{border-color:#a
 .visual-lab-small-btn{border:1px solid #759eb4;border-radius:10px;padding:9px 12px;min-height:44px;background:#224b66;color:#fff;font:inherit;font-size:12px;font-weight:700}
 .visual-lab-small-btn:hover{border-color:#c7f783;background:#345d74}
 .visual-lab-small-btn:focus-visible,.visual-lab-next:focus-visible,.visual-lab-continue:focus-visible{outline:3px solid #a4d7ff;outline-offset:3px}
+.visual-lab-ears{border:1px solid #648298;border-radius:14px;padding:14px;margin-top:16px;background:#193b4d}
+.visual-lab-ears .visual-lab-options{margin-top:14px}
+.visual-lab-ears .visual-lab-story-head{font-size:14px;font-weight:800}
+.visual-lab-example{margin-top:14px}
+.visual-lab-example .visual-lab-sentence{margin:15px 0 8px}
+html[data-theme="light"] .visual-lab-ears{background:#e2eff7;border-color:#9dbbc9}
 .visual-lab-continue{display:block;margin-top:18px;width:100%;text-align:center}
 .visual-lab-option:disabled{cursor:default;opacity:.78}
 .visual-lab-option.visual-lab-correct:disabled{opacity:1}

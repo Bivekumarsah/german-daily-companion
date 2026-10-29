@@ -124,7 +124,7 @@
     wrap.setAttribute('aria-label','See, hear and practise German words');
     wrap.append(el('p','visual-lab-eyebrow','LOOK • LISTEN • REMEMBER'));
     wrap.append(el('h4','visual-lab-title',scene.title));
-    wrap.append(el('p','visual-lab-intro','See the picture, hear the German, practise a short conversation, then solve a three-picture challenge.'));
+    wrap.append(el('p','visual-lab-intro',scene.generic?'Learn three useful words, tap to hear German, practise a real sentence and solve a short matching challenge. Symbols are memory cues and may represent the topic rather than the exact word.':'See the picture, hear the German, practise a short conversation, then solve a three-picture challenge.'));
     const cards=el('div','visual-lab-cards');
     for(const [emoji,de,en,ne,phonetic,nephonetic] of scene.items){
       const button=el('button','visual-lab-card');
@@ -212,7 +212,7 @@
       wrap.append(scene);
     }
     const practice=el('div','visual-lab-practice');
-    const title=el('h5','visual-lab-practice-title','Picture challenge');
+    const title=el('h5','visual-lab-practice-title',scene.generic?'Word challenge':'Picture challenge');
     const cue=el('p','visual-lab-question');
     const options=el('div','visual-lab-options');
     const feedback=el('p','visual-lab-feedback','');
@@ -231,7 +231,7 @@
       feedback.textContent='';
       misclicked=false;
       const [emoji,de,en,ne]=items[round];
-      title.textContent='Picture challenge · '+(round+1)+' of '+items.length;
+      title.textContent=(scene.generic?'Word challenge':'Picture challenge')+' · '+(round+1)+' of '+items.length;
       cue.replaceChildren();
       cue.append(el('span','visual-lab-cue-icon',emoji),el('span','', 'Choose the German for '+en+' ('+ne+').'));
       // Rotate choices on each round instead of repeating the same answer order.
@@ -267,8 +267,8 @@
       round++;
       if(round<items.length)question();
       else{
-        title.textContent='✓ Picture challenge completed';
-        cue.textContent='You recognised '+firstTry+' of '+items.length+' pictures on the first try.';
+        title.textContent='✓ '+(scene.generic?'Word':'Picture')+' challenge completed';
+        cue.textContent='You recognised '+firstTry+' of '+items.length+' words on the first try.';
         options.replaceChildren();
         feedback.textContent='This is practice feedback, not an official Goethe exam score. Review the words and try again whenever you want.';
         next.textContent='Practise again ↻';

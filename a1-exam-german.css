@@ -16,3 +16,8 @@ html[data-theme="light"] .a1-mock-choice[aria-pressed="true"]{outline-color:#2b8
 html[data-theme="light"] .a1-mock-question:focus{outline-color:#2b8048}
 @media(max-width:600px){.a1-mock-language-options{display:grid;grid-template-columns:1fr 1fr}.a1-mock-language-choice{min-width:0;font-size:12px;line-height:1.5;overflow-wrap:anywhere;padding:10px 8px}.a1-mock-language{width:100%}}
 @media(max-width:380px){.a1-mock-language-options{grid-template-columns:1fr}}
+
+.a1-mock-breakdown{margin:15px 0;padding:12px 15px;border:1px solid #81b49a;border-radius:10px;background:#173b3b}
+.a1-mock-breakdown h6{font-size:15px;line-height:1.5;margin:0 0 8px}
+.a1-mock-breakdown-row{font-size:13px;line-height:1.55;margin:5px 0}
+html[data-theme="light"] .a1-mock-breakdown{background:#eef8ef;border-color:#add0b3}

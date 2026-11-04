@@ -82,7 +82,7 @@
   return note;
  }
  // Avoid question/answer leaks and avoid changing the no-hints exam rehearsal.
- const EXCLUDED='#a1MockRoot, #a1ExamContent, #lessonOptions, #pronunciationRoot, .dj-choices, .a1-options, .a1-theme-options, .a1-bridge-choices, .a1-example, #germanOutput, .nepali-sound-note';
+ const EXCLUDED='#a1MockRoot, #a1ExamContent, #lessonOptions, #pronunciationRoot, .dj-choices, .a1-options, .a1-theme-options, .a1-bridge-choices, .a1-example, .visual-lab-turn, #flashGerman, #germanOutput, .nepali-sound-note';
  function eligible(node){
   return node instanceof Element && node.matches('[lang="de"]')
    && !node.matches('button,input,textarea,option')

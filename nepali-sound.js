@@ -25,7 +25,9 @@
  curated.set(key('Wie geht es dir?'),'वी गेट एस डियर');
  // Previous authored phrase + sentence cues take priority over heuristic estimates.
  for(const phrase of (window.DAILY_PHRASES||[])){
-  if(Array.isArray(phrase)&&phrase[1]&&phrase[4])curated.set(key(phrase[1]),phrase[4]);
+  const german=Array.isArray(phrase)?phrase[1]:phrase?.german;
+  const pronunciation=Array.isArray(phrase)?phrase[4]:phrase?.pronNepali;
+  if(german&&pronunciation)curated.set(key(german),pronunciation);
  }
  for(const unit of (window.DEUTSCH_A1?.units||[])){
   if(unit?.grammar?.example&&unit.grammar.pronNepali)curated.set(key(unit.grammar.example),unit.grammar.pronNepali);

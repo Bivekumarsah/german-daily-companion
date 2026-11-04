@@ -12,6 +12,10 @@ A new Linux Playwright **WebKit/Safari-engine emulator** complements Chromium 32
 
 Dictionary-supported teaching fixes: **die Eltern** is marked plural-only; **das Wort** explains *die Wörter* versus *die Worte*; **das Gleis** now has an accurate railway-track English/Nepali explanation. The source references appear in the cards and [editorial report](docs/a1-human-editorial-review.md).
 
+## Section-by-section improvement programme (November 2026)
+
+The [quality improvement plan](docs/quality-improvement-plan.md) documents evidence-based 9/10 targets for every major learning section, including what still needs expert review and physical-device testing. The current focused upgrade adds optional hide/reveal **vocabulary recall** in the guided daily lesson and displays pre-existing approximate English-sound and नेपाली-script **grammar sentence pronunciation after the sentence-building attempt succeeds**. Four truncated A1 sentence pronunciation guides have been completed as approximate learning aids, **not** independently phonetics-certified. This is an ongoing improvement, not a declaration of full A1 readiness.
+
 ## New daily guided learning journey (October 2026)
 
 The home dashboard now includes a **six-part, approximately 10-minute guided practice session**, available completely offline once the PWA assets are cached: **Discover four words (1 min), Listening comprehension (2 min), Sentence-building (2 min), Reading comprehension (2 min), Spoken self-practice (2 min), and Adaptive recall (1 min)**. It uses the existing 36-unit lessons and English/Nepali meanings. The learner may pause without a penalty, resume today's activity and advance to another unit after finishing. There is **no strict timer, forced streak, leaderboard or paid feature**.

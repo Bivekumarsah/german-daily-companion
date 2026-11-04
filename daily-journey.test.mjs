@@ -53,6 +53,16 @@ const logic=mock.window.DEUTSCH_DAILY_LOGIC;
 const units=mock.window.DEUTSCH_A1.units;
 const app=mock.window.DEUTSCH_DAILY_JOURNEY;
 assert.equal(units.length,36);
+for(const [id,englishEnd,nepaliEnd] of [
+ ['a1-04','SHPREH-khuh neh-PAH-lee','श्प्रेखे नेपाली'],
+ ['a1-17','REKH-noong BIT-tuh','रेख्नुङ बिट्टे'],
+ ['a1-25','tehr-MEEN','टेर्मिन'],
+ ['a1-32','NAKH-nah-muh ist RAI','नाखनामे इस्ट राई']
+]){
+ const unit=units.find(u=>u.id===id);
+ assert(unit?.grammar.pronEnglish.includes(englishEnd),id+' English sound cue completes the sentence');
+ assert(unit?.grammar.pronNepali.includes(nepaliEnd),id+' Nepali sound cue completes the sentence');
+}
 assert.equal(logic.steps.length,6);
 assert.equal(logic.steps.reduce((n,s)=>n+s.minutes,0),10);
 assert.equal(app.state.step,0);
@@ -71,6 +81,15 @@ assert.equal(new Set(shuffled.options.map(x=>x.label)).size,3);
 app.start();
 assert(root.textContent.includes('Discover useful words'));
 assert.equal(root.findAll('dj-word').length,4);
+const glosses=root.findAll('dj-word-meaning');
+assert.equal(glosses.length,4,'All discover cards display English/Nepali meanings');
+assert.equal(glosses[0].hidden,false,'Beginners see translations by default');
+root.findButton('Hide meaning').click();
+assert.equal(glosses[0].hidden,true,'Learners can practise remembering without translations');
+assert.equal(root.findButton('Show meaning').attrs['aria-expanded'],'false','Recall toggle exposes accessibility state');
+root.findButton('Show meaning').click();
+assert.equal(glosses[0].hidden,false,'Translations return on demand');
+assert.equal(root.findButton('Hide meaning').attrs['aria-expanded'],'true');
 root.findButton('I studied these words').click();
 assert.equal(app.state.step,1);
 const question=units[0].listening;
@@ -80,6 +99,7 @@ assert(root.textContent.includes('Not quite'));
 root.findButton(question.choices[question.answer]).click();
 root.findButton('Next activity').click();
 assert.equal(app.state.step,2);
+assert.equal(root.findAll('dj-pron-guide').length,0,'Sentence sound clues wait until after answering');
 const phrase=units[0].grammar.example.split(/\s+/u);
 for(const token of phrase){
  const matches=root.findAll('dj-choice').filter(x=>x.textContent===token&&!x.disabled);
@@ -88,6 +108,10 @@ for(const token of phrase){
 }
 root.findButton('Check order').click();
 assert(root.textContent.includes('Richtig!'));
+assert.equal(root.findAll('dj-pron-guide').length,1,'Pronunciation appears after solving the sentence');
+assert(root.textContent.includes(units[0].grammar.pronEnglish),'Easy English pronunciation provided');
+assert(root.textContent.includes(units[0].grammar.pronNepali),'Nepali pronunciation provided');
+assert(root.textContent.includes('Approximate pronunciation only'),'Pronunciation limits are explicit');
 root.findButton('Continue').click();
 assert.equal(app.state.step,3);
 const reading=units[0].reading;

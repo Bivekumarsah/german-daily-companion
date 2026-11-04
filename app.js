@@ -102,13 +102,14 @@ function renderResult(data){
  $('resultContent').hidden=false;$('emptyResult').hidden=true;
  $('germanOutput').textContent=data.german;
  $('pronEnglish').textContent=data.pronEnglish || 'Not verified — tap Listen to hear German.';
- $('pronNepali').textContent=data.pronNepali || 'विश्वसनीय उच्चारण उपलब्ध छैन — जर्मन आवाज सुन्नुहोस्।';
+ const soundAid=window.DEUTSCH_NEPALI_SOUND?.guide(data.german);
+  $('pronNepali').textContent=data.pronNepali || soundAid?.nepali || 'जर्मन आवाज सुन्नुहोस्।';
  $('nepaliOutput').textContent=data.nepali || 'नेपाली अर्थ अहिले उपलब्ध छैन।';
  const fromOnline=data.source==='Online translation';
  const savedOffline=data.source==='Saved offline';
  $('translationSource').textContent = fromOnline
- ? 'Online translation (MyMemory), automatically saved for offline reuse. Pronunciation spelling is shown only for curated phrases; use a German voice for other text.'
- : savedOffline ? 'Previously translated and saved on this device. Available offline. Listen to the German voice for pronunciation.'
+ ? 'Online translation (MyMemory), automatically saved for offline reuse. Nepali sound spelling can be automatically estimated and inaccurate; listen to an installed German voice for pronunciation.'
+ : savedOffline ? 'Previously translated and saved on this device. Sound spelling is approximate, especially for uncurated text. Listen to a German device voice.'
  : data.source==='German alphabet' ? 'German alphabet letter. Tap Listen to hear its name.'
  : 'Curated built-in phrase, available offline. Spelling is an approximate pronunciation aid; German audio is preferred.';
  const strip=$('wordStrip');strip.replaceChildren();
@@ -186,7 +187,7 @@ function renderRecent(){
   const btn=document.createElement('button');btn.type='button';
   const name=document.createElement('strong');name.textContent=item.german;
   const meaning=document.createElement('span');meaning.textContent=item.english;
-  btn.append(name,meaning);btn.addEventListener('click',()=>choosePhrase(item.english));
+  btn.append(name,meaning);const sound=window.DEUTSCH_NEPALI_SOUND?.annotation(item.german);if(sound)btn.append(sound);btn.addEventListener('click',()=>choosePhrase(item.english));
   const speak=document.createElement('button');speak.className='icon-btn';speak.type='button';speak.textContent='🔊';speak.setAttribute('aria-label','Speak '+item.german);speak.addEventListener('click',()=>speaking(item.german));
   row.append(btn,speak);node.append(row);
  }
@@ -195,7 +196,7 @@ function choosePhrase(phrase){$('englishInput').value=phrase;scheduleTranslation
 function saveCurrent(){if(!current)return;const key=normalize(current.english);const index=favorites.findIndex(p=>normalize(p.english)===key);if(index>=0){favorites.splice(index,1);notify('Removed from saved phrases');}else{favorites.unshift(current);favorites=favorites.slice(0,100);notify('Saved for practice ♡');}writeStorage(KEY_FAV,favorites);renderFavorites();renderResult(current);}
 function renderFavorites(){const node=$('savedList');node.replaceChildren();$('savedCount').textContent=favorites.length;
  if(!favorites.length){const p=document.createElement('p');p.className='saved-empty';p.textContent='♡ Your favorite German phrases will appear here.';node.append(p);return;}
- for(const p of favorites){const row=document.createElement('div');row.className='saved-row';const btn=document.createElement('button');btn.type='button';const a=document.createElement('strong');a.textContent=p.german;const b=document.createElement('span');b.textContent=p.english;btn.append(a,b);btn.addEventListener('click',()=>choosePhrase(p.english));const speak=document.createElement('button');speak.className='icon-btn';speak.type='button';speak.textContent='🔊';speak.setAttribute('aria-label','Speak '+p.german);speak.addEventListener('click',()=>speaking(p.german));const rm=document.createElement('button');rm.type='button';rm.className='remove';rm.textContent='×';rm.setAttribute('aria-label','Remove saved phrase '+p.english);rm.addEventListener('click',()=>{favorites=favorites.filter(x=>normalize(x.english)!==normalize(p.english));writeStorage(KEY_FAV,favorites);renderFavorites();if(current&&normalize(current.english)===normalize(p.english))renderResult(current);});row.append(btn,speak,rm);node.append(row);}
+ for(const p of favorites){const row=document.createElement('div');row.className='saved-row';const btn=document.createElement('button');btn.type='button';const a=document.createElement('strong');a.textContent=p.german;const b=document.createElement('span');b.textContent=p.english;btn.append(a,b);const sound=window.DEUTSCH_NEPALI_SOUND?.annotation(p.german);if(sound)btn.append(sound);btn.addEventListener('click',()=>choosePhrase(p.english));const speak=document.createElement('button');speak.className='icon-btn';speak.type='button';speak.textContent='🔊';speak.setAttribute('aria-label','Speak '+p.german);speak.addEventListener('click',()=>speaking(p.german));const rm=document.createElement('button');rm.type='button';rm.className='remove';rm.textContent='×';rm.setAttribute('aria-label','Remove saved phrase '+p.english);rm.addEventListener('click',()=>{favorites=favorites.filter(x=>normalize(x.english)!==normalize(p.english));writeStorage(KEY_FAV,favorites);renderFavorites();if(current&&normalize(current.english)===normalize(p.english))renderResult(current);});row.append(btn,speak,rm);node.append(row);}
 }
 function renderFlash(){const p=PHRASES[currentFlash%PHRASES.length];$('flashEnglish').textContent=p.english;$('flashGerman').textContent=p.german;$('flashNepali').textContent=p.nepali;$('flashPron').textContent=p.pronEnglish+' · '+p.pronNepali;$('flashReveal').hidden=true;$('revealFlash').textContent='Show answer';}
 function renderAlphabet(){const grid=$('alphabetGrid');for(const [letter,english,nepali] of ALPHABET){const b=document.createElement('button');b.className='letter-btn'+('ÄÖÜẞ'.includes(letter)?' special':'');b.type='button';b.title=letter+' · '+english+' · '+nepali;b.setAttribute('aria-label','Hear German letter '+letter+', '+english);const strong=document.createElement('strong');strong.textContent=letter;const small=document.createElement('small');small.textContent=english;b.append(strong,small);b.addEventListener('click',()=>{speaking(letter,true);notify(letter+' — '+english+' — '+nepali);});grid.append(b);}}

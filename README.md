@@ -12,6 +12,15 @@ A new Linux Playwright **WebKit/Safari-engine emulator** complements Chromium 32
 
 Dictionary-supported teaching fixes: **die Eltern** is marked plural-only; **das Wort** explains *die Wörter* versus *die Worte*; **das Gleis** now has an accurate railway-track English/Nepali explanation. The source references appear in the cards and [editorial report](docs/a1-human-editorial-review.md).
 
+## Nepali-script reading for German words and sentences (November 2026)
+
+**German spelling · approximate नेपाली उच्चारण · English meaning · Nepali meaning · German audio.**
+The core 36-lesson vocabulary contains 260 repeated entries representing **244 distinct German words/phrases**. All 244 now have hand-authored **draft Nepali-script sound guides** in `nepali-sound.js`. Previously authored phrase and grammar-example guides are reused. Visible German study text marked `lang="de"` in the course, vocabulary themes, daily journey, reading models, essentials, and sentence examples now gets an extra Nepali-script sound line. The translator also supplies an approximate Nepali-script reading for newly translated or saved German text; existing curated phrases keep their own guides. These changes do not overwrite the separate Nepali meaning.
+
+**Important accuracy boundary:** the 244 readings and previously authored cues are *approximate and not independently reviewed* by a German/Nepali pronunciation specialist. For German text outside the authored dictionaries, a transparently marked last-resort letter-pattern estimate may be **wrong**; listen to an installed German-language device voice and check with a qualified speaker. Machine-generated TTS itself is not a native-speaker human recording. German-only exam rehearsal and hidden listening test answers deliberately do **not** reveal transliteration clues before review.
+
+Run `node nepali-sound.test.mjs` to check the 244-entry mapping, basic phrase cases, translator integration and offline asset references. Expert proofreading, more natural recordings and real-device QA remain required.
+
 ## Section-by-section improvement programme (November 2026)
 
 The [quality improvement plan](docs/quality-improvement-plan.md) documents evidence-based 9/10 targets for every major learning section, including what still needs expert review and physical-device testing. The current focused upgrade adds optional hide/reveal **vocabulary recall** in the guided daily lesson and displays pre-existing approximate English-sound and नेपाली-script **grammar sentence pronunciation after the sentence-building attempt succeeds**. Four truncated A1 sentence pronunciation guides have been completed as approximate learning aids, **not** independently phonetics-certified. This is an ongoing improvement, not a declaration of full A1 readiness.

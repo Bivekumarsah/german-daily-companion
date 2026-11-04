@@ -1,0 +1,9 @@
+/* Shared visual style for optional phonetic guides. Not IPA, not a Goethe-certified transcription. */
+.nepali-sound-note{display:block;max-width:100%;font-family:system-ui,"Noto Sans Devanagari",sans-serif;font-size:13px;line-height:1.7;font-weight:550;letter-spacing:normal;color:#d8edb9;overflow-wrap:anywhere;margin:5px 0 8px}
+.a1-word-card .nepali-sound-note{grid-column:1/-1}
+.a1-theme-card .nepali-sound-note,.a1-bridge-card .nepali-sound-note,.dj-word .nepali-sound-note{margin-top:6px;padding:5px 0}
+.a1-review-word + .nepali-sound-note{font-size:15px;margin:5px 0 12px}
+.nepali-sound-note[data-nepali-sound-source="estimated"]{color:#ffdfa6}
+html[data-theme="light"] .nepali-sound-note{color:#285c39}
+html[data-theme="light"] .nepali-sound-note[data-nepali-sound-source="estimated"]{color:#895210}
+@media(max-width:570px){.nepali-sound-note{font-size:12px;line-height:1.75}}

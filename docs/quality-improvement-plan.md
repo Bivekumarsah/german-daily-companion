@@ -23,6 +23,14 @@ Quality must be earned through evidence, not by assigning inflated ratings. A se
 | Revision / progress | Offline review, practice completion, backup and error-prioritizing recall | Restore/export reliability, transparent practice-vs-mastery labels, retention validation without punitive streaks |
 | Design, accessibility, mobile & offline | Responsive navigation, dark/light themes, service worker, Chromium/WebKit emulator checks | Actual Android Chrome and iPhone Safari signoffs, keyboard and screen-reader checks, reduced motion, offline and mic consent tests |
 
+## Follow-up: Nepali script on visible German study text (2026-11-04)
+
+- Added a distinct Nepali **sound** guide alongside the original Nepali **meaning**, avoiding confusion between translation and pronunciation.
+- Implemented hand-authored draft readings for all **244 unique German word strings** in the 36-unit original vocabulary bank (260 total lesson-entry occurrences).
+- Existing curated phrase and grammar-example pronunciation fields feed the same display layer. Other visible German examples/translator output use a **clearly marked, automatic, potentially inaccurate estimate**, which is NOT phonetic verification.
+- Shown in study screens using explicit German-language markers; hidden listening items, answer-choice controls, and formal exam rehearsal are not annotated to avoid leaking answers.
+- New offline assets `nepali-sound.js` and `nepali-sound.css`, with regression test `nepali-sound.test.mjs`. Human review is still required.
+
 ## First focused improvement — 2026-11-04 (pull request)
 
 1. Daily Discover now shows four German words with English/Nepali meanings visible by default, and individual **Hide meaning / Show meaning** controls for active recall. Accessible state and button targets are exposed. Listening remains optional.
@@ -32,7 +40,7 @@ Quality must be earned through evidence, not by assigning inflated ratings. A se
 
 ## What this does NOT complete
 
-- All **260 original unit vocabulary entries currently lack dedicated `pronEnglish`/`pronNepali` fields**. Do not generate misleading phonetic approximations automatically or claim every word has a verified guide.
+- All **260 original unit vocabulary entry occurrences** (244 distinct strings) now have a separate, hand-authored **draft Nepali-script sound mapping**, but not dedicated per-entry verified `pronEnglish`/`pronNepali` fields. These guides await phonetic review; unknown text uses a clearly labeled algorithmic estimate, not a verified transcription.
 - The whole Goethe source-label comparison still has **305 candidate labels unmatched** as documented in `docs/goethe-full-concordance.md`. Candidate-label counts are not a certified list of missing principal A1 headwords; examine inflected and derived forms by hand.
 - The **762-row editorial queue** has not received qualified bilingual signoff.
 - Real Android and iPhone QA remains unsigned. Chromium and Linux WebKit emulation are not physical phone testing.

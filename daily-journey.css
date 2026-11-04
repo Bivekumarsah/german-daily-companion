@@ -23,6 +23,10 @@
 .dj-word strong{font-size:20px}
 .dj-word p{font-size:13px;line-height:1.5;margin:5px 0}
 .dj-word .dj-btn{margin-top:8px}
+.dj-word-meaning[hidden]{display:none}
+.dj-pron-guide{padding:13px;border:1px solid #77aeb1;background:#163c4a;border-radius:12px;margin:14px 0}
+.dj-pron-guide strong{display:block;font-size:14px;margin:0 0 6px}
+.dj-pron-line{font-size:14px;line-height:1.6;margin:6px 0;overflow-wrap:anywhere}
 .dj-nepali{font-family:system-ui,"Noto Sans Devanagari",sans-serif}
 .dj-german,.dj-built{font-size:19px;line-height:1.7;font-weight:750;overflow-wrap:anywhere;border-radius:10px;background:#203f53;padding:12px}
 .dj-meaning,.dj-question{font-size:15px;line-height:1.65;font-weight:700;margin:15px 0}
@@ -45,6 +49,7 @@ html[data-theme="light"] .dj-step{color:#426178;border-color:#9dbbcb}
 html[data-theme="light"] .dj-step.is-current{color:#1b512e;background:#d5f2d3;border-color:#7aa98b}
 html[data-theme="light"] .dj-step.is-done{color:#255838;border-color:#62a679}
 html[data-theme="light"] .dj-word,html[data-theme="light"] .dj-german,html[data-theme="light"] .dj-built,html[data-theme="light"] .dj-transcript,html[data-theme="light"] .dj-speaking-model{background:#fff;color:#1f3d50;border-color:#acc9d4}
+html[data-theme="light"] .dj-pron-guide{background:#edf9fa;color:#1d4651;border-color:#91b8bd}
 html[data-theme="light"] .dj-btn,html[data-theme="light"] .dj-choice{background:#fff;color:#21445b;border-color:#93b1c3}
 html[data-theme="light"] .dj-primary{background:#357c40;color:#fff;border-color:#357c40}
 html[data-theme="light"] .dj-good{color:#206c39}

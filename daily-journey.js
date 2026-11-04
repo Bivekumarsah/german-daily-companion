@@ -133,13 +133,23 @@ function mcq(host,unit,kind,isReview=false){
  });
 }
 function discover(host,unit){
- host.append(make('h3','','👀 Discover useful words'),make('p','dj-help','Read the English and Nepali meaning. Listen, then say each German word aloud.'));
+ host.append(make('h3','','👀 Discover useful words'),make('p','dj-help','Read the English and Nepali meanings, listen, and say each German word. Hide a meaning to test your memory, then reveal it whenever you need help. अर्थ लुकाएर सम्झने अभ्यास गर्नुहोस्।'));
  const list=make('div','dj-word-grid');
- unit.vocab.slice(0,4).forEach(w=>{
+ unit.vocab.slice(0,4).forEach((w,index)=>{
   const card=make('article','dj-word');
   const de=make('strong','',w.de);de.lang='de';
-  card.append(de,make('p','',w.en),make('p','dj-nepali',w.ne));
-  card.append(button('🔊 Listen',()=>speak(w.de),'dj-btn'));
+  const meaning=make('div','dj-word-meaning');
+  meaning.id='dj-meaning-'+unit.id+'-'+index;
+  const ne=make('p','dj-nepali',w.ne);ne.lang='ne';
+  meaning.append(make('p','',w.en),ne);
+  const toggle=button('Hide meaning · अर्थ लुकाउनुहोस्',()=>{
+   meaning.hidden=!meaning.hidden;
+   toggle.textContent=meaning.hidden?'Show meaning · अर्थ हेर्नुहोस्':'Hide meaning · अर्थ लुकाउनुहोस्';
+   toggle.setAttribute('aria-expanded',String(!meaning.hidden));
+  },'dj-btn');
+  toggle.setAttribute('aria-controls',meaning.id);
+  toggle.setAttribute('aria-expanded','true');
+  card.append(de,meaning,toggle,button('🔊 Listen',()=>speak(w.de),'dj-btn'));
   list.append(card);
  });
  host.append(list);
@@ -170,7 +180,17 @@ function build(host,unit){
    const correct=picked.every((w,i)=>w.value===expected[i]);
    if(correct){
     feedback.className='dj-feedback dj-good';feedback.textContent='✓ Richtig! '+unit.grammar.example;
-    const audio=make('div','dj-actions');addAudio(audio,unit.grammar.example);
+    if(unit.grammar.pronEnglish||unit.grammar.pronNepali){
+      const guide=make('div','dj-pron-guide');
+      guide.append(make('strong','','👂 Say the complete sentence'),make('p','dj-help','Approximate pronunciation only. Listen to the German audio first; these English and Nepali cues cannot reproduce every German sound.'));
+      if(unit.grammar.pronEnglish)guide.append(make('p','dj-pron-line','Easy English sound · '+unit.grammar.pronEnglish));
+      if(unit.grammar.pronNepali){
+       const neGuide=make('p','dj-pron-line dj-nepali','नेपाली उच्चारण (अनुमानित) · '+unit.grammar.pronNepali);
+       neGuide.lang='ne';guide.append(neGuide);
+      }
+      host.append(guide);
+     }
+     const audio=make('div','dj-actions');addAudio(audio,unit.grammar.example);
     host.append(audio);for(const x of row.children)x.disabled=true;for(const x of pool.children)x.disabled=true;
     forward(host);
    }else{

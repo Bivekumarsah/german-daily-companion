@@ -26,7 +26,7 @@ assert.equal(sample.source,'authored');
 assert.equal(helper.guide('Hallo!').nepali,'हालो');
 assert.equal(helper.guide('Guten Tag!').nepali,'गूटन टाक');
 assert.equal(helper.guide('Wie heißt du?').nepali,'वी हाइस्ट डू');
-assert.equal(helper.guide('Ich lerne Deutsch.').nepali,'इख लेर्ने डोइच.');
+assert.equal(helper.guide('Ich lerne Deutsch.').nepali,'इख लेर्ने डोइच');
 const novel=helper.guide('Fantasiewortxyz');
 assert.equal(novel.source,'estimated','Unknown German should never be labeled as curated');
 assert.match(novel.nepali,/[\u0900-\u097F]/u);
